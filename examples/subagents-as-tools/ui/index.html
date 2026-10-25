@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subagents as tools</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does the main thread stay small when subagents read the contracts?</h2>
+        <p>One run gives the same task to two modes at the same time. One agent reads all 16 contracts. The other starts one subagent per contract.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span><span class="mx-small mx-muted">2 settings</span></summary>
+        <div class="mx-fields sa-pad">
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+            <span class="mx-hint">Applies to every thread in both modes.</span>
+          </div>
+          <div class="mx-field sa-model-field">
+            <label class="mx-label" for="sub-model">Subagent model</label>
+            <input id="sub-model" class="mx-input mx-input--small" spellcheck="false" autocomplete="off" placeholder="optional">
+            <span class="mx-hint">Empty: the same model as the main thread.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run both modes</button>
+      </div>
+    </section>
+    <div id="notice" role="status" aria-live="polite"></div>
+
+    <p id="empty" class="mx-plate sa-empty">Press <b>Run both modes</b>. About 38 paid requests, about 2 cents with gpt-6-luna.</p>
+
+    <div id="headline" class="mx-callout" hidden><p id="headline-text"></p></div>
+
+    <section class="mx-plate sa-plate" id="chart-plate" hidden>
+      <div class="mx-section-head sa-plate-head">
+        <h2 class="mx-h3">Main thread: input tokens per request</h2>
+        <p>One bar per request of the main thread. The subagents' requests are not in the chart.</p>
+      </div>
+      <div id="chart" class="sa-chart"></div>
+    </section>
+
+    <section class="mx-stack" id="summary" hidden>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead id="totals-head"></thead>
+          <tbody id="totals"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="wrong" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Wrong values</h2>
+        <p>Each wrong field, the correct value, and the source of the wrong value.</p>
+      </div>
+      <div class="sa-modes">
+        <div class="mx-stack">
+          <span class="mx-label">One agent</span>
+          <ul class="sa-wrong" id="wrong-single"></ul>
+        </div>
+        <div class="mx-stack">
+          <span class="mx-label">With subagents</span>
+          <ul class="sa-wrong" id="wrong-subagents"></ul>
+        </div>
+      </div>
+    </section>
+
+    <p class="mx-muted mx-small sa-meaning" id="meaning" hidden></p>
+
+    <section class="mx-stack" id="traces" hidden>
+      <details class="mx-details">
+        <summary><span class="mx-label">Steps</span><span class="mx-small mx-muted" id="trace-single-note">one agent</span></summary>
+        <div class="sa-pad">
+          <p class="mx-small mx-muted sa-aside">The main thread has <code>list_files</code> and <code>read_file</code>. Each contract it reads stays in its context.</p>
+          <ol class="sa-trace" id="trace-single"></ol>
+        </div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Steps</span><span class="mx-small mx-muted" id="trace-subagents-note">with subagents</span></summary>
+        <div class="sa-pad">
+          <p class="mx-small mx-muted sa-aside">The main thread has <code>list_files</code> and <code>spawn_subagent</code>. Each subagent reads one contract in its own context. Only its answer comes back as the tool result.</p>
+          <ol class="sa-trace" id="trace-subagents"></ol>
+        </div>
+      </details>
+    </section>
+
+    <section class="mx-stack">
+      <details class="mx-details">
+        <summary><span class="mx-label">Task</span><span class="mx-small mx-muted">the same for both modes</span></summary>
+        <div class="sa-pad"><p class="mx-output" id="task"></p></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Contracts</span><span class="mx-small mx-muted" id="contracts-note"></span></summary>
+        <div class="sa-pad mx-stack">
+          <div class="mx-table-wrap"><table class="mx-table"><thead><tr><th>File</th><th>Vendor</th><th class="num">Lines</th><th>Later changes</th></tr></thead><tbody id="contracts"></tbody></table></div>
+        </div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span><span class="mx-small mx-muted">3 instructions, 2 tool lists</span></summary>
+        <div class="sa-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

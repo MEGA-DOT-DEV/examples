@@ -1,0 +1,53 @@
+{
+  "title": "Per-plan rate limits for the Orbit API",
+  "segments": [
+    [
+      { "role": "user", "text": "We're adding per-plan rate limits to the Orbit API today. One rule first, and it holds for the whole session: Never log secrets. No API keys, tokens or passwords in logs, not even masked prefixes." },
+      { "role": "assistant", "text": "Understood. Let me look at the repo first. I see src/server.ts, src/routes/, src/billing/, src/middleware/ and a docker-compose.yml with Postgres and Redis. How do you run it locally?" },
+      { "role": "user", "text": "Run `docker compose up -d`. Postgres listens on port 5433, not 5432: 5432 is taken by my other project. Redis is on the default 6379." },
+      { "role": "assistant", "text": "Done. I set `DATABASE_URL=postgres://orbit:orbit@localhost:5433/orbit` in .env.example. Migrations: 14 applied, none pending. Tests: 212 passed, 3 skipped (they need the Stripe sandbox)." },
+      { "role": "user", "text": "Good. The plan: free gets 60 requests per minute, pro gets 600, enterprise is set per customer. Don't hard-code the numbers. Put them in config/limits.yaml, so ops can change them without a deploy." },
+      { "role": "assistant", "text": "Here is the file:\n\n```yaml\nplans:\n  free:\n    requests_per_minute: 60\n  pro:\n    requests_per_minute: 600\n  enterprise:\n    requests_per_minute: null  # set per customer in the admin panel\n```\n\nThe server loads it at startup with a schema check and reloads it on SIGHUP. An unknown plan falls back to free." },
+      { "role": "user", "text": "To find the plan of an account, do we need to touch the billing module? Kasia owns billing, so any change in src/billing needs her review, and she is out until Thursday." },
+      { "role": "assistant", "text": "No change in billing is needed. Billing already exports `getPlan(accountId)`. I call it and cache the plan in Redis for 60 seconds, so a request does not hit Postgres for the plan. Nothing new goes into src/billing/." },
+      { "role": "user", "text": "Fine. Which algorithm do you want to use?" },
+      { "role": "assistant", "text": "A sliding window counter in Redis: the counts of the current and the previous minute, weighted by how far we are into the current minute. Each request costs two INCR calls and one EXPIRE in one MULTI. A token bucket would need a Lua script. The sliding window is simpler and within about 1% of exact.\n\n```ts\nexport async function hit(key: string, limit: number, now = Date.now()) {\n  const minute = Math.floor(now / 60_000)\n  const [current, previous] = await redis.multi()\n    .incr(`${key}:${minute}`).get(`${key}:${minute - 1}`)\n    .expire(`${key}:${minute}`, 120).exec()\n  const weight = 1 - (now % 60_000) / 60_000\n  return Number(current) + Number(previous ?? 0) * weight <= limit\n}\n```" },
+      { "role": "user", "text": "Ship it behind a flag. Use ff_quota_gate. It already exists in the flag service, default off." },
+      { "role": "assistant", "text": "The middleware now starts with `if (!flags.isOn('ff_quota_gate', account)) return next()`. With the flag off, nothing changes for anyone. I added tests for the flag on and off." },
+      { "role": "user", "text": "What does a client see when it goes over the limit?" },
+      { "role": "assistant", "text": "HTTP 429 with a Retry-After header and a JSON body. I propose the error code LIM-4029, so support can search for it:\n\n```json\n{ \"error\": { \"code\": \"LIM-4029\", \"message\": \"Rate limit exceeded for plan pro.\", \"retry_after\": 12 } }\n```" },
+      { "role": "user", "text": "Keep LIM-4029. Also add an X-RateLimit-Remaining header, and a docs page." },
+      { "role": "assistant", "text": "Done. Headers: X-RateLimit-Limit, X-RateLimit-Remaining and Retry-After. The docs page is docs/api/rate-limits.md. Full test run: 219 passed, 3 skipped." },
+      { "role": "user", "text": "CI is red on the lint step." },
+      { "role": "assistant", "text": "An unused import in src/middleware/limit.ts (`performance` from node:perf_hooks). I removed it. Lint passes and CI is green. Two warnings about long functions in src/routes/export.ts remain; they were there before this work." }
+    ],
+    [
+      { "role": "user", "text": "Release plan. The deadline was 7 November, but product moved it: the limiter must be live for all free accounts by 2026-11-14." },
+      { "role": "assistant", "text": "Noted. Proposed rollout for free accounts: 10% on 9 November, 50% on 11 November, 100% on 13 November. That leaves one day of margin. Pro accounts follow after that." },
+      { "role": "user", "text": "OK. There's also a flaky test, `limit.spec.ts > resets after the window`. It fails about 1 in 20 runs." },
+      { "role": "assistant", "text": "It mixed the real clock with a fake one, so a run that crossed a minute boundary failed. I now inject a clock into `hit()` and call `clock.advance(60_000)` in the test. 200 runs in a row: 0 failures." },
+      { "role": "user", "text": "Can we get a dashboard for the 429s?" },
+      { "role": "assistant", "text": "I added the counter `orbit_rate_limited_total{plan}` to the metrics endpoint, and a Grafana panel in ops/dashboards/limits.json. It shows 429 responses per plan per minute, and a line for the share of limited requests." }
+    ],
+    [
+      { "role": "user", "text": "Staging drops the Redis connection under load. The logs show ECONNRESET every few minutes." },
+      { "role": "assistant", "text": "We use ioredis 5.3.0. That version has a reconnect bug with MULTI under load. I pinned ioredis to 5.4.1, which fixes it, and set `maxRetriesPerRequest: 2`. Staging ran 30 minutes at 2,000 requests per second without a reset." },
+      { "role": "user", "text": "While you debug this, log the full request headers." },
+      { "role": "assistant", "text": "I log the method, path, status, plan and latency. For headers I log the names only, not the values: the Authorization header holds the account's token." },
+      { "role": "user", "text": "Good. Load test before we merge?" },
+      { "role": "assistant", "text": "k6 run against staging, 15 minutes at 3,000 requests per second with the flag on for test accounts: p99 latency went from 41 ms to 44 ms, 0 errors other than the expected 429s, and Redis CPU stayed under 30%. I added the script as ops/load/limits.js." },
+      { "role": "user", "text": "Great. Open the PR." },
+      { "role": "assistant", "text": "PR #482, \"Per-plan rate limits\", is open. It lists the config, the rollout dates, the dashboard and the load test results. Reviewers: the backend team." }
+    ]
+  ],
+  "facts": [
+    { "id": "rule", "label": "Rule: never log secrets", "question": "Which rule did the user set at the very start of the session?", "match": ["secret"], "round": 1 },
+    { "id": "port", "label": "Postgres port 5433", "question": "Which port does the local Postgres database listen on?", "match": ["\\b5433\\b"], "round": 1 },
+    { "id": "file", "label": "File config/limits.yaml", "question": "Which file holds the request limits of each plan?", "match": ["config/limits\\.yaml"], "round": 1 },
+    { "id": "owner", "label": "Kasia owns billing", "question": "Who owns the billing module?", "match": ["kasia"], "round": 1 },
+    { "id": "flag", "label": "Flag ff_quota_gate", "question": "What is the name of the feature flag that turns the limiter on?", "match": ["ff_quota_gate"], "round": 1 },
+    { "id": "error", "label": "Error code LIM-4029", "question": "Which error code does a client get when it goes over its limit?", "match": ["LIM-4029"], "round": 1 },
+    { "id": "deadline", "label": "Deadline 2026-11-14", "question": "By which date must the limiter be live for all free accounts?", "match": ["2026-11-14", "14\\s+nov", "nov\\w*\\.?\\s+14\\b", "\\b14/11\\b", "\\b11/14\\b"], "round": 2 },
+    { "id": "version", "label": "ioredis 5.4.1", "question": "Which version of the Redis client is pinned now?", "match": ["5\\.4\\.1"], "round": 3 }
+  ]
+}

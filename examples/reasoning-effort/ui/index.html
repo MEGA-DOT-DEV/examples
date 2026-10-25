@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reasoning effort</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="task">Task</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Sample tasks"></div>
+      </div>
+      <textarea id="task" class="mx-textarea" rows="4" spellcheck="false"></textarea>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="expected">Correct answer</label>
+          <input id="expected" class="mx-input mx-input--small re-expected" inputmode="decimal" autocomplete="off">
+          <span class="mx-hint">Code compares the model's number with this number.</span>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">runs per level, xhigh and max</span></summary>
+        <div class="re-more">
+          <div class="mx-fields">
+            <div class="mx-field">
+              <span class="mx-label">Runs per level</span>
+              <div class="mx-seg" id="runs" role="group" aria-label="Runs per level"></div>
+            </div>
+            <div class="mx-field">
+              <span class="mx-label">Levels</span>
+              <label class="mx-check"><input type="checkbox" id="extra"> Add <code>xhigh</code> and <code>max</code></label>
+            </div>
+          </div>
+          <div class="mx-callout mx-callout--warn" id="extra-warning" hidden>
+            <span class="mx-label">Slow and expensive</span>
+            <p>These levels can reason for minutes and use tens of thousands of output tokens. One run can cost more than all other levels together. Some models do not support them.</p>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run 4 levels</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p class="re-empty" id="empty"></p>
+    <div class="mx-callout" id="headline" hidden>
+      <span class="mx-label">Result</span>
+      <p id="headline-text"></p>
+    </div>
+
+    <section class="mx-stack" id="results" hidden>
+      <div class="mx-spread re-head">
+        <div class="mx-section-head">
+          <h2 class="mx-h3">Each level</h2>
+          <p>One row per request. Output tokens include the reasoning tokens.</p>
+        </div>
+        <span class="mx-label" id="meta"></span>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table re-table">
+          <thead>
+            <tr>
+              <th>Effort</th>
+              <th class="num">Run</th>
+              <th>Reasoning tokens</th>
+              <th class="num">Output tokens</th>
+              <th class="num">Time</th>
+              <th class="num">Cost</th>
+              <th>Result</th>
+              <th class="num">Answer</th>
+              <th><span class="re-sr">Details</span></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p id="totals" class="mx-small mx-muted re-totals"></p>
+    </section>
+
+    <section class="mx-stack" id="detail" hidden>
+      <div class="mx-spread">
+        <span class="mx-label" id="detail-title"></span>
+        <span class="mx-label" id="detail-usage"></span>
+      </div>
+      <div id="detail-text"></div>
+      <div id="detail-raw"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

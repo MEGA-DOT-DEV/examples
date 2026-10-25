@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tokenization round trip</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="text">Your text</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Sample texts"></div>
+      </div>
+      <textarea id="text" class="mx-textarea" rows="3" spellcheck="false">Hey, how are you?</textarea>
+    </section>
+
+    <section class="mx-panel mx-settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <span class="mx-label">Encoding</span>
+          <div class="mx-seg" id="encodings" role="group" aria-label="Encoding"></div>
+          <span class="mx-hint" id="used-by"></span>
+        </div>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <div class="mx-callout" id="headline">
+      <span class="mx-label">Result</span>
+      <p id="headline-text">Type a sentence. The page counts the tokens as you type. It runs locally and costs nothing.</p>
+    </div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Tokens and their IDs</h2>
+        <p>Each box is one token. The number under it is the token ID. The model reads only the IDs.</p>
+      </div>
+      <div class="mx-plate tk-plate">
+        <div id="tokens" class="tk-tokens" aria-live="polite"></div>
+      </div>
+      <p class="mx-hint tk-note">· marks a space and ↵ marks a line break.</p>
+      <p id="split-note" class="mx-hint tk-note" hidden></p>
+      <details class="mx-details">
+        <summary><span class="mx-label" id="ids-title">Token IDs as one list</span></summary>
+        <div id="ids"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

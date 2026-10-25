@@ -1,0 +1,267 @@
+/* The message editor: role, text, move and remove. */
+.ct-messages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.ct-message {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr) auto;
+  gap: var(--mega-space-2);
+  align-items: start;
+  padding: 2px;
+  border: 1px solid transparent;
+}
+.ct-message.ct-same {
+  border-color: var(--mega-line-strong);
+}
+.ct-who {
+  display: grid;
+  gap: 2px;
+}
+.ct-role {
+  width: 100%;
+  font: 400 var(--mega-text-xs) / 1.5 var(--mega-ui-mono);
+}
+.ct-name {
+  width: 100%;
+  font: 400 var(--mega-text-xs) / 1.5 var(--mega-ui-mono);
+}
+.ct-content {
+  min-height: 2.75rem;
+  font: 400 var(--mega-text-sm) / 1.5 var(--mega-ui-mono);
+}
+.ct-tools {
+  display: flex;
+  gap: 2px;
+  padding-top: 0.3rem;
+}
+.ct-tools .mx-btn {
+  min-width: 1.9rem;
+  padding: 0.3rem 0.45rem;
+  letter-spacing: 0;
+}
+
+.ct-more {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+
+.ct-plate {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+
+/* Two columns, one row per message: the tokens, and the same message as a chat. */
+.ct-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(11rem, 1fr);
+  column-gap: var(--mega-space-6);
+}
+.ct-col-head {
+  padding-bottom: var(--mega-space-2);
+  border-bottom: 1px solid var(--mega-line-strong);
+}
+.ct-row {
+  display: contents;
+}
+.ct-stream,
+.ct-chat {
+  padding: var(--mega-space-3) 0;
+  border-bottom: 1px solid var(--mega-line);
+  transition: background-color var(--mega-dur-fast) var(--mega-ease-out);
+}
+.ct-row:last-child > * {
+  border-bottom: 0;
+}
+.ct-row.ct-same > * {
+  background: color-mix(in srgb, var(--mega-ink) 5%, transparent);
+}
+
+/* The token stream: plain text with light marks, not a wall of boxes. */
+.ct-stream {
+  font: 400 var(--mega-text-base) / 2 var(--mega-ui-mono);
+  color: var(--mega-ink);
+  overflow-wrap: anywhere;
+}
+.ct-tk {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  vertical-align: top;
+}
+.ct-text {
+  white-space: pre;
+  padding: 0 0.08em;
+}
+.ct-tk--content .ct-text {
+  background: color-mix(in srgb, var(--mega-blue-text) 22%, transparent);
+}
+.ct-tk--content.ct-tk--alt .ct-text {
+  background: color-mix(in srgb, var(--mega-blue-text) 10%, transparent);
+}
+[data-theme="light"] .ct-tk--content .ct-text {
+  background: color-mix(in srgb, var(--mega-blue) 12%, transparent);
+}
+[data-theme="light"] .ct-tk--content.ct-tk--alt .ct-text {
+  background: color-mix(in srgb, var(--mega-blue) 5%, transparent);
+}
+.ct-tk--header .ct-text {
+  color: var(--mega-ink-muted);
+}
+.ct-tk--special .ct-text {
+  color: var(--mega-accent-ink);
+  font-size: 0.82em;
+  padding: 0.05em 0.35em;
+  margin: 0 0.15em;
+  border: 1px solid color-mix(in srgb, var(--mega-red) 60%, transparent);
+}
+.ct-tk--special:first-child .ct-text {
+  margin-left: 0;
+}
+.ct-id {
+  font-size: var(--mega-text-2xs);
+  line-height: 1.1;
+  color: var(--mega-ink-muted);
+  padding: 0 0.15em 0.2em;
+}
+.ct-sp {
+  color: var(--mega-ink-muted);
+  opacity: 0.6;
+}
+.ct-nl {
+  color: var(--mega-ink-muted);
+  opacity: 0.7;
+  font-size: 0.8em;
+  padding: 0 0.1em;
+}
+
+/* The chat column. */
+.ct-chat {
+  display: grid;
+  align-content: start;
+  gap: 0.2rem;
+}
+.ct-said {
+  margin: 0;
+  color: var(--mega-ink-body);
+  font-size: var(--mega-text-sm);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ct-writing {
+  color: var(--mega-ink-muted);
+  font-size: var(--mega-text-sm);
+}
+
+/* Where the model starts writing. */
+.ct-next {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 0.4em;
+  padding: 0 0.5em;
+  line-height: 1.7;
+  border: 1px dashed var(--mega-line-strong);
+  color: var(--mega-ink-muted);
+  font-size: var(--mega-text-sm);
+}
+.ct-next::after {
+  content: "▍";
+  color: var(--mega-accent-ink);
+  margin-left: 0.3em;
+  animation: ct-blink 1s steps(1) infinite;
+}
+@keyframes ct-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.ct-foot {
+  display: grid;
+  gap: var(--mega-space-2);
+  border-top: 1px solid var(--mega-line-strong);
+  padding-top: var(--mega-space-3);
+  color: var(--mega-ink-muted);
+}
+.ct-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-4);
+}
+.ct-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.ct-swatch {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+.ct-swatch--special {
+  box-shadow: inset 0 0 0 1px var(--mega-red);
+}
+.ct-swatch--header {
+  background: var(--mega-ink-muted);
+  opacity: 0.5;
+}
+.ct-swatch--content {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--mega-blue-text) 30%, transparent) 50%,
+    color-mix(in srgb, var(--mega-blue-text) 14%, transparent) 50%
+  );
+}
+[data-theme="light"] .ct-swatch--content {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--mega-blue) 18%, transparent) 50%,
+    color-mix(in srgb, var(--mega-blue) 7%, transparent) 50%
+  );
+}
+.ct-key {
+  margin: 0;
+}
+.ct-key code {
+  color: var(--mega-accent-ink);
+  font-size: 0.92em;
+}
+
+.ct-compare {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+#raw .mx-code {
+  border-width: 1px 0 0;
+}
+
+@media (max-width: 640px) {
+  .ct-message {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .ct-content {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .ct-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ct-col-head:nth-child(2) {
+    display: none;
+  }
+  .ct-stream {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-next::after {
+    animation: none;
+  }
+}
+#notice:empty {
+  display: none;
+}

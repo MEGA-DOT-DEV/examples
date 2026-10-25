@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image detail probe</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">Seven simple pictures, read at two levels of detail</h2>
+      <p>Code draws each picture and computes its answer from the geometry: crossings, gaps, letters, counts. The model reads each picture at low and at high detail, and code checks every value.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">pictures per task, seed</span></summary>
+        <div class="mx-fields idp-pad">
+          <div class="mx-field">
+            <span class="mx-label">Pictures per task</span>
+            <div class="mx-seg" id="count" role="group" aria-label="Pictures per task"></div>
+            <span class="mx-hint">Each picture needs two requests: low and high detail.</span>
+          </div>
+          <div class="mx-field">
+            <label class="mx-label" for="seed">Seed</label>
+            <input class="mx-input idp-seed" id="seed" type="number" min="1" max="99999" step="1" value="1">
+            <span class="mx-hint">The same seed always draws the same pictures.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <div id="headline"></div>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead id="sum-head"></thead>
+          <tbody id="sum-body"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted" id="total"></p>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Tasks</h2>
+        <p>Each picture with its key and the answer at each detail. A red value is wrong. Click a picture to see it at full size.</p>
+      </div>
+      <div class="idp-cards" id="cards"></div>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">Questions and answer schemas</span> <span class="mx-hint">7 tasks, the same at both details</span></summary>
+      <div class="mx-stack idp-pad" id="questions"></div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

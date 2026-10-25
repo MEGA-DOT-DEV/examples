@@ -1,0 +1,10 @@
+{
+  "name": "@mega-examples/cli",
+  "version": "0.0.0",
+  "private": true,
+  "description": "mex: the CLI that sets up keys and runs MEGA examples.",
+  "type": "module",
+  "bin": {
+    "mex": "bin/mex.js"
+  }
+}

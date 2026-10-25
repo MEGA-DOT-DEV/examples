@@ -1,0 +1,95 @@
+/* Styles for this page only. Shared components come from /kit/kit.css. */
+.sp-prompt {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-sm);
+  min-height: 4rem;
+}
+.sp-num {
+  width: 7rem;
+}
+#temperature:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.sp-plate {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.sp-runs {
+  border-width: 1px 0 0;
+}
+.sp-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.sp-empty b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+
+.sp-more {
+  padding: var(--mega-space-3) var(--mega-space-4) var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}
+.sp-note {
+  margin: 0;
+}
+
+/* One distinct answer per row: answer, share of the runs, count. */
+.sp-tally {
+  display: grid;
+  gap: 0.15rem;
+}
+.sp-bar-row {
+  display: grid;
+  grid-template-columns: minmax(3rem, 9rem) minmax(0, 1fr) 8.5rem;
+  align-items: center;
+  gap: var(--mega-space-4);
+  padding: 0.3rem 0;
+}
+.sp-answer {
+  font: 400 var(--mega-text-base) / 1.3 var(--mega-ui-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp-bar-row.wrong .sp-answer {
+  color: var(--mega-accent-ink);
+}
+.sp-bar-row.zero {
+  color: var(--mega-ink-muted);
+}
+.sp-bar-row.zero .sp-answer {
+  opacity: 0.6;
+}
+.sp-count {
+  font: 400 var(--mega-text-sm) / 1 var(--mega-ui-mono);
+  text-align: right;
+  white-space: nowrap;
+}
+.sp-count small {
+  color: var(--mega-ink-muted);
+  font-size: 1em;
+}
+.sp-bar-row.zero .sp-count {
+  opacity: 0.6;
+}
+.sp-bar-row .mx-meter i {
+  transition: width var(--mega-dur) var(--mega-ease-out);
+}
+/* A fair pick: the share each answer would get if the model picked at random. */
+.sp-fair {
+  position: absolute;
+  top: -0.3rem;
+  bottom: -0.3rem;
+  width: 0;
+  border-left: 1px dashed var(--mega-ink-muted);
+}
+
+@media (max-width: 640px) {
+  .sp-bar-row {
+    grid-template-columns: 2.5rem minmax(0, 1fr) 6.5rem;
+    gap: var(--mega-space-2);
+  }
+}

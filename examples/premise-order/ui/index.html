@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premise order</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="runs">Runs per version</label>
+          <input id="runs" class="mx-input mx-input--small" type="number" min="1" max="10" value="3">
+          <span class="mx-hint">The answers can change from run to run.</span>
+        </div>
+        <div class="mx-field">
+          <span class="mx-label" id="effort-label">Reasoning effort</span>
+          <div class="mx-seg" id="effort" role="group" aria-labelledby="effort-label"></div>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">a variant with one line changed</span></summary>
+        <div class="mx-fields po-more">
+          <div class="mx-field">
+            <span class="mx-label">Variant</span>
+            <label class="mx-check"><input type="checkbox" id="variant"> Add the in-order riddle with a host who does not know</label>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <div id="headline" aria-live="polite"></div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The same four lines</h2>
+        <p>Only their order changes. The model reads the lines as one paragraph, then this question:</p>
+      </div>
+      <p class="po-question" id="question"></p>
+      <div class="po-cases" id="cases"></div>
+    </section>
+
+    <div id="raw"></div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confabulation probe</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Ask 5 questions</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p class="cf-plan" id="empty">Press <b>Ask 5 questions</b>. 5 requests, under 1 cent.</p>
+    <div class="mx-callout" id="headline" hidden>
+      <span class="mx-label">Result</span>
+      <p id="headline-text"></p>
+    </div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">One question, three contexts</h2>
+        <p>Each card sends “Tell me about Alice.” with different context. A keyword check marks what the model did.</p>
+      </div>
+      <div class="cf-grid" id="alice"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">A package that does not exist</h2>
+        <p>Nobody published this package, so a usage example for it is made up. A keyword check marks an answer that says it is not sure.</p>
+      </div>
+      <div id="npm"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The latest version</h2>
+        <p>The model knows versions only up to its knowledge cutoff. The page reads the current version from the npm registry and compares.</p>
+      </div>
+      <div id="latest"></div>
+      <p class="mx-small mx-muted cf-total" id="total"></p>
+    </section>
+
+    <section class="mx-panel cf-own">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Your own question</h2>
+        <p>Ask about a name with more than one meaning. Ask once with context and once without.</p>
+      </div>
+      <div class="mx-field">
+        <label class="mx-label" for="own-context">Context (optional)</label>
+        <textarea id="own-context" class="mx-textarea cf-small" rows="2" spellcheck="false" placeholder="Alice is the name of our cat."></textarea>
+      </div>
+      <div class="mx-field">
+        <label class="mx-label" for="own-question">Question</label>
+        <div class="cf-ask">
+          <input id="own-question" class="mx-input" spellcheck="false" value="Tell me about Alice.">
+          <button class="mx-btn" id="own-go" type="button">Ask</button>
+        </div>
+      </div>
+      <div id="own"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

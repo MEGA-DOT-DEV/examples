@@ -1,0 +1,159 @@
+.al-task {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-base);
+  min-height: 4rem;
+}
+.al-steps {
+  width: 4.5rem;
+}
+
+.al-plate {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.al-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.al-empty b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+
+/* The trace: one row per step, a rail on the left joins the steps. */
+.al-trace {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+.al-step {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: var(--mega-space-4);
+}
+.al-rail {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.al-rail::after {
+  content: "";
+  position: absolute;
+  top: 2.25rem;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--mega-red);
+}
+.al-step:last-child .al-rail::after {
+  display: none;
+}
+.al-num {
+  position: relative;
+  z-index: 1;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--mega-line-strong);
+  background: var(--mega-plate);
+  font: 400 var(--mega-text-sm) / 1 var(--mega-ui-mono);
+}
+.al-body {
+  padding-bottom: var(--mega-space-6);
+}
+.al-kind {
+  color: var(--mega-ink);
+}
+
+.al-call {
+  border: 1px solid var(--mega-line);
+  background: var(--mega-plate-well);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.al-call-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+}
+.al-arrow {
+  color: var(--mega-accent-ink);
+  font-family: var(--mega-ui-mono);
+}
+.al-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.al-call-args {
+  color: var(--mega-ink-body);
+  overflow-wrap: anywhere;
+  flex: 1 1 12rem;
+}
+.al-call-out {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-2);
+  padding: 0 var(--mega-space-3) var(--mega-space-3);
+}
+.al-call-out .mx-code pre {
+  max-height: 16rem;
+  overflow: auto;
+}
+.al-call.is-error {
+  border-color: var(--mega-accent-ink);
+}
+.al-aside {
+  margin: 0;
+}
+
+/* The last step: text, no tool. The loop ends here. */
+.al-step.is-end .al-num {
+  background: var(--mega-red);
+  border-color: var(--mega-red);
+  color: var(--mega-black-1);
+}
+.al-answer {
+  border-left: 4px solid var(--mega-red);
+  padding: var(--mega-space-2) var(--mega-space-4);
+  display: grid;
+  gap: var(--mega-space-2);
+  background: var(--mega-surface);
+}
+
+.al-step.is-pending .al-num {
+  border-style: dashed;
+  color: var(--mega-ink-muted);
+}
+.al-step.is-pending .al-body .mx-label {
+  animation: al-pulse 1.2s ease-in-out infinite;
+}
+@keyframes al-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+.al-note {
+  margin: 0;
+}
+.al-raw > summary {
+  padding: var(--mega-space-2) var(--mega-space-3);
+}
+.al-raw > .mx-stack {
+  padding: 0 var(--mega-space-3) var(--mega-space-3);
+}
+.al-result {
+  margin: 0 var(--mega-space-3) var(--mega-space-3);
+}
+.al-result > summary {
+  padding: var(--mega-space-2) var(--mega-space-3);
+  flex-wrap: wrap;
+}
+.al-result .mx-code pre {
+  max-height: 16rem;
+  overflow: auto;
+}

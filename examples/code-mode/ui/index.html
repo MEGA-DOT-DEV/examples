@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code mode</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="task">Task</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Sample tasks"></div>
+      </div>
+      <textarea id="task" class="mx-textarea cm-task" rows="2" spellcheck="false"></textarea>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <p class="mx-hint">Both modes get the same task and model. Code mode sends 2 tools in each request. Function calling sends 30.</p>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run both modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <div id="headline">
+      <p class="mx-small mx-muted">Press <b>Run both modes</b>. The default task takes about 6 requests, plus 3 small requests that measure the tool schemas. Under 1 cent.</p>
+    </div>
+
+    <section class="mx-stack" id="answers-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Answers</h2>
+        <p>The last text of each mode, which ends its loop.</p>
+      </div>
+      <div class="cm-answers" id="answers"></div>
+    </section>
+
+    <section class="mx-stack" id="compare-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Comparison</h2>
+        <p>Each step is one request. The numbers change from run to run.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead>
+            <tr><th>Mode</th><th class="num">Tools</th><th class="num">Steps</th><th class="num">Input tokens</th><th class="num">Output tokens</th><th class="num">Cost</th><th class="num">Time</th></tr>
+          </thead>
+          <tbody id="compare"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="split-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Where the input tokens go</h2>
+        <p>Each request carries the tool schemas again. In code mode, each request after <code>find</code> also carries the signatures it loaded.</p>
+      </div>
+      <div class="cm-split" id="split"></div>
+      <details class="mx-details cm-raw" id="split-how">
+        <summary><span class="mx-label">How the parts are counted</span><span class="mx-small mx-muted" id="split-how-size"></span></summary>
+        <div class="mx-stack" id="split-how-body"></div>
+      </details>
+    </section>
+
+    <section class="mx-stack" id="steps-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Steps</h2>
+        <p>The tool calls of each mode, in order. Code mode shows the code the model wrote.</p>
+      </div>
+      <div class="cm-runs" id="runs"></div>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">The API both modes use</span><span class="mx-small mx-muted">30 fake functions</span></summary>
+      <div id="signatures"></div>
+    </details>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Not a sandbox</h2>
+        <p>The code runs in <code>node:vm</code> with only <code>api</code> and <code>console.log</code>, for at most 2 seconds. <code>node:vm</code> is not a security boundary, so this demo uses only fake data. In production, code mode runs the code in a sandbox, for example <a href="https://developers.cloudflare.com/agents/tools/codemode/" target="_blank" rel="noopener">Cloudflare code mode</a> or <a href="https://www.daytona.io/" target="_blank" rel="noopener">Daytona</a>.</p>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

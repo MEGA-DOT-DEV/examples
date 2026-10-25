@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Structured output</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="prompt">Prompt</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Presets"></div>
+      </div>
+      <textarea id="prompt" class="mx-textarea so-prompt" rows="2" spellcheck="false"></textarea>
+
+      <div class="mx-spread so-schema-head">
+        <label class="mx-label" for="schema">JSON Schema</label>
+        <span class="mx-hint">Strict mode: list every field in <code>required</code>. Allow no other fields.</span>
+      </div>
+      <textarea id="schema" class="mx-textarea so-schema" rows="9" spellcheck="false"></textarea>
+      <p id="schema-status" class="mx-small so-status" aria-live="polite"></p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">schema name</span></summary>
+        <div class="mx-fields so-more">
+          <div class="mx-field">
+            <label class="mx-label" for="name">Schema name</label>
+            <input id="name" class="mx-input mx-input--small so-name" spellcheck="false" autocomplete="off" maxlength="64">
+            <span class="mx-hint">The API shows it in errors. Letters, digits, <code>_</code> and <code>-</code>.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions so-actions">
+        <div id="picker"></div>
+        <div class="mx-row">
+          <button class="mx-btn" id="run" type="button">Send prompt</button>
+          <button class="mx-btn mx-btn--primary" id="compare" type="button">Run Kyoto and Tarvenmoor</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <div id="headline">
+      <p class="mx-muted so-empty">Press <b>Run Kyoto and Tarvenmoor</b>. 2 requests, under 1 cent. <b>Send prompt</b> and the presets send 1 request.</p>
+    </div>
+
+    <section id="details" class="mx-stack" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Each answer</h2>
+        <p>The model writes a string. Our code parses it and checks it against the schema.</p>
+      </div>
+      <div id="board" class="so-board"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

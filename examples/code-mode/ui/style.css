@@ -1,0 +1,198 @@
+.cm-task {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-base);
+  min-height: 4rem;
+}
+#headline > p {
+  margin: 0;
+}
+#headline b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+
+/* The two answers side by side, so they compare without clicks. */
+.cm-answers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--mega-space-4);
+}
+.cm-answer-cell {
+  align-content: start;
+}
+.cm-answer-cell > b {
+  font-weight: 500;
+  color: var(--mega-ink);
+}
+
+/* Where the input tokens go: one stacked bar per mode, on one scale. */
+.cm-split {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.cm-split-row {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.cm-split-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--mega-space-3);
+  font-size: var(--mega-text-sm);
+}
+.cm-split-head b {
+  font-weight: 500;
+  color: var(--mega-ink);
+}
+.cm-bar {
+  display: flex;
+  height: 0.85rem;
+  background: var(--mega-surface-2);
+}
+.cm-bar > span {
+  display: block;
+  height: 100%;
+}
+.cm-part--schemas {
+  background: var(--mega-red);
+}
+.cm-part--specs {
+  background: var(--mega-blue-text);
+}
+.cm-part--rest {
+  background: var(--mega-line-strong);
+}
+.cm-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-1) var(--mega-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-body);
+}
+.cm-legend li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--mega-space-1);
+}
+.cm-legend i {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  flex: none;
+}
+.cm-legend b {
+  font-family: var(--mega-ui-mono);
+  font-weight: 500;
+  color: var(--mega-ink);
+}
+
+/* The steps of the two runs, one above the other, so the code has the full width. */
+.cm-runs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-4);
+}
+.cm-runs:empty {
+  display: none;
+}
+.cm-run {
+  align-content: start;
+}
+
+.cm-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.cm-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-2);
+  border-left: 2px solid var(--mega-line-strong);
+  padding-left: var(--mega-space-3);
+}
+.cm-step-title {
+  color: var(--mega-ink);
+}
+.cm-step.is-end {
+  border-left-color: var(--mega-red);
+}
+.cm-step.is-pending .mx-label {
+  animation: cm-pulse 1.2s ease-in-out infinite;
+}
+@keyframes cm-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.cm-call {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-2);
+  border: 1px solid var(--mega-line);
+  background: var(--mega-plate-well);
+  padding: var(--mega-space-2) var(--mega-space-3) var(--mega-space-3);
+}
+.cm-call.is-error {
+  border-color: var(--mega-accent-ink);
+}
+.cm-call-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+}
+.cm-arrow {
+  color: var(--mega-accent-ink);
+  font-family: var(--mega-ui-mono);
+}
+.cm-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.cm-call-args {
+  color: var(--mega-ink-body);
+  overflow-wrap: anywhere;
+  flex: 1 1 10rem;
+  font-size: var(--mega-text-xs);
+}
+.cm-call .mx-code pre {
+  max-height: 18rem;
+  overflow: auto;
+}
+.cm-answer {
+  border-left: 4px solid var(--mega-red);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  background: var(--mega-surface-2);
+  font-size: var(--mega-text-sm);
+}
+
+.mx-section-head a {
+  color: var(--mega-accent-ink);
+  text-underline-offset: 0.2em;
+}
+.mx-section-head code {
+  font-size: 0.9em;
+}
+.cm-raw > summary {
+  padding: var(--mega-space-2) var(--mega-space-3);
+}
+.cm-raw > .mx-stack {
+  padding: 0 var(--mega-space-3) var(--mega-space-3);
+}
+.cm-raw > .mx-stack > p {
+  margin: 0;
+}
+.cm-result > summary {
+  padding: var(--mega-space-2) var(--mega-space-3);
+  flex-wrap: wrap;
+}
+.cm-run > details > summary {
+  flex-wrap: wrap;
+}

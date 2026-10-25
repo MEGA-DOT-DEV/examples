@@ -1,0 +1,106 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.idp-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+#total {
+  margin: 0;
+}
+#total:empty {
+  display: none;
+}
+.idp-seed {
+  max-width: 9rem;
+}
+
+/* ── Task cards: a grid that wraps; a card with a picture at full size takes a whole row ── */
+.idp-cards {
+  display: grid;
+  gap: var(--mega-space-5);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr));
+  align-items: start;
+}
+.idp-card {
+  display: grid;
+  gap: var(--mega-space-4);
+  padding: var(--mega-space-5);
+}
+.idp-card p {
+  margin: 0;
+}
+.idp-card.idp-wide {
+  grid-column: 1 / -1;
+}
+
+/* Equal columns for the pictures; the first column holds the row names. */
+.idp-answers {
+  table-layout: fixed;
+}
+.idp-answers th:first-child,
+.idp-answers td:first-child {
+  width: 6.5rem;
+}
+.idp-answers th,
+.idp-answers td {
+  padding: 0.4rem 0.6rem;
+}
+.idp-answers td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.idp-answers th.idp-pic {
+  vertical-align: top;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: normal;
+}
+.idp-group th {
+  padding-top: var(--mega-space-3);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}
+.idp-value {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+}
+.idp-note {
+  display: block;
+  margin-top: 0.35rem;
+  font: 400 var(--mega-text-2xs) / 1.3 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+
+/* The pictures keep their own white background in both themes: their pixels are the data. */
+.idp-thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--mega-line-strong);
+  background: #fff;
+  cursor: zoom-in;
+}
+.idp-thumb[aria-pressed="true"] {
+  outline: 2px solid var(--mega-ink);
+  outline-offset: 2px;
+  cursor: zoom-out;
+}
+.idp-thumb img,
+.idp-zoom img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.idp-zoom {
+  margin: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+/* Full size: 768 pixels wide, so a gap of 1 pixel shows. */
+.idp-zoom img {
+  max-width: 768px;
+  border: 1px solid var(--mega-line-strong);
+  background: #fff;
+}

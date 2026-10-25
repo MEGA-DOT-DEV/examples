@@ -1,0 +1,149 @@
+.cc-lost {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+#notice:empty {
+  display: none;
+}
+.cc-steps-body {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+
+.cc-prompt {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.cc-prompt-box {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-sm);
+}
+
+/* The thread: one block per message, facts marked. */
+.cc-thread {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.cc-segment {
+  padding: var(--mega-space-3) 0 var(--mega-space-1);
+  border-top: 1px dashed var(--mega-line-strong);
+  color: var(--mega-accent-ink);
+}
+.cc-segment:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.cc-msg {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  border: 1px solid var(--mega-line);
+}
+.cc-msg--user {
+  background: var(--mega-surface);
+}
+.cc-msg p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.cc-msg mark {
+  background: var(--mx-tint-2);
+  color: var(--mega-ink);
+  padding: 0 0.15em;
+}
+
+/* Context sizes: one bar per context and summary. */
+.cc-plate {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.cc-sizes {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.cc-size {
+  display: grid;
+  grid-template-columns: minmax(10rem, 18rem) minmax(0, 1fr) 4rem;
+  align-items: center;
+  gap: var(--mega-space-3);
+  font-size: var(--mega-text-sm);
+}
+.cc-size .mx-meter {
+  height: 0.85rem;
+}
+.cc-size--summary {
+  margin-bottom: var(--mega-space-2);
+}
+.cc-size-note {
+  display: block;
+  font-size: var(--mega-text-2xs);
+}
+.cc-size-num {
+  font-family: var(--mega-ui-mono);
+  text-align: right;
+}
+
+.cc-facts td {
+  min-width: 6rem;
+}
+/* Long answers end with … inside the cell; the full answer is in the cell's tooltip. */
+.cc-answer {
+  display: block;
+  font-size: var(--mega-text-2xs);
+  font-family: var(--mega-ui-mono);
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cc-note {
+  margin: 0;
+}
+.cc-summary {
+  gap: var(--mega-space-2);
+  padding-top: var(--mega-space-3);
+  border-top: 1px solid var(--mega-line);
+}
+.cc-summary .mx-output {
+  font-size: var(--mega-text-sm);
+}
+
+tr.cc-selected td {
+  background: var(--mega-table-stripe);
+}
+.cc-running {
+  animation: cc-pulse 1.2s ease-in-out infinite;
+}
+@keyframes cc-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+.cc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (max-width: 640px) {
+  .cc-msg {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mega-space-1);
+  }
+  .cc-size {
+    grid-template-columns: minmax(0, 1fr) 3.5rem;
+  }
+  .cc-size .mx-meter {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}

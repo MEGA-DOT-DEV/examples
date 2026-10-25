@@ -1,0 +1,109 @@
+/* Styles for this page only. Shared components come from /kit/kit.css. */
+
+/* The skills field takes the full width of the settings panel. */
+.ss-wide {
+  flex: 1 1 100%;
+}
+/* Skill cards: name, description, body. */
+.ss-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: var(--mega-space-3);
+}
+.ss-skill {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-3);
+  align-content: start;
+  border: 1px solid var(--mega-line);
+}
+.ss-name {
+  width: 100%;
+  font-family: var(--mega-ui-mono);
+}
+/* Fields grow with their text (field-sizing; app.js sizes them where it is missing). */
+.ss-desc,
+.ss-request {
+  field-sizing: content;
+  resize: none;
+  overflow: hidden;
+}
+.ss-desc {
+  width: 100%;
+  font-size: var(--mega-text-sm);
+  min-height: 4.8rem;
+}
+.ss-skill .mx-code {
+  border-width: 1px 0 0;
+}
+.ss-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+#instructions .mx-code {
+  border-width: 1px 0 0;
+}
+#instructions pre {
+  white-space: pre-wrap;
+}
+
+/* Test requests in Advanced. */
+.ss-tests td {
+  vertical-align: middle;
+}
+.ss-request-cell {
+  min-width: 18rem;
+  width: 100%;
+}
+.ss-request {
+  width: 100%;
+  font-size: var(--mega-text-sm);
+  min-height: 2.6rem;
+}
+.ss-expected {
+  min-width: 11.5rem;
+}
+.ss-remove {
+  min-width: 2rem;
+}
+.ss-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* The result table. */
+.ss-request-text {
+  min-width: 18rem;
+  width: 100%;
+}
+.ss-runs {
+  white-space: nowrap;
+}
+.ss-runs > div + div {
+  margin-top: 0.3rem;
+}
+.ss-outcome {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+.ss-empty {
+  margin: 0;
+}
+
+.ss-ctx-field {
+  flex: 1 1 28rem;
+}
+.ss-ctx-field .mx-select {
+  width: 100%;
+  max-width: 40rem;
+}
+#ctx-text pre {
+  white-space: pre-wrap;
+}

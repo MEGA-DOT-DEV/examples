@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Same prompt, many runs</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="prompt">Prompt</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Sample prompts"></div>
+      </div>
+      <textarea id="prompt" class="mx-textarea sp-prompt" rows="2" spellcheck="false"></textarea>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="runs">Runs</label>
+          <input id="runs" class="mx-input mx-input--small sp-num" type="number" min="1" value="20">
+          <span class="mx-hint" id="runs-hint"></span>
+        </div>
+        <div class="mx-field">
+          <span class="mx-label">Reasoning effort</span>
+          <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+        </div>
+        <div class="mx-field">
+          <label class="mx-label" for="temperature">Temperature</label>
+          <input id="temperature" class="mx-input mx-input--small sp-num" type="number" min="0" max="2" step="0.1" placeholder="default">
+          <span class="mx-hint" id="temp-hint"></span>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">answer check</span></summary>
+        <div class="mx-fields sp-more">
+          <div class="mx-field">
+            <label class="mx-label" for="check">Check each answer</label>
+            <select id="check" class="mx-select mx-input--small"></select>
+            <span class="mx-hint">A preset always uses its own check.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p id="empty" class="sp-empty"></p>
+    <div class="mx-callout" id="headline" hidden>
+      <span class="mx-label">Result</span>
+      <p id="headline-text"></p>
+    </div>
+
+    <section class="mx-stack" id="answers" hidden>
+      <div class="mx-spread">
+        <div class="mx-section-head">
+          <h2 class="mx-h3">Answers</h2>
+          <p>Each distinct answer, and how many runs gave it.</p>
+        </div>
+        <span class="mx-label" id="meta"></span>
+      </div>
+      <div class="mx-plate sp-plate">
+        <div id="tally" class="sp-tally"></div>
+        <p id="fair-note" class="mx-small mx-muted sp-note" hidden>The dashed line marks 10%. A fair random pick gives each number 10%.</p>
+      </div>
+      <p class="mx-small mx-muted" id="total"></p>
+    </section>
+
+    <section class="mx-stack" id="runs-box" hidden>
+      <details class="mx-details">
+        <summary><span class="mx-label" id="runs-title">Each run</span></summary>
+        <div class="mx-table-wrap sp-runs">
+          <table class="mx-table">
+            <thead><tr><th class="num">#</th><th>Answer</th><th>Check</th><th>Usage</th><th class="num">ms</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </details>
+      <div class="mx-stack" id="raw" hidden></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

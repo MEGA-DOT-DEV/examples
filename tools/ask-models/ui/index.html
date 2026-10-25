@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ask models</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="question">Question</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Sample questions"></div>
+      </div>
+      <textarea id="question" class="mx-textarea" rows="2" spellcheck="false"></textarea>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-field">
+        <div class="mx-spread">
+          <span class="mx-label">Models <span id="model-count"></span></span>
+          <button class="mx-btn mx-btn--small" id="reset" type="button">Defaults</button>
+        </div>
+        <div class="mx-row" id="chips" role="group" aria-label="Models to ask"></div>
+        <form class="mx-row am-add" id="add-form">
+          <input id="add-model" class="mx-input mx-input--small" spellcheck="false" autocomplete="off" placeholder="Add a model ID" aria-label="Model ID to add">
+          <button class="mx-btn mx-btn--small" type="submit">Add</button>
+        </form>
+      </div>
+      <div class="mx-field">
+        <span class="mx-label">Perspectives <span id="perspective-count"></span></span>
+        <span class="mx-hint">Each request answers as one role. Remove them all to ask each model with no role.</span>
+        <div class="mx-row" id="perspective-chips" role="group" aria-label="Perspectives"></div>
+        <form class="mx-row am-add" id="add-perspective-form">
+          <input id="add-perspective" class="mx-input mx-input--small" spellcheck="false" autocomplete="off" maxlength="60" placeholder="Add a role, for example tax adviser" aria-label="Perspective to add">
+          <button class="mx-btn mx-btn--small" type="submit">Add</button>
+        </form>
+      </div>
+      <div class="mx-field">
+        <span class="mx-label">Requests <span id="seat-count"></span></span>
+        <ol class="am-seats" id="seats"></ol>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">merge model</span></summary>
+        <div class="mx-fields am-pad">
+          <div class="mx-field am-merge-field">
+            <label class="mx-label" for="merge-model">Merge model</label>
+            <input id="merge-model" class="mx-input mx-input--small" spellcheck="false" autocomplete="off">
+            <span class="mx-hint">This model merges the answers. Empty: the provider's default model.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker" class="am-picker"></div>
+        <button class="mx-btn mx-btn--primary" id="ask" type="button">Ask</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p class="mx-plate am-empty" id="empty"></p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Merged answer</h3>
+        <p>One point per row. A dot marks each answer that makes the point, as the merge model reports it.</p>
+      </div>
+      <div id="headline"></div>
+      <div id="merged" class="mx-stack" hidden></div>
+    </section>
+
+    <section class="mx-stack" id="answers-box" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Answers</h3>
+        <p>Numbered as the columns above. The requests run at the same time.</p>
+      </div>
+      <div class="mx-readouts" id="totals"></div>
+      <div class="am-cards" id="cards" aria-live="polite"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

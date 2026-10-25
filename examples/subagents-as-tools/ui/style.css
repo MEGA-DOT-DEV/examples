@@ -1,0 +1,265 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.sa-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.sa-pad > .sa-aside {
+  margin-bottom: var(--mega-space-3);
+}
+.sa-model-field .mx-input {
+  min-width: 16rem;
+}
+
+/* The chart: one group per step, a bar for A and a bar for B. */
+.sa-plate {
+  display: grid;
+  gap: var(--mega-space-5);
+}
+.sa-plate-head {
+  padding-left: var(--mega-space-6);
+}
+.sa-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.sa-empty b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.sa-chart {
+  display: flex;
+  align-items: stretch;
+  gap: var(--mega-space-3);
+  height: 15rem;
+  padding-top: 1.4rem;
+  overflow: auto hidden;
+}
+.sa-group {
+  flex: 1 0 4.5rem;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: var(--mega-space-2);
+  max-width: 9rem;
+}
+.sa-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  border-bottom: 1px solid var(--mega-line-strong);
+}
+.sa-bar {
+  position: relative;
+  flex: 1;
+  min-height: 1px;
+}
+.sa-bar-num {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 0.2rem;
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-body);
+  white-space: nowrap;
+}
+.sa-step-num {
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+  text-align: center;
+}
+.sa-bar--single {
+  background: var(--mega-zinc);
+}
+.sa-bar--subagents {
+  background: var(--mega-red);
+}
+.sa-bar--empty {
+  background: transparent;
+}
+.sa-bar.is-pending {
+  height: 18%;
+  border: 1px dashed var(--mega-line-strong);
+  border-bottom: 0;
+  animation: sa-pulse 1.2s ease-in-out infinite;
+}
+
+.sa-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mega-space-2);
+  white-space: nowrap;
+}
+.sa-swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  flex: none;
+}
+.sa-meaning {
+  margin: 0;
+}
+
+/* Wrong values: the vendor and field, the value, and the kind of mistake. */
+.sa-wrong {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.sa-wrong li {
+  display: grid;
+  gap: 0.15rem;
+  padding: var(--mega-space-2) var(--mega-space-3);
+  border-left: 3px solid var(--mega-line-strong);
+  background: var(--mega-surface);
+  font-size: var(--mega-text-sm);
+}
+.sa-wrong li.mx-good {
+  border-left-color: var(--mx-ok);
+}
+.sa-wrong .sa-wrong-earlier {
+  border-left-color: var(--mega-zinc);
+}
+.sa-wrong .sa-wrong-same-contract {
+  border-left-color: var(--mega-blue-text);
+}
+.sa-wrong .sa-wrong-other-vendor {
+  border-left-color: var(--mega-red);
+}
+.sa-wrong-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-2);
+  align-items: baseline;
+}
+.sa-wrong-head b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.sa-wrong-head code {
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}
+
+/* The wrong values of both modes side by side, stacked on a narrow screen. */
+.sa-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-5);
+  align-items: start;
+}
+.sa-trace {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+.sa-step {
+  border: 1px solid var(--mega-line);
+  background: var(--mega-surface);
+  padding: var(--mega-space-3);
+  display: grid;
+  gap: var(--mega-space-2);
+  grid-template-columns: minmax(0, 1fr);
+}
+.sa-step.is-end {
+  border-left: 4px solid var(--mega-red);
+}
+.sa-step.is-pending .mx-label {
+  animation: sa-pulse 1.2s ease-in-out infinite;
+}
+.sa-kind {
+  color: var(--mega-ink);
+}
+.sa-aside {
+  margin: 0;
+}
+
+.sa-call {
+  border: 1px solid var(--mega-line);
+  background: var(--mega-plate-well);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.sa-call.is-error {
+  border-color: var(--mega-accent-ink);
+}
+.sa-call-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+}
+.sa-arrow {
+  color: var(--mega-accent-ink);
+  font-family: var(--mega-ui-mono);
+}
+.sa-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.sa-call-args {
+  color: var(--mega-ink-body);
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+  flex: 1 1 10rem;
+}
+/* A subagent's task: two lines here, the whole text in its thread. */
+.sa-call-task {
+  flex: 1 1 10rem;
+  min-width: 0;
+  color: var(--mega-ink-body);
+  font-size: var(--mega-text-xs);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.sa-result > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  cursor: pointer;
+  padding: 0 var(--mega-space-3) var(--mega-space-2);
+  list-style: none;
+}
+.sa-result > summary::before {
+  content: "+ ";
+  font-family: var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.sa-result[open] > summary::before {
+  content: "− ";
+}
+.sa-result .mx-code {
+  border-width: 1px 0 0;
+}
+.sa-result .mx-code pre {
+  max-height: 16rem;
+  overflow: auto;
+}
+
+/* A subagent's own thread, nested under the call that started it. */
+.sa-thread {
+  display: grid;
+  gap: var(--mega-space-2);
+  padding: 0 var(--mega-space-3) var(--mega-space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+.sa-thread .sa-step {
+  background: var(--mega-plate-well);
+}
+
+.sa-raw > summary {
+  padding: var(--mega-space-2) var(--mega-space-3);
+}
+
+@keyframes sa-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}

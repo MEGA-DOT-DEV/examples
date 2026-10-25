@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Next-token probabilities</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="prompt">Text to continue</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Sample texts"></div>
+      </div>
+      <textarea id="prompt" class="mx-textarea nt-prompt" rows="2" spellcheck="false">Have a nice</textarea>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">candidates</span></summary>
+        <div class="mx-fields nt-more">
+          <div class="mx-field">
+            <span class="mx-label">Candidates</span>
+            <div class="mx-seg" id="tops" role="group" aria-label="Number of candidates"></div>
+            <span class="mx-hint">How many of the most likely tokens to show.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="predict" type="button">Predict next token</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p id="empty" class="nt-empty">Press <b>Predict next token</b>. One request, under 1 cent.</p>
+    <div class="mx-callout" id="headline" hidden>
+      <span class="mx-label">Result</span>
+      <p id="headline-text"></p>
+    </div>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-spread">
+        <div class="mx-section-head">
+          <h2 class="mx-h3">Next token</h2>
+          <p>The most likely next tokens and their probabilities. Click one to add it to your text and predict again.</p>
+        </div>
+        <span class="mx-label" id="meta"></span>
+      </div>
+      <div class="mx-plate nt-plate">
+        <ol id="candidates" class="nt-list"></ol>
+        <p id="wrote" class="nt-wrote mx-small"></p>
+        <p id="spaces" class="nt-wrote mx-hint" hidden>· marks a space and ↵ marks a line break.</p>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="trail-box" hidden>
+      <div class="mx-spread">
+        <div class="mx-section-head">
+          <h2 class="mx-h3">Text the model reads next</h2>
+          <p>Your text, with the tokens you added in color.</p>
+        </div>
+        <div class="mx-row">
+          <button class="mx-btn mx-btn--small" id="undo" type="button">Undo</button>
+          <button class="mx-btn mx-btn--small" id="reset" type="button">Start over</button>
+        </div>
+      </div>
+      <p id="trail" class="mx-panel nt-trail-text"></p>
+    </section>
+
+    <div id="raw" hidden></div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

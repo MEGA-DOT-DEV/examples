@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent loop</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="task">Task</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Sample tasks"></div>
+      </div>
+      <textarea id="task" class="mx-textarea al-task" rows="2" spellcheck="false"></textarea>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="max-steps">Step limit</label>
+          <input id="max-steps" class="mx-input mx-input--small al-steps" type="number" min="1" max="20" value="8">
+          <span class="mx-hint">The loop stops at this step, with or without an answer.</span>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <div class="mx-row">
+          <button class="mx-btn" id="stop" type="button" hidden>Stop</button>
+          <button class="mx-btn mx-btn--primary" id="run" type="button">Run the agent</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" id="headline">
+      <p class="mx-small mx-muted al-empty">Press <b>Run the agent</b>. The default task takes 2 to 4 steps, one request each, under 1 cent.</p>
+    </section>
+
+    <section class="mx-plate al-plate" id="trace-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The loop, step by step</h2>
+        <p>Each step is one request. A tool call keeps the loop going. Text ends it.</p>
+      </div>
+      <ol id="trace" class="al-trace"></ol>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">Tool schemas</span><span class="mx-muted mx-small" id="tool-names"></span></summary>
+      <div id="tool-defs"></div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

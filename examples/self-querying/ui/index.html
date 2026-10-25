@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Self-querying</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The task</h2>
+        <p>The model knows each atomic number. The question asks for their sum.</p>
+      </div>
+      <div class="mx-plate sq-question" id="question"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Two ways to answer</h2>
+        <p>Both final replies get the same instruction: “Reply with the answer only: one number.”</p>
+      </div>
+      <ol class="sq-modes">
+        <li><b>Direct.</b> The model gets the question and replies at once. 1 request.</li>
+        <li><b>Self-querying.</b> Step 1: the model writes one short question and answer for each element, for example “What is the atomic number of Fe? 26”. Step 2: it gets the question with these notes in its context, and replies. 2 requests.</li>
+      </ol>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field sq-symbols-field">
+          <div class="mx-spread">
+            <label class="mx-label" for="symbols">Element symbols</label>
+            <div class="mx-row" id="presets" role="group" aria-label="Sample sets"></div>
+          </div>
+          <input id="symbols" class="mx-input mx-input--small sq-symbols" spellcheck="false" autocomplete="off">
+          <span class="mx-hint">2 to 6 symbols.</span>
+        </div>
+        <div class="mx-field">
+          <label class="mx-label" for="runs">Runs per mode</label>
+          <input id="runs" class="mx-input mx-input--small" type="number" min="1" max="10" value="5">
+        </div>
+        <div class="mx-field">
+          <span class="mx-label" id="effort-label">Reasoning effort</span>
+          <div class="mx-seg" id="efforts" role="group" aria-labelledby="effort-label"></div>
+          <span class="mx-hint">With <code>low</code>, hidden reasoning can recall the facts too.</span>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run both modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" aria-live="polite">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Result</h2>
+        <p>Code reads the number in each reply and compares it with the periodic table.</p>
+      </div>
+      <div class="mx-stack" id="result"></div>
+    </section>
+
+    <section class="mx-stack" id="runs-section" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Each run</h2>
+        <p>What the model got and what it wrote, step by step. Run 1 of each mode is open.</p>
+      </div>
+      <div class="sq-columns">
+        <div class="sq-runs" id="runs-a" role="group" aria-label="Direct runs"></div>
+        <div class="sq-runs" id="runs-b" role="group" aria-label="Self-querying runs"></div>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="second" hidden aria-live="polite">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Second check</h2>
+        <p>After the runs, a second model (a grader) reads each run and finds its final number and the facts before it. Code compares this with the result above.</p>
+      </div>
+      <div class="mx-stack sq-second" id="second-body"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

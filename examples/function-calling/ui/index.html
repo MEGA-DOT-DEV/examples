@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Function calling</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <label class="mx-label" for="query">Your message</label>
+        <div class="mx-row" id="presets" role="group" aria-label="Presets"></div>
+      </div>
+      <input id="query" class="mx-input fc-query" spellcheck="false" autocomplete="off" maxlength="1000">
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-actions fc-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run one round trip</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <div id="headline">
+      <p class="mx-muted fc-empty">Press <b>Run one round trip</b>. 1 or 2 requests, under 1 cent.</p>
+    </div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The round trip, step by step</h2>
+        <p>The model only writes JSON. Our code runs the tool and sends the result back.</p>
+      </div>
+      <ol id="steps" class="fc-steps" aria-live="polite"></ol>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">Fake data behind the tools</span><span class="mx-small mx-muted" id="data-count"></span></summary>
+      <div id="data" class="fc-data"></div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

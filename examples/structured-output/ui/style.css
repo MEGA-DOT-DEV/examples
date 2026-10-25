@@ -1,0 +1,114 @@
+.so-prompt {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-base);
+  min-height: 3.5rem;
+}
+.so-schema {
+  font: 400 var(--mega-text-xs) / 1.6 var(--mega-ui-mono);
+  min-height: 8rem;
+  tab-size: 2;
+  resize: none;
+  overflow: hidden;
+}
+.so-schema-head {
+  margin-top: var(--mega-space-2);
+  flex-wrap: wrap;
+  gap: var(--mega-space-2) var(--mega-space-4);
+}
+.so-name {
+  width: 12rem;
+}
+.so-status {
+  margin: 0;
+  min-height: 1.5em;
+}
+
+/* One card, or two side by side. */
+.so-board {
+  display: grid;
+  gap: var(--mega-space-4);
+  grid-template-columns: minmax(0, 1fr);
+}
+.so-board--pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 760px) {
+  .so-board--pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.so-empty {
+  margin: 0;
+}
+.so-empty b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.so-more {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+
+.so-card {
+  display: grid;
+  gap: var(--mega-space-4);
+  align-content: start;
+  padding: var(--mega-space-6) var(--mega-space-5);
+}
+.so-title {
+  color: var(--mega-ink);
+}
+.so-meta {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.so-body {
+  display: grid;
+  gap: var(--mega-space-4);
+  grid-template-columns: minmax(0, 1fr);
+}
+.so-prompt-echo {
+  margin: 0;
+  font: 400 var(--mega-text-sm) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink-body);
+}
+.so-section {
+  display: grid;
+  gap: var(--mega-space-2);
+  grid-template-columns: minmax(0, 1fr);
+}
+.so-section p {
+  margin: 0;
+}
+.so-verdict {
+  font-size: var(--mega-text-sm);
+}
+.so-errors {
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--mega-accent-ink);
+  font: 400 var(--mega-text-xs) / 1.6 var(--mega-ui-mono);
+}
+.so-card .mx-small {
+  margin: 0;
+}
+.so-schema-head .mx-hint code {
+  font-size: 0.95em;
+}
+.so-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.so-verdict code {
+  font-size: 0.95em;
+}
+/* When the buttons wrap under the provider picker, they stay on the right. */
+.so-actions > .mx-row {
+  margin-left: auto;
+}
+/* A fold's summary: the label stays on one line, the note after it wraps. */
+.so-card details > summary {
+  flex-wrap: wrap;
+}
+.so-card details > summary > .mx-label {
+  white-space: nowrap;
+}

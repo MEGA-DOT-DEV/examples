@@ -1,0 +1,36 @@
+{
+  "name": "mega-examples",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Code examples, Agent Skills and tools for the MEGA developer course.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "workspaces": [
+    "cli"
+  ],
+  "imports": {
+    "#shared/*": "./shared/*"
+  },
+  "scripts": {
+    "start": "mex open",
+    "setup": "mex setup",
+    "doctor": "mex doctor",
+    "list": "mex list",
+    "check": "mex check",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "fix": "biome check --write",
+    "test": "mex check && node --disable-warning=ExperimentalWarning --test \"cli/test/*.test.ts\" \"shared/*.test.ts\" \"examples/*/*.test.ts\" \"tools/*/*.test.ts\""
+  },
+  "dependencies": {
+    "gpt-tokenizer": "^4.0.0",
+    "marked": "^16.4.2",
+    "shiki": "^4.5.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "^22.18.0"
+  }
+}

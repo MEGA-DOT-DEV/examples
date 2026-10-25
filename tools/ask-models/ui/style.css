@@ -1,0 +1,179 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.am-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.am-pad {
+  padding: 0 var(--mega-space-3) var(--mega-space-3);
+}
+.am-chip {
+  gap: 0.5em;
+  padding-right: 0.25rem;
+}
+.am-remove {
+  border: 0;
+  background: transparent;
+  color: var(--mega-ink-muted);
+  cursor: pointer;
+  font: 400 var(--mega-text-sm) / 1 var(--mega-ui-mono);
+  padding: 0.1rem 0.3rem;
+}
+.am-remove:hover {
+  color: var(--mega-accent-ink);
+}
+.am-add .mx-input {
+  flex: 1 1 18rem;
+  max-width: 30rem;
+}
+.am-merge-field {
+  flex: 1 1 14rem;
+  max-width: 24rem;
+}
+.am-merge-field > .mx-input.mx-input--small {
+  justify-self: stretch;
+}
+
+/* Which model answers as which role: numbered as the cards and the grid columns. */
+.am-seats {
+  margin: 0;
+  padding-left: 1.5rem;
+  display: grid;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.am-seats code {
+  font-size: var(--mega-text-xs);
+}
+
+/* The grid: one row per merged point, one column per answer. */
+.am-grid td.am-point {
+  min-width: 14rem;
+  color: var(--mega-ink-body);
+}
+.am-grid th.am-col {
+  text-align: center;
+  white-space: nowrap;
+}
+.am-grid th.am-col b {
+  display: block;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink);
+}
+.am-grid th.am-col span {
+  display: block;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.am-grid td.am-cell {
+  text-align: center;
+  vertical-align: middle;
+  width: 1%;
+  padding-inline: 0.6rem;
+}
+.am-dot {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--mega-ink);
+}
+.am-grid .am-merged {
+  background: color-mix(in srgb, var(--mega-ink) 4%, transparent);
+}
+.am-grid .am-merged .am-dot {
+  background: var(--mega-accent-ink);
+}
+/* A point that only one answer makes: the contribution the merge exists for. */
+.am-grid tr.am-own td.am-point {
+  box-shadow: inset 2px 0 0 var(--mega-accent-ink);
+}
+.am-grid tr.am-group td {
+  font: 400 var(--mega-text-2xs) / 1.2 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-ink-muted);
+  background: var(--mega-surface);
+}
+.am-grid tfoot th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--mega-ink-muted);
+  padding: 0.55rem 0.85rem;
+  border-top: 1px solid var(--mega-line-strong);
+}
+.am-grid tfoot td {
+  border-top: 1px solid var(--mega-line-strong);
+}
+.am-grid td.am-count {
+  font-family: var(--mega-ui-mono);
+}
+@media (max-width: 40rem) {
+  /* The numbers match the answer cards; the role and the model stay in the column title. */
+  .am-grid th.am-col span {
+    display: none;
+  }
+  .am-grid td.am-point {
+    min-width: 9rem;
+    padding-inline: 0.6rem;
+  }
+  .am-grid td.am-cell,
+  .am-grid th.am-col,
+  .am-grid tfoot td {
+    padding-inline: 0.3rem;
+  }
+  .am-grid tfoot th {
+    padding-inline: 0.6rem;
+  }
+}
+
+/* One card per answer, one row each. */
+.am-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-4);
+}
+.am-cards:empty {
+  display: none;
+}
+.am-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  align-content: start;
+  grid-template-columns: minmax(0, 1fr);
+}
+.am-card-head {
+  border-bottom: 1px solid var(--mega-line);
+  padding-bottom: var(--mega-space-2);
+  align-items: flex-start;
+}
+.am-who {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0 var(--mega-space-2);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink);
+}
+.am-who .am-num {
+  grid-row: span 2;
+  font-size: var(--mega-text-lg);
+  line-height: 1.2;
+}
+.am-model {
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  overflow-wrap: anywhere;
+}
+.am-card .mx-output {
+  font-size: var(--mega-text-sm);
+}
+.am-wait {
+  margin: 0;
+}
+.am-usage {
+  margin: 0;
+  font-family: var(--mega-ui-mono);
+}
+.am-failed {
+  border-color: var(--mega-accent-ink);
+}

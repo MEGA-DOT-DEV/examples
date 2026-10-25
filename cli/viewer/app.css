@@ -1,0 +1,480 @@
+/* The viewer shell: sidebar, header, tabs, pager. Components come from kit.css. */
+
+.vw {
+  display: grid;
+  grid-template-columns: 18.5rem minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────── */
+.vw-side {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mega-space-6);
+  padding: var(--mega-space-6) var(--mega-space-5);
+  border-right: 1px solid var(--mega-line);
+}
+.vw-brand {
+  display: grid;
+  gap: var(--mega-space-1);
+  color: var(--mega-ink);
+  text-decoration: none;
+}
+.vw-logo {
+  font: 400 2.1rem / 0.9 var(--mega-pixel);
+  letter-spacing: 0.02em;
+}
+.vw-search {
+  display: grid;
+  gap: var(--mega-space-2);
+  position: relative;
+}
+.vw-search .mx-input {
+  padding-right: 2rem;
+  font-size: var(--mega-text-sm);
+}
+.vw-search .vw-kbd {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.65rem;
+}
+.vw-kbd {
+  display: inline-block;
+  min-width: 1.3em;
+  padding: 0.05em 0.35em;
+  text-align: center;
+  border: 1px solid var(--mega-line-strong);
+  color: var(--mega-ink-muted);
+  font: 400 var(--mega-text-2xs) / 1.4 var(--mega-ui-mono);
+}
+
+.vw-nav {
+  display: grid;
+  gap: var(--mega-space-6);
+}
+.vw-group {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.vw-group > .mx-label {
+  margin-bottom: var(--mega-space-2);
+}
+.vw-item {
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.45rem 0 0.45rem 1rem;
+  border-left: 1px solid var(--mega-line);
+  color: var(--mega-ink-muted);
+  text-decoration: none;
+  transition: color var(--mega-dur-fast) var(--mega-ease-out);
+}
+.vw-item:hover {
+  color: var(--mega-ink);
+}
+.vw-item-title {
+  font-size: var(--mega-text-sm);
+  line-height: 1.35;
+}
+.vw-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font: 400 var(--mega-text-2xs) / 1.2 var(--mega-ui-mono);
+  letter-spacing: 0.02em;
+  color: var(--mega-ink-muted);
+}
+.vw-item[aria-current="page"] {
+  color: var(--mega-ink);
+}
+/* The active marker: a short red bar on the rail, as on mega.dev. */
+.vw-item[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0.55rem;
+  width: 3px;
+  height: 1.1rem;
+  background: var(--mega-red);
+}
+.vw-empty {
+  color: var(--mega-ink-muted);
+  font-size: var(--mega-text-sm);
+  margin: 0;
+}
+
+/* A lesson group: the episode and the lesson title, folding like mx-details. */
+.vw-lesson > summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  gap: 0.2rem;
+  margin-bottom: var(--mega-space-2);
+}
+.vw-lesson > summary::-webkit-details-marker {
+  display: none;
+}
+.vw-lesson-line {
+  display: flex;
+  align-items: center;
+  gap: var(--mega-space-2);
+}
+.vw-lesson-line::before {
+  content: "+";
+  width: 1ch;
+  font-family: var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.vw-lesson[open] .vw-lesson-line::before {
+  content: "−";
+}
+.vw-lesson-count {
+  margin-left: auto;
+  font: 400 var(--mega-text-2xs) / 1.2 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.vw-lesson-title {
+  padding-left: calc(1ch + var(--mega-space-2));
+  font-size: var(--mega-text-xs);
+  line-height: 1.35;
+  color: var(--mega-ink-muted);
+}
+.vw-lesson > summary:hover .vw-lesson-title {
+  color: var(--mega-ink-body);
+}
+.vw-lesson-items {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.vw-lesson:not([open]) > summary {
+  margin-bottom: 0;
+}
+
+.vw-side-foot {
+  margin-top: auto;
+  display: grid;
+  gap: var(--mega-space-3);
+  justify-items: start;
+}
+.vw-keys-hint {
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+.vw-keys-hint code {
+  color: var(--mega-ink);
+}
+.vw-theme svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ── Main column ──────────────────────────────────────────────────────── */
+.vw-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--mega-space-10)
+    clamp(var(--mega-space-5), 5vw, var(--mega-space-16)) var(--mega-space-8);
+  max-width: 68rem;
+}
+.vw-head {
+  display: grid;
+  gap: var(--mega-space-4);
+  padding-bottom: var(--mega-space-6);
+}
+.vw-kicker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-4);
+  align-items: center;
+}
+.vw-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-3);
+  align-items: stretch;
+  margin-top: var(--mega-space-2);
+}
+
+/* The run command: copy it into a terminal. */
+.vw-cmd {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--mega-line-strong);
+  background: var(--mega-code-bg);
+}
+.vw-cmd code {
+  padding: 0.45rem 0.75rem;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-code-ink);
+  white-space: nowrap;
+}
+.vw-cmd .mx-copy {
+  position: static;
+  border-left: 1px solid var(--mega-line);
+  padding: 0.55rem 0.7rem;
+}
+.vw-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-2);
+  align-items: center;
+}
+.vw-keys .mx-chip {
+  font-size: var(--mega-text-2xs);
+}
+
+/* Tabs: uppercase labels, a red underline on the selected one. */
+.vw-tabs {
+  display: flex;
+  gap: var(--mega-space-6);
+  border-bottom: 1px solid var(--mega-line);
+  margin-bottom: var(--mega-space-6);
+}
+.vw-tab {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.7rem 0;
+  margin-bottom: -1px;
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-ink-muted);
+  border-bottom: 2px solid transparent;
+}
+.vw-tab:hover {
+  color: var(--mega-ink);
+}
+.vw-tab[aria-selected="true"] {
+  color: var(--mega-ink);
+  border-bottom-color: var(--mega-red);
+}
+
+.vw-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-5);
+  align-content: start;
+}
+.vw-frame {
+  width: 100%;
+  border: 0;
+  display: block;
+  min-height: 24rem;
+  background: transparent;
+}
+
+/* Code tab: a file list and the selected file. */
+.vw-code {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: var(--mega-space-5);
+  align-items: start;
+}
+.vw-files {
+  display: grid;
+  gap: 0.15rem;
+  position: sticky;
+  top: var(--mega-space-6);
+}
+.vw-file {
+  text-align: left;
+  border: 0;
+  border-left: 1px solid var(--mega-line);
+  background: transparent;
+  cursor: pointer;
+  padding: 0.35rem 0 0.35rem 0.8rem;
+  color: var(--mega-ink-muted);
+  font: 400 var(--mega-text-xs) / 1.3 var(--mega-ui-mono);
+  overflow-wrap: anywhere;
+}
+.vw-file:hover {
+  color: var(--mega-ink);
+}
+.vw-file[aria-current="true"] {
+  color: var(--mega-ink);
+  border-left: 3px solid var(--mega-red);
+  padding-left: calc(0.8rem - 2px);
+}
+.vw-source code {
+  counter-reset: line;
+}
+/* Line numbers in front of each line (Shiki marks lines with .line). */
+.vw-source .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2.2em;
+  margin-right: 1.2em;
+  text-align: right;
+  color: var(--mega-code-muted) !important;
+  opacity: 0.7;
+  user-select: none;
+}
+
+/* ── Pager ────────────────────────────────────────────────────────────── */
+.vw-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mega-space-4);
+  margin-top: var(--mega-space-12);
+  padding-top: var(--mega-space-6);
+  border-top: 1px solid var(--mega-line);
+}
+.vw-pager a {
+  display: grid;
+  gap: var(--mega-space-1);
+  padding: var(--mega-space-4);
+  border: 1px solid var(--mega-line);
+  color: var(--mega-ink);
+  text-decoration: none;
+  transition: border-color var(--mega-dur-fast) var(--mega-ease-out);
+}
+.vw-pager a:hover {
+  border-color: var(--mega-ink);
+}
+.vw-pager a.next {
+  text-align: right;
+  grid-column: 2;
+}
+.vw-pager span:last-child {
+  font-size: var(--mega-text-sm);
+}
+
+/* ── Home ─────────────────────────────────────────────────────────────── */
+.vw-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: var(--mega-space-4);
+}
+.vw-card {
+  display: grid;
+  gap: var(--mega-space-2);
+  align-content: start;
+  padding: var(--mega-space-5);
+  border: 1px solid var(--mega-line);
+  background: var(--mega-surface);
+  color: var(--mega-ink);
+  text-decoration: none;
+  transition: border-color var(--mega-dur-fast) var(--mega-ease-out);
+}
+.vw-card:hover {
+  border-color: var(--mega-ink);
+}
+.vw-card p {
+  margin: 0;
+  color: var(--mega-ink-muted);
+  font-size: var(--mega-text-sm);
+}
+.vw-card .vw-item-meta {
+  margin-top: var(--mega-space-2);
+}
+
+@media (max-width: 860px) {
+  .vw {
+    grid-template-columns: 1fr;
+  }
+  .vw-side {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--mega-line);
+  }
+  .vw-side-foot {
+    margin-top: 0;
+  }
+  .vw-code {
+    grid-template-columns: 1fr;
+  }
+  .vw-files {
+    position: static;
+  }
+}
+
+/* ── Start here: the Setup page and its card on the home page ─────────── */
+.vw-start {
+  display: grid;
+  gap: var(--mega-space-2);
+  margin-bottom: var(--mega-space-6);
+  padding: var(--mega-space-6);
+  border: 1px solid var(--mega-line-strong);
+  border-left: 4px solid var(--mega-red);
+  background: var(--mega-surface);
+  color: var(--mega-ink);
+  text-decoration: none;
+  transition: border-color var(--mega-dur-fast) var(--mega-ease-out);
+}
+.vw-start:hover {
+  border-color: var(--mega-ink);
+  border-left-color: var(--mega-red);
+}
+.vw-start p {
+  margin: 0;
+  color: var(--mega-ink-muted);
+  max-width: 60ch;
+}
+
+.vw-status {
+  display: grid;
+  gap: var(--mega-space-4);
+  max-width: var(--mega-measure);
+}
+.vw-status-rows {
+  display: grid;
+  border-top: 1px solid var(--mega-line);
+}
+.vw-status-row {
+  display: grid;
+  grid-template-columns: 0.5rem 9rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  align-items: center;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--mega-line);
+  font-size: var(--mega-text-sm);
+}
+.vw-status-name {
+  color: var(--mega-ink);
+}
+.vw-status-detail {
+  color: var(--mega-ink-body);
+  overflow-wrap: anywhere;
+}
+.vw-status-detail code {
+  font-size: 0.9em;
+}
+.vw-status-detail a {
+  color: var(--mega-accent-ink);
+  text-underline-offset: 0.2em;
+}
+.vw-missing a {
+  color: var(--mega-accent-ink);
+  text-underline-offset: 0.2em;
+}
+.vw-missing a:hover {
+  color: var(--mega-ink);
+}
+.vw-status-foot {
+  display: grid;
+  gap: var(--mega-space-2);
+  justify-items: start;
+}
+.vw-status-foot p {
+  margin: 0;
+}
+.vw-status-foot .vw-cmd {
+  max-width: 100%;
+}
+.vw-status-foot .vw-cmd code {
+  overflow-x: auto;
+}
+
+/* The restart banner: the viewer's own code changed after it started. */
+.vw-restart {
+  margin-bottom: var(--mega-space-5);
+}

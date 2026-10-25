@@ -1,0 +1,64 @@
+/* Styles for this page only. Shared components come from /kit/kit.css. */
+.po-more {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.po-cases {
+  display: grid;
+  gap: var(--mega-space-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
+}
+.po-case {
+  display: grid;
+  gap: var(--mega-space-4);
+  align-content: start;
+}
+.po-case p {
+  margin: 0;
+}
+.po-lines {
+  margin: 0;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: var(--mega-space-2);
+  font-size: var(--mega-text-sm);
+}
+.po-line {
+  display: flex;
+  gap: var(--mega-space-2);
+  align-items: baseline;
+}
+/* The letter names the line: the same letter is the same text in every version. */
+.po-letter {
+  flex: none;
+  min-width: 1.4rem;
+  text-align: center;
+  font: 500 var(--mega-text-2xs) / 1.6 var(--mega-ui-mono);
+  border: 1px solid var(--mega-line-strong);
+}
+/* A line that moved or changed: the letter in blue, and the word after the line. */
+.po-marked {
+  border-color: var(--mega-blue-text);
+  color: var(--mega-blue-text);
+}
+.po-mark {
+  flex: none;
+  font: 500 var(--mega-text-2xs) / 1.6 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-blue-text);
+}
+.po-question {
+  margin: 0;
+  padding-left: var(--mega-space-4);
+  border-left: 2px solid var(--mega-line-strong);
+  font-size: var(--mega-text-sm);
+}
+.po-meaning {
+  margin: 0;
+}
+.po-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.po-runs .num {
+  width: 1%;
+}

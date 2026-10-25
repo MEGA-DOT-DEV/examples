@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Context window budget</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <span class="mx-label">Add text to the request</span>
+        <div class="mx-row">
+          <button class="mx-chip" id="filler-10k" type="button">+10,000 tokens</button>
+          <button class="mx-chip" id="filler-100k" type="button">+100,000 tokens</button>
+          <label class="mx-chip cw-load">Load files<input type="file" id="load" multiple hidden></label>
+          <button class="mx-chip" id="reset" type="button">Reset</button>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Paste a file</span> <span class="mx-hint">name and text</span></summary>
+        <div class="mx-stack cw-paste">
+          <input id="paste-name" class="mx-input mx-input--small" placeholder="notes.md" spellcheck="false" aria-label="File name">
+          <textarea id="paste-text" class="mx-textarea" rows="5" spellcheck="false" placeholder="Paste any text: code, a document, a long thread." aria-label="File text"></textarea>
+          <div class="mx-row"><button class="mx-btn mx-btn--small" id="paste-add" type="button">Add as a file</button></div>
+        </div>
+      </details>
+      <div class="mx-row" id="added"></div>
+      <p id="status" class="mx-small mx-muted cw-status"></p>
+    </section>
+
+    <section class="mx-panel mx-settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="window">Model and context window</label>
+          <select id="window" class="mx-select cw-select"></select>
+          <span class="mx-hint">Limits from OpenRouter's public model list, October 2026.</span>
+        </div>
+        <div class="mx-field cw-scenario-field">
+          <span class="mx-label" id="scenario-label">Request from</span>
+          <div class="mx-seg" id="scenario" role="group" aria-labelledby="scenario-label"></div>
+          <span class="mx-hint" id="scenario-hint"></span>
+        </div>
+      </div>
+    </section>
+
+    <div id="headline"></div>
+
+    <section class="mx-plate cw-plate">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The context window</h2>
+        <p>Each colour is one block of the request. The green tint is the smart zone.</p>
+      </div>
+      <div class="cw-bar-wrap">
+        <div class="cw-bar" id="bar" role="img" aria-label="Context window usage"></div>
+        <div class="cw-scale" id="scale" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Blocks of the request</h2>
+        <p>Counted locally with <code>o200k_base</code>. Share is the part of this request.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead><tr><th>Block</th><th>What it holds</th><th class="num">Tokens</th><th class="num">Share</th></tr></thead>
+          <tbody id="blocks"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <details class="mx-details" id="measure-box">
+      <summary><span class="mx-label">Measure with the API</span> <span class="mx-hint">1 request on your key, under 1 cent</span></summary>
+      <div class="mx-stack cw-measure">
+        <p class="mx-small cw-copy">Sends this request once and reads <code>usage.input_tokens</code>: the count that the provider bills.</p>
+        <div class="mx-actions">
+          <div id="picker"></div>
+          <button class="mx-btn mx-btn--primary" id="measure" type="button">Measure with the API</button>
+        </div>
+        <p id="measure-hint" class="mx-hint cw-status"></p>
+        <div id="notice"></div>
+        <div id="measured" class="mx-stack" hidden></div>
+      </div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

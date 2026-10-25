@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MEGA examples</title>
+  <link rel="icon" href="viewer/favicon.svg" type="image/svg+xml">
+  <script src="kit/theme.js"></script>
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="viewer/app.css">
+</head>
+<body>
+  <div class="vw">
+    <aside class="vw-side">
+      <a class="vw-brand" href="#/">
+        <span class="vw-logo">MEGA</span>
+        <span class="mx-label">Examples</span>
+      </a>
+      <label class="vw-search">
+        <span class="mx-label">Search</span>
+        <input id="search" class="mx-input" type="search" placeholder="Name or topic" autocomplete="off" spellcheck="false">
+        <kbd class="vw-kbd">/</kbd>
+      </label>
+      <nav id="nav" class="vw-nav" aria-label="Examples, skills and tools"></nav>
+      <div class="vw-side-foot">
+        <button id="theme" class="mx-btn mx-btn--small vw-theme" type="button" aria-pressed="false"></button>
+        <p class="mx-label vw-keys-hint">Keys: <code>npx mex setup</code></p>
+        <p class="mx-label vw-keys-hint"><kbd class="vw-kbd">[</kbd> <kbd class="vw-kbd">]</kbd> previous / next</p>
+      </div>
+    </aside>
+
+    <main class="vw-main" id="main">
+      <header class="vw-head" id="head"></header>
+      <div class="vw-tabs" id="tabs" role="tablist" aria-label="Views"></div>
+      <section class="vw-panel" id="panel" role="tabpanel"></section>
+      <section class="vw-panel" id="try-panel" role="tabpanel" hidden></section>
+      <nav class="vw-pager" id="pager" aria-label="Previous and next"></nav>
+    </main>
+  </div>
+  <script type="module" src="viewer/app.js"></script>
+</body>
+</html>

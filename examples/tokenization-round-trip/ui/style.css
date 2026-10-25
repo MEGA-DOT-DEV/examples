@@ -1,0 +1,80 @@
+.tk-plate {
+  display: grid;
+}
+.tk-tokens {
+  font: 400 var(--mega-text-lg) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink);
+  overflow-wrap: anywhere;
+  min-height: 3rem;
+}
+.tk-tokens:empty::before {
+  content: "Type something above.";
+  color: var(--mega-ink-muted);
+  font: 400 var(--mega-text-sm) / 1.5 var(--mega-sans);
+}
+
+/* One token: its text on a tint, and its ID under it when shown. */
+.tk {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  vertical-align: top;
+  margin: 0 2px 0.55rem 0;
+  cursor: default;
+}
+.tk-text {
+  padding: 0.1em 0.2em;
+  white-space: pre;
+  background: var(--tint);
+  outline: 1px solid transparent;
+  transition: outline-color var(--mega-dur-micro) ease-out;
+}
+.tk:hover .tk-text,
+.tk.same .tk-text {
+  outline-color: var(--mega-ink);
+}
+.tk-id {
+  font-size: var(--mega-text-2xs);
+  color: var(--mega-ink-muted);
+  padding: 0.15em 0.2em 0;
+  line-height: 1.2;
+}
+.tk-sp {
+  color: var(--mega-ink-muted);
+}
+/* Bytes of a character that this token splits. */
+.tk-bytes {
+  font-size: 0.62em;
+  vertical-align: 0.15em;
+  border: 1px solid var(--mega-line-strong);
+  padding: 0 0.3em;
+  margin: 0 0.1em;
+  color: var(--mega-ink-muted);
+}
+.tk-done {
+  font-size: 0.62em;
+  vertical-align: 0.15em;
+  color: var(--mega-accent-ink);
+  margin-left: 0.2em;
+}
+.tk-break {
+  flex-basis: 100%;
+  height: 0;
+  display: block;
+}
+
+#ids .mx-code {
+  border-width: 1px 0 0;
+}
+.tk-note {
+  margin: 0;
+}
+.tk-note .tk-bytes,
+.tk-note .tk-done {
+  font-family: var(--mega-ui-mono);
+  font-size: 0.95em;
+  vertical-align: 0;
+}
+#notice:empty {
+  display: none;
+}

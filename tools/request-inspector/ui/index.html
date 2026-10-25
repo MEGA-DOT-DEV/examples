@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request inspector</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <div class="mx-section-head">
+          <h2 class="mx-h3">Captures</h2>
+          <p id="count">Each request that your harness sends through the proxy.</p>
+        </div>
+        <div class="mx-row">
+          <label class="mx-check" id="probes-box" hidden><input type="checkbox" id="probes"> <span id="probes-label">Show health checks</span></label>
+          <button class="mx-btn mx-btn--small" id="refresh" type="button">Refresh</button>
+          <button class="mx-btn mx-btn--small" id="clear" type="button" hidden>Clear captures</button>
+          <button class="mx-btn mx-btn--small mx-btn--primary" id="demo" type="button">Open demo</button>
+        </div>
+      </div>
+      <p class="mx-plate ri-empty" id="empty" hidden>No captures yet. Press <b>Open demo</b> to load a recorded Claude Code request. It sends no request and costs nothing.</p>
+      <div class="mx-table-wrap ri-list">
+        <table class="mx-table">
+          <thead><tr><th>Time</th><th>Request</th><th>Model</th><th class="num">Messages</th><th class="num">Tools</th><th class="num">Input tokens</th><th class="num">From cache</th><th class="num">Status</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted" id="privacy">Captures hold your prompts and file contents. They stay on this computer, in <code id="dir">.captures/</code>. Delete them when you are done.</p>
+    </section>
+
+    <!-- Open while there are no captures; folded once there are, or once the demo opens. -->
+    <details class="mx-details ri-start-box" id="start-box">
+      <summary><span class="mx-label">Start the proxy</span><span class="mx-hint">3 steps, for Claude Code, OpenAI or OpenRouter</span></summary>
+      <div class="ri-start">
+        <div class="mx-seg" id="harness" role="group" aria-label="Your harness"></div>
+        <ol class="ri-steps">
+          <li><p class="ri-step-title">In a terminal, in the repo folder, start the proxy. Keep it running.</p><div id="step-proxy"></div></li>
+          <li><p class="ri-step-title" id="step-harness-title"></p><div id="step-harness"></div></li>
+          <li><p class="ri-step-title">Send "Hello" from your harness. Then press <b>Refresh</b>.</p></li>
+        </ol>
+        <p class="mx-small mx-muted">Captures hold your prompts and file contents. They stay on this computer.</p>
+      </div>
+    </details>
+
+    <div id="notice"></div>
+
+    <section id="detail" class="mx-stack ri-detail" hidden>
+      <div id="headline"></div>
+      <div class="mx-plate ri-demo" id="demo-bar" hidden>
+        <div class="mx-spread">
+          <p><b>Demo:</b> a recorded Claude Code request. Personal details are replaced.</p>
+          <div class="mx-row">
+            <div class="mx-seg" id="demo-pick" role="group" aria-label="Demo request"></div>
+            <button class="mx-btn mx-btn--small" id="demo-close" type="button">Close the demo</button>
+          </div>
+        </div>
+      </div>
+      <div class="mx-readouts" id="readouts"></div>
+      <p class="ri-change" id="change" hidden></p>
+      <p class="mx-small mx-muted" id="probe-note" hidden>This is not a model request. The harness checks that the server answers. It holds no prompt.</p>
+
+      <div class="mx-stack" id="model-detail">
+        <section class="mx-plate mx-stack">
+          <div class="mx-spread">
+            <div class="mx-section-head">
+              <h2 class="mx-h3">Where the input tokens go</h2>
+              <p>A local o200k_base estimate. Each lab's tokenizer counts a little differently. Images and files are not counted.</p>
+            </div>
+            <span class="mx-label" id="total"></span>
+          </div>
+          <div class="ri-bar" id="bar" role="img"></div>
+          <ul class="ri-legend" id="legend"></ul>
+        </section>
+
+        <section class="mx-stack">
+          <div class="mx-section-head">
+            <h2 class="mx-h3">The request, top to bottom</h2>
+            <p>The model reads the parts in this order. Open a row to read its text. A dashed line marks where the cached part can end.</p>
+          </div>
+          <div class="ri-flow">
+            <h3 class="ri-flow-head"><span class="ri-step">1</span><span id="system-head">System prompt</span></h3>
+            <div class="ri-rows" id="system-rows"></div>
+            <h3 class="ri-flow-head"><span class="ri-step">2</span><span id="tools-head">Tools</span></h3>
+            <div class="ri-rows" id="tool-rows"></div>
+            <h3 class="ri-flow-head"><span class="ri-step">3</span><span id="conversation-head">Conversation</span></h3>
+            <div class="ri-rows" id="conversation-rows"></div>
+          </div>
+        </section>
+
+        <div class="ri-grid">
+          <section class="mx-panel mx-stack">
+            <span class="mx-label">Settings the harness chose</span>
+            <dl class="ri-dl" id="settings"></dl>
+          </section>
+          <section class="mx-panel mx-stack">
+            <span class="mx-label">Response</span>
+            <dl class="ri-dl" id="response"></dl>
+            <p class="mx-small mx-muted ri-note">The proxy keeps only these numbers, not the response text.</p>
+          </section>
+        </div>
+      </div>
+
+      <details class="mx-details" id="raw-box"><summary><span class="mx-label">Raw request</span><span class="mx-hint" id="raw-note">headers and body, auth redacted</span></summary><div id="raw"></div></details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "about": "Which lesson each example comes from. The viewer groups its sidebar by this list. Folders and their metadata stay free of lesson numbers, so moving an example to another lesson changes only this file. An example that is not listed shows under More examples.",
+  "lessons": [
+    {
+      "episode": "S01E01",
+      "title": "Mechanics Behind Generative AI",
+      "items": [
+        "tokenization-round-trip",
+        "next-token-probabilities",
+        "same-prompt-many-runs",
+        "confabulation-probe",
+        "reasoning-effort",
+        "responses-request",
+        "chat-template",
+        "context-window-budget",
+        "context-compaction",
+        "structured-output",
+        "function-calling",
+        "code-mode",
+        "agent-loop",
+        "skill-selection",
+        "subagents-as-tools",
+        "self-querying",
+        "request-inspector",
+        "ask-models",
+        "premise-order",
+        "mcp-tool-bridge",
+        "image-detail-probe"
+      ]
+    }
+  ]
+}

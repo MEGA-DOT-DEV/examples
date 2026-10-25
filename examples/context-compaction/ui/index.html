@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Context compaction</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <details class="mx-details">
+      <summary><span class="mx-label">The thread</span> <span class="mx-hint" id="thread-title"></span></summary>
+      <div class="cc-thread" id="thread"></div>
+    </details>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <span class="mx-label" id="words-label">Summary length, in words</span>
+          <div class="mx-seg" id="words" role="group" aria-labelledby="words-label"></div>
+          <span class="mx-hint">A shorter summary loses more detail.</span>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">compaction prompt</span></summary>
+        <div class="cc-prompt mx-stack">
+          <textarea id="prompt" class="mx-textarea cc-prompt-box" rows="9" spellcheck="false" aria-label="Compaction prompt"></textarea>
+          <div class="mx-spread">
+            <span class="mx-hint">From <code>compact.md</code>. <code>{{words}}</code> becomes the summary length.</span>
+            <button class="mx-btn mx-btn--small" id="prompt-reset" type="button">Reset</button>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run 3 rounds</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <div id="headline"></div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Facts after each round</h2>
+        <p>The model answers from the summary only. Code checks each answer for the exact fact.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table cc-facts">
+          <thead><tr><th>Fact</th><th>Full thread</th><th>Round 1</th><th>Round 2</th><th>Round 3</th></tr></thead>
+          <tbody id="facts"></tbody>
+        </table>
+      </div>
+      <p class="mx-hint cc-note">— means that the fact is not in the thread yet.</p>
+    </section>
+
+    <section class="mx-plate cc-plate">
+      <div class="mx-spread">
+        <div class="mx-section-head">
+          <h2 class="mx-h3">Context size</h2>
+          <p>Each summary replaces all messages before it. Tokens are counted locally with <code>o200k_base</code>.</p>
+        </div>
+        <span class="mx-label" id="meta"></span>
+      </div>
+      <div class="cc-sizes" id="sizes"></div>
+    </section>
+
+    <section class="mx-stack" id="summaries" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Summaries</h2>
+        <p>The model reads this text in place of the thread.</p>
+      </div>
+      <div class="mx-stack" id="summary-list"></div>
+    </section>
+
+    <details class="mx-details cc-steps">
+      <summary><span class="mx-label">Requests</span> <span class="mx-hint" id="steps-title"></span></summary>
+      <div class="mx-stack cc-steps-body">
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead><tr><th>Request</th><th>Result</th><th>Usage</th><th class="num">Time</th><th><span class="cc-sr">Details</span></th></tr></thead>
+            <tbody id="steps"></tbody>
+          </table>
+        </div>
+        <div class="mx-stack" id="detail" hidden></div>
+      </div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

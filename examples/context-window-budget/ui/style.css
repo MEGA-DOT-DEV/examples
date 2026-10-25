@@ -1,0 +1,224 @@
+.cw-scenario-field {
+  max-width: 30rem;
+}
+.cw-select {
+  justify-self: start;
+  min-width: 22rem;
+  font: 400 var(--mega-text-sm) / 1.4 var(--mega-ui-mono);
+}
+
+.cw-plate {
+  display: grid;
+  gap: var(--mega-space-5);
+}
+
+/* The window as one stacked bar: a segment per block, then the room left. */
+.cw-bar-wrap {
+  padding-top: 1.6rem;
+}
+.cw-bar {
+  position: relative;
+  height: 2.75rem;
+  border: 1px solid var(--mega-line-strong);
+  background: var(--mega-plate-well);
+}
+/* The segments clip here, so 2px minimums never push past 100%. The marks sit outside it. */
+.cw-fill {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+.cw-seg {
+  display: block;
+  height: 100%;
+  flex: none;
+}
+.cw-seg:not(.cw-seg--left) {
+  min-width: 2px;
+}
+.cw-seg--left {
+  flex: 1 1 auto;
+  background: transparent;
+}
+.cw-seg--instructions {
+  background: var(--mega-red);
+}
+/* Harness layers: instruction texts in red tints, skills in brown, deferred tools in light blue, reminders in light green. */
+.cw-seg--agents_md {
+  background: color-mix(in srgb, var(--mega-red) 65%, var(--mega-ink));
+}
+.cw-seg--memory {
+  background: color-mix(in srgb, var(--mega-red) 45%, var(--mega-page));
+}
+.cw-seg--skills {
+  background: color-mix(in srgb, var(--mega-red) 50%, var(--mx-ok));
+}
+.cw-seg--deferred {
+  background: color-mix(in srgb, var(--mega-blue-text) 45%, var(--mega-page));
+}
+.cw-seg--reminders {
+  background: color-mix(in srgb, var(--mx-ok) 45%, var(--mega-page));
+}
+.cw-seg--tools {
+  background: var(--mega-blue-text);
+}
+.cw-seg--conversation {
+  background: var(--mx-ok);
+}
+.cw-seg--files {
+  background: var(--mega-ink-muted);
+}
+.cw-seg--filler {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--mega-ink-muted) 0 3px,
+    color-mix(in srgb, var(--mega-ink-muted) 35%, transparent) 3px 6px
+  );
+}
+.cw-seg--tool_call {
+  background: color-mix(in srgb, var(--mega-red) 50%, var(--mega-blue-text));
+}
+.cw-seg--tool_result {
+  background: color-mix(in srgb, var(--mega-blue-text) 45%, var(--mx-ok));
+}
+
+/* The smart zone: a tint from 0 that fades out across the soft edge (30-40%),
+   with a line and a label above the bar. */
+.cw-smart {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--mx-ok) 16%, transparent) var(--edge-start),
+    transparent
+  );
+}
+.cw-smart::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 0.35rem);
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--mx-ok) var(--edge-start),
+    transparent
+  );
+}
+.cw-smart-label {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.6rem);
+  white-space: nowrap;
+  font: 400 var(--mega-text-xs) / 1 var(--mega-ui-mono);
+  color: var(--mx-ok);
+}
+.cw-fill {
+  position: relative;
+}
+.cw-overflow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--mega-red) 30%, transparent);
+}
+.cw-overflow-swatch {
+  background: color-mix(in srgb, var(--mega-red) 45%, transparent);
+}
+.cw-limit {
+  position: absolute;
+  top: -0.5rem;
+  bottom: -0.5rem;
+  width: 0;
+  border-left: 2px solid var(--mega-accent-ink);
+  pointer-events: none;
+}
+.cw-limit span {
+  position: absolute;
+  bottom: calc(100% + 0.1rem);
+  left: 0.3rem;
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-accent-ink);
+}
+
+.cw-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+
+.cw-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.cw-swatch {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  flex: none;
+}
+
+.cw-detail {
+  color: var(--mega-ink-muted);
+  font-size: var(--mega-text-xs);
+  max-width: 22rem;
+  overflow-wrap: anywhere;
+}
+.cw-total td {
+  font-weight: 600;
+  border-top: 1px solid var(--mega-line-strong);
+}
+
+.cw-load {
+  position: relative;
+}
+.cw-paste {
+  padding: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}
+.cw-paste .mx-input {
+  max-width: 20rem;
+}
+.cw-measure {
+  padding: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}
+.cw-x {
+  border: 0;
+  background: transparent;
+  color: var(--mega-ink-muted);
+  cursor: pointer;
+  padding: 0 0.15rem;
+  font: inherit;
+}
+.cw-x:hover {
+  color: var(--mega-accent-ink);
+}
+.cw-status {
+  margin: 0;
+}
+#notice:empty {
+  display: none;
+}
+.cw-status:empty {
+  display: none;
+}
+.cw-copy {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.cw-copy code {
+  font-size: 0.92em;
+}

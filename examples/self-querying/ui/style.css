@@ -1,0 +1,153 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.sq-symbols-field {
+  flex: 1 1 22rem;
+}
+.sq-symbols {
+  width: 100%;
+  font-family: var(--mega-ui-mono);
+}
+.sq-question p {
+  margin: 0;
+}
+
+.sq-modes {
+  margin: 0;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.sq-modes b {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+
+/* The two scores: the big number, then every reply, wrong ones in red. */
+.sq-scores {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+.sq-scores p {
+  margin: 0;
+}
+.sq-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-1) var(--mega-space-3);
+  font-family: var(--mega-ui-mono);
+}
+.sq-summary {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.sq-summary p {
+  margin: 0;
+}
+.sq-second > p {
+  margin: 0;
+}
+.sq-chip {
+  white-space: nowrap;
+}
+
+.sq-grid td {
+  vertical-align: top;
+}
+.sq-grid td:first-child {
+  white-space: nowrap;
+}
+.sq-read {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-1) var(--mega-space-3);
+}
+.sq-facts {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-1) var(--mega-space-3);
+  font-family: var(--mega-ui-mono);
+}
+.sq-facts > * {
+  white-space: nowrap;
+}
+
+/* Each run: a row that opens to its flow. Direct and self-querying side by side. */
+.sq-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+.sq-runs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.sq-runs .sq-row + .sq-row {
+  border-top: 0;
+}
+.sq-row > summary {
+  justify-content: space-between;
+}
+.sq-run {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+  margin-right: auto;
+}
+.sq-status {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-sm);
+}
+.sq-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  font-size: var(--mega-text-sm);
+}
+.sq-pad p {
+  margin: 0;
+}
+
+/* The flow: boxes for what the model got and wrote, arrows for what happens next. */
+.sq-flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+.sq-box {
+  border: 1px solid var(--mega-line);
+  padding: var(--mega-space-3) var(--mega-space-4);
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.sq-box-title {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.sq-arrow {
+  display: flex;
+  gap: var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-4);
+}
+.sq-arrow::before {
+  content: "↓";
+  font-family: var(--mega-ui-mono);
+  color: var(--mega-ink);
+}
+.sq-verdict {
+  font-weight: 500;
+  border-left: 3px solid currentColor;
+}
+.sq-reply {
+  font-size: var(--mega-text-sm);
+  overflow-x: auto;
+}
+.sq-notes {
+  margin: 0;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.sq-notes li > span:first-child {
+  margin-right: var(--mega-space-2);
+}
+.sq-notes b {
+  font-family: var(--mega-ui-mono);
+  font-weight: 600;
+}

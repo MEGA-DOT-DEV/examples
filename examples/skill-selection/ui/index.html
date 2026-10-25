@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skill selection</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does the model load the right skill from its name and description?</h2>
+        <p>One run sends each test request alone, with no history, and records which skill the model loads.</p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field ss-wide">
+          <span class="mx-label">Skills</span>
+          <div id="skills" class="ss-skills"></div>
+          <div class="mx-spread">
+            <span class="mx-hint">The model sees only the name and the description. The body loads only when the model calls <code>load_skill</code>.</span>
+            <button class="mx-btn mx-btn--small" id="reset" type="button">Reset to defaults</button>
+          </div>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions</span><span class="mx-small mx-muted" id="instructions-size"></span></summary>
+        <div id="instructions"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span><span class="mx-small mx-muted">2 settings</span></summary>
+        <div class="mx-stack ss-pad">
+          <div class="mx-field">
+            <span class="mx-label">Test requests</span>
+            <div class="mx-table-wrap">
+              <table class="mx-table ss-tests">
+                <thead><tr><th class="num">#</th><th>Request</th><th>Expected skill</th><th><span class="ss-sr">Remove</span></th></tr></thead>
+                <tbody id="tests"></tbody>
+              </table>
+            </div>
+            <div class="mx-row"><button class="mx-btn mx-btn--small" id="add" type="button">Add request</button></div>
+            <span class="mx-hint">Set the expected skill to none for a near miss: a request that sounds related but needs no skill.</span>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Repeats per request</span>
+            <div class="mx-seg" id="repeats" role="group" aria-label="Repeats per request"></div>
+            <span class="mx-hint">Send each test request more than once to see if the choice changes.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" id="result">
+      <p class="mx-muted ss-empty" id="empty"></p>
+      <div id="headline" hidden></div>
+      <div class="mx-table-wrap" id="table" hidden>
+        <table class="mx-table ss-results">
+          <thead><tr><th class="num">#</th><th>Request</th><th>Expected</th><th>Loaded</th><th>Outcome</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted" id="meaning" hidden></p>
+      <details class="mx-details" id="raw" hidden>
+        <summary><span class="mx-label">Request and response</span><span class="mx-small mx-muted" id="raw-title"></span></summary>
+        <div id="raw-body" class="mx-stack ss-pad"></div>
+      </details>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">Context size</span><span class="mx-small mx-muted">3 ways to give the skills to a model · counted locally</span></summary>
+      <div class="mx-stack ss-pad">
+        <div class="mx-fields">
+          <div class="mx-field ss-ctx-field">
+            <label class="mx-label" for="ctx-request">Request</label>
+            <select id="ctx-request" class="mx-select mx-input--small"></select>
+          </div>
+        </div>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead><tr><th>Strategy</th><th class="num">Up front</th><th class="num">Loads</th><th class="num">Total</th></tr></thead>
+            <tbody id="ctx-rows"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted">Up front is in every request, before the model picks a skill. Loads is what a correct <code>load_skill</code> call adds for this one request. A router helps when it hides many skills that most requests do not need.</p>
+        <details class="mx-details">
+          <summary><span class="mx-label">Text behind the counts</span><span class="mx-small mx-muted">3 strategies</span></summary>
+          <div id="ctx-text" class="mx-stack ss-pad"></div>
+        </details>
+      </div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

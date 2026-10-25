@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat template</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-spread">
+        <span class="mx-label">Messages</span>
+        <div class="mx-row" role="group" aria-label="Sample threads">
+          <button class="mx-chip" id="reset" type="button">Lesson example</button>
+          <button class="mx-chip" id="tool-example" type="button">Tool call example</button>
+        </div>
+      </div>
+      <ol id="messages" class="ct-messages"></ol>
+      <div class="mx-row">
+        <button class="mx-btn mx-btn--small" id="add" type="button">Add message</button>
+        <span class="mx-small mx-muted" id="limit"></span>
+      </div>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Format settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <span class="mx-label" id="formats-label">Format</span>
+          <div class="mx-seg" id="formats" role="group" aria-labelledby="formats-label"></div>
+          <span class="mx-hint" id="encoding-note"></span>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span> <span class="mx-hint">separator, open turn, token IDs</span></summary>
+        <div class="mx-fields ct-more">
+          <div class="mx-field" id="sep-row">
+            <span class="mx-label" id="seps-label">After the role name</span>
+            <div class="mx-seg" id="seps" role="group" aria-labelledby="seps-label"></div>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">End of the text</span>
+            <label class="mx-check"><input type="checkbox" id="open" checked> Open assistant turn</label>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Token IDs</span>
+            <label class="mx-check"><input type="checkbox" id="show-ids"> Show under each token</label>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <div id="notice"></div>
+
+    <div class="mx-callout">
+      <span class="mx-label">Result</span>
+      <p id="headline">Edit a message. The text below updates as you type. It runs locally and costs nothing.</p>
+    </div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What the model reads</h2>
+        <p>The model reads one text, left to right. GPT-6 uses its own format, which is not public. ChatML and Harmony show the same idea.</p>
+      </div>
+      <div class="mx-plate ct-plate">
+        <div class="ct-grid" id="tokens" aria-live="polite">
+          <div class="ct-col-head mx-label">Tokens: one text</div>
+          <div class="ct-col-head mx-label">The same, as a chat</div>
+        </div>
+        <div class="ct-foot mx-small">
+          <div class="ct-legend">
+            <span><i class="ct-swatch ct-swatch--special"></i>Special token</span>
+            <span><i class="ct-swatch ct-swatch--header"></i>Format text (role, separator)</span>
+            <span><i class="ct-swatch ct-swatch--content"></i>Your content, one shade per token</span>
+          </div>
+          <p class="ct-key" id="key"></p>
+        </div>
+      </div>
+      <p id="compare" class="ct-compare mx-small"></p>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label" id="raw-title">Rendered text</span></summary>
+      <div id="raw"></div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

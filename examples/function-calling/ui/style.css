@@ -1,0 +1,175 @@
+.fc-query {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-base);
+}
+
+/* The round trip as a vertical list of numbered steps, joined by a line. */
+.fc-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+.fc-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: var(--mega-space-4);
+  border: 1px solid var(--mega-line);
+  background: var(--mega-surface);
+  padding: var(--mega-space-4) var(--mega-space-5);
+}
+.fc-step + .fc-step::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--mega-space-5) + 1.125rem);
+  top: calc(-1 * var(--mega-space-3) - 1px);
+  height: var(--mega-space-3);
+  border-left: 1px dashed var(--mega-line-strong);
+}
+.fc-step--focal {
+  border-color: var(--mega-line-strong);
+  border-left-color: var(--mega-blue-text);
+  border-left-width: 4px;
+  background: var(--mega-plate);
+}
+.fc-step[data-state="idle"] .fc-body,
+.fc-step[data-state="skipped"] .fc-body {
+  opacity: 0.75;
+}
+.fc-step[data-state="skipped"] .fc-title {
+  color: var(--mega-ink-muted);
+}
+
+.fc-num {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--mega-line-strong);
+  font: 400 var(--mega-text-lg) / 1 var(--mega-pixel);
+  color: var(--mega-ink-muted);
+}
+.fc-step[data-state="active"] .fc-num {
+  border-color: var(--mega-ink);
+  color: var(--mega-ink);
+}
+.fc-step[data-state="done"] .fc-num {
+  background: var(--mega-ink);
+  border-color: var(--mega-ink);
+  color: var(--mega-page);
+}
+.fc-step--focal[data-state="done"] .fc-num {
+  background: var(--mega-blue-text);
+  border-color: var(--mega-blue-text);
+  color: var(--mega-black-1);
+}
+.fc-step[data-state="failed"] .fc-num {
+  border-color: var(--mega-accent-ink);
+  color: var(--mega-accent-ink);
+}
+
+.fc-main {
+  display: grid;
+  gap: var(--mega-space-3);
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+}
+.fc-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--mega-space-2);
+  min-height: 2.25rem;
+  align-content: center;
+}
+.fc-title {
+  font: 400 var(--mega-text-lg) / 1.2 var(--mega-heading);
+  color: var(--mega-ink);
+}
+.fc-body {
+  display: grid;
+  gap: var(--mega-space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+.fc-body p {
+  margin: 0;
+}
+
+.fc-kv {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.fc-mono {
+  font: 400 var(--mega-text-xs) / 1.6 var(--mega-ui-mono);
+  color: var(--mega-ink-body);
+  overflow-wrap: anywhere;
+}
+.fc-call {
+  display: grid;
+  gap: var(--mega-space-2);
+  grid-template-columns: minmax(0, 1fr);
+}
+.fc-call-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--mega-space-2) var(--mega-space-4);
+}
+.fc-name {
+  font: 500 var(--mega-text-base) / 1.2 var(--mega-ui-mono);
+  color: var(--mega-blue-text);
+}
+.fc-none {
+  font-weight: 500;
+  color: var(--mega-ink);
+}
+.fc-reply {
+  font-size: var(--mega-text-lg);
+  color: var(--mega-ink);
+}
+.fc-empty {
+  margin: 0;
+}
+.fc-empty b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+/* The panel holds only the actions: no line above them. */
+.fc-actions {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.fc-data {
+  display: grid;
+  gap: var(--mega-space-2);
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  grid-template-columns: minmax(0, 1fr);
+}
+.fc-data p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .fc-step {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fc-step + .fc-step::before {
+    display: none;
+  }
+}
+.fc-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.fc-fold > summary {
+  flex-wrap: wrap;
+}
+.fc-fold .fc-kv,
+.fc-fold p {
+  margin: 0;
+}

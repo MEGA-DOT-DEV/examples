@@ -1,0 +1,375 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+
+/* How to start: numbered steps, one command block each. */
+.ri-start {
+  display: grid;
+  gap: var(--mega-space-4);
+  justify-items: start;
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.ri-start > .ri-steps {
+  justify-self: stretch;
+}
+.ri-steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.ri-steps > li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  column-gap: var(--mega-space-3);
+  row-gap: var(--mega-space-2);
+  align-items: start;
+}
+.ri-steps > li::before {
+  content: counter(step);
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--mega-line-strong);
+  color: var(--mega-ink-muted);
+  font: 400 var(--mega-text-xs) / 1 var(--mega-ui-mono);
+}
+.ri-step-title {
+  margin: 0;
+  padding-top: 0.15rem;
+  color: var(--mega-ink-body);
+  font-size: var(--mega-text-sm);
+  line-height: 1.5;
+}
+.ri-step-title b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.ri-steps > li > div:empty {
+  display: none;
+}
+
+/* The list scrolls in its own box when there are many captures. */
+.ri-list {
+  max-height: 22rem;
+  overflow-y: auto;
+}
+.ri-list thead th {
+  position: sticky;
+  top: 0;
+}
+.ri-row {
+  cursor: pointer;
+}
+.ri-row:hover td {
+  background: var(--mega-table-stripe);
+}
+.ri-row.is-selected td {
+  background: var(--mx-tint-1);
+}
+.ri-row.is-probe td {
+  color: var(--mega-ink-muted);
+}
+.ri-row td code {
+  font-size: var(--mega-text-xs);
+  white-space: nowrap;
+}
+
+/* Readouts that hold a name, not a number: smaller, and they may wrap. */
+.ri-text b {
+  font: 400 var(--mega-text-lg) / 1.3 var(--mega-ui-mono);
+  overflow-wrap: anywhere;
+}
+
+/* One color per part, the same in the bar and the legend. Text says the numbers too. */
+.ri-part--instructions {
+  background: var(--mega-ink);
+}
+.ri-part--tools {
+  background: var(--mega-blue-text);
+}
+.ri-part--midsystem {
+  background: color-mix(in srgb, var(--mega-ink) 55%, var(--mega-page));
+}
+.ri-part--reminders {
+  background: var(--mega-red);
+}
+.ri-part--user {
+  background: var(--mx-ok);
+}
+.ri-part--assistant {
+  background: var(--mega-zinc);
+}
+.ri-part--toolio {
+  background: var(--mega-line-strong);
+}
+.ri-part--other {
+  background: var(--mega-surface-2);
+}
+
+.ri-bar {
+  display: flex;
+  height: 1.5rem;
+  background: var(--mega-surface-2);
+  gap: 2px;
+}
+.ri-bar i {
+  min-width: 3px;
+  flex-basis: 0;
+}
+
+.ri-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: var(--mega-space-2) var(--mega-space-5);
+}
+.ri-legend li {
+  display: grid;
+  grid-template-columns: 0.85rem minmax(0, 1fr) auto 3rem;
+  gap: var(--mega-space-2);
+  align-items: center;
+  font-size: var(--mega-text-sm);
+}
+.ri-legend li.is-zero {
+  color: var(--mega-ink-muted);
+}
+.ri-legend li.is-zero .ri-swatch {
+  opacity: 0.35;
+}
+.ri-swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+.ri-legend-num {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+  text-align: right;
+}
+.ri-note,
+.ri-cut {
+  margin: 0;
+}
+
+.ri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+.ri-dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) minmax(0, 1fr);
+  gap: var(--mega-space-2) var(--mega-space-4);
+  font-size: var(--mega-text-sm);
+}
+.ri-dl dt {
+  color: var(--mega-ink-muted);
+}
+.ri-dl dd {
+  margin: 0;
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+  color: var(--mega-ink-body);
+}
+
+.ri-change {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.ri-change b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+
+/* The request, top to bottom: three numbered parts, one row per block. */
+.ri-flow {
+  display: grid;
+  gap: var(--mega-space-3);
+}
+.ri-flow-head {
+  margin: var(--mega-space-3) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--mega-space-3);
+  font: 500 var(--mega-text-base) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.ri-step {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--mega-line-strong);
+  color: var(--mega-ink-muted);
+  font: 400 var(--mega-text-xs) / 1 var(--mega-ui-mono);
+}
+.ri-rows {
+  display: grid;
+  border: 1px solid var(--mega-line-strong);
+}
+.ri-rows > p {
+  margin: 0;
+  padding: var(--mega-space-3) var(--mega-space-4);
+}
+
+.ri-block {
+  border-left: 3px solid var(--ri-kind, var(--mega-line-strong));
+}
+.ri-block + .ri-block,
+.ri-cache + .ri-block {
+  border-top: 1px solid var(--mega-line);
+}
+.ri-block > summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  align-items: baseline;
+  grid-template-columns: 2rem 10.5rem minmax(0, 1fr) 4rem 4.5rem;
+  gap: var(--mega-space-3);
+  padding: 0.55rem var(--mega-space-4) 0.55rem var(--mega-space-3);
+  font-size: var(--mega-text-sm);
+}
+.ri-block > summary::-webkit-details-marker {
+  display: none;
+}
+.ri-block > summary:hover {
+  background: var(--mega-table-stripe);
+}
+.ri-block[open] > summary {
+  background: var(--mega-surface);
+}
+.ri-msg,
+.ri-tok,
+.ri-mark {
+  font: 400 var(--mega-text-xs) / 1.4 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.ri-msg,
+.ri-tok,
+.ri-mark {
+  text-align: right;
+}
+.ri-tag {
+  font: 400 var(--mega-text-2xs) / 1.4 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-ink-muted);
+  overflow-wrap: anywhere;
+}
+.ri-main {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  color: var(--mega-ink-body);
+}
+.ri-main > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ri-main b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.ri-preview {
+  color: var(--mega-ink-muted);
+}
+.ri-heads {
+  font: 400 var(--mega-text-xs) / 1.4 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.ri-block.is-new .ri-mark,
+.ri-block.is-changed .ri-mark {
+  color: var(--mega-accent-ink);
+}
+.ri-block-body {
+  padding: 0 var(--mega-space-4) var(--mega-space-4) var(--mega-space-6);
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.ri-block-body pre {
+  max-height: 28rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.ri-cache {
+  padding: 0.2rem var(--mega-space-4);
+  border-top: 1px dashed var(--mega-blue-text);
+  font: 400 var(--mega-text-2xs) / 1.6 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-blue-text);
+}
+.ri-raw-label {
+  margin: var(--mega-space-2) 0 0;
+}
+
+/* One color per kind of block, close to the colors of the bar. */
+.ri-kind--system {
+  --ri-kind: var(--mega-ink);
+}
+.ri-kind--tools {
+  --ri-kind: var(--mega-blue-text);
+}
+.ri-kind--thread-system {
+  --ri-kind: color-mix(in srgb, var(--mega-ink) 55%, var(--mega-page));
+}
+.ri-kind--reminder {
+  --ri-kind: var(--mega-red);
+}
+.ri-kind--user {
+  --ri-kind: var(--mx-ok);
+}
+.ri-kind--assistant,
+.ri-kind--thinking {
+  --ri-kind: var(--mega-zinc);
+}
+.ri-kind--tool-call,
+.ri-kind--tool-result {
+  --ri-kind: var(--mega-line-strong);
+}
+
+/* Narrow: the tag moves above the text. */
+@media (max-width: 40rem) {
+  .ri-block > summary {
+    grid-template-columns: 1.5rem minmax(0, 1fr) auto;
+  }
+  .ri-tag {
+    grid-column: 2;
+  }
+  .ri-main {
+    grid-column: 2 / -1;
+  }
+  .ri-mark {
+    display: none;
+  }
+}
+
+/* The empty state and the demo bar: one line each. */
+.ri-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.ri-demo {
+  padding: var(--mega-space-3) var(--mega-space-4);
+}
+.ri-demo p {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+  line-height: 1.6;
+}
+.ri-empty b,
+.ri-demo b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}

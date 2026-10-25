@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCP and CLI tool bridge</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="project">Project</label>
+          <select id="project" class="mx-select"></select>
+          <span class="mx-hint">The model looks up the owner and route of this project.</span>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run MCP and CLI</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <div id="headline">
+      <p class="mx-small mx-muted">Press <b>Run MCP and CLI</b>. Two agent runs, at most 10 requests, under 1 cent.</p>
+    </div>
+
+    <section class="mx-stack" id="runs-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The two runs</h2>
+        <p>The same question. One run gets the tool of an MCP server, the other a command to run.</p>
+      </div>
+      <div class="tb-runs" id="runs"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

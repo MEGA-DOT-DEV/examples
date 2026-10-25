@@ -1,0 +1,893 @@
+/*
+ * MEGA examples kit: the design system for the viewer and for every
+ * example page (examples/<name>/ui/index.html links this file).
+ *
+ * The --mega-* tokens mirror mega-dev packages/ui/src/base.css (October 2026).
+ * Change values there first, then copy them here.
+ *
+ * Fonts: Geist Sans, Geist Mono and Geist Pixel are OFL (fonts/LICENSE-Geist.txt).
+ * mega.dev headings use Argent Pixel, a commercial font that this public
+ * repo cannot ship. Geist Pixel stands in for it.
+ */
+
+@font-face {
+  font-family: "Geist";
+  src: url("fonts/GeistSans-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Pixel";
+  src: url("fonts/GeistPixel-Square.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ── Tokens (mirror of mega-dev base.css) ─────────────────────────────── */
+:root {
+  --mega-red: #ff0000;
+  --mega-blue: #0000ff;
+  --mega-black: #000;
+  --mega-black-0: #050505;
+  --mega-black-1: #1b1b1b;
+  --mega-black-2: #2f2f2f;
+  --mega-green: #4ade80;
+  --mega-zinc: #71717a;
+  --mega-muted-foreground: #a6a6af;
+  --mega-offwhite: #fafafa;
+  --mega-blue-text: #7a7aff;
+
+  --mega-mono:
+    ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --mega-sans: "Geist", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mega-ui-mono: "Geist Mono", var(--mega-mono);
+  --mega-pixel: "Geist Pixel", var(--mega-mono);
+  --mega-heading: var(--mega-pixel);
+
+  --mega-text-2xs: clamp(0.75rem, 0.727rem + 0.095vw, 0.8125rem);
+  --mega-text-xs: clamp(0.8125rem, 0.789rem + 0.095vw, 0.875rem);
+  --mega-text-sm: clamp(0.875rem, 0.852rem + 0.095vw, 0.9375rem);
+  --mega-text-base: clamp(1rem, 0.954rem + 0.19vw, 1.125rem);
+  --mega-text-lg: clamp(1.125rem, 1.079rem + 0.19vw, 1.25rem);
+  --mega-text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --mega-text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  --mega-text-3xl: clamp(2rem, 1.55rem + 2.25vw, 3.4rem);
+
+  --mega-space-1: 0.25rem;
+  --mega-space-2: 0.5rem;
+  --mega-space-3: 0.75rem;
+  --mega-space-4: 1rem;
+  --mega-space-5: 1.25rem;
+  --mega-space-6: 1.5rem;
+  --mega-space-8: 2rem;
+  --mega-space-10: 2.5rem;
+  --mega-space-12: 3rem;
+  --mega-space-16: 4rem;
+
+  --mega-leading-tight: 1.05;
+  --mega-leading-snug: 1.35;
+  --mega-leading-body: 1.6;
+  --mega-tracking-tight: -0.01em;
+  --mega-tracking-label: 0.08em;
+
+  --mega-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --mega-dur-micro: 0.14s;
+  --mega-dur-fast: 0.2s;
+  --mega-dur: 0.35s;
+
+  --mega-measure: 42.5rem;
+  --mega-wide: 53.75rem;
+
+  /* Dark theme values are the defaults, as on mega.dev. */
+  --mega-page: var(--mega-black-0);
+  --mega-surface: var(--mega-black-1);
+  --mega-surface-2: var(--mega-black-2);
+  --mega-ink: #f2f2ee;
+  --mega-ink-body: #d9d9d4;
+  --mega-ink-muted: var(--mega-muted-foreground);
+  --mega-line: var(--mega-black-2);
+  --mega-line-strong: #4a4a52;
+  --mega-accent-ink: var(--mega-red);
+  --mega-chip-bg: var(--mega-black-0);
+  --mega-table-stripe: #101010;
+  --mega-focus: var(--mega-ink);
+
+  --mega-plate: var(--mega-black);
+  --mega-code-bg: #101010;
+  --mega-code-ink: #f2f2ee;
+  --mega-code-muted: #8a8a93;
+  --mega-code-red: #ff5555;
+  --mega-code-blue: #7b7bff;
+  --mega-plate-ink-muted: #a1a1aa;
+  --mega-plate-line: #4a4a52;
+  --mega-plate-well: #0a0a0a;
+
+  /* Kit-only: token tints for tokenizer chips, and the "ready" dot. */
+  --mx-tint-1: color-mix(in srgb, var(--mega-red) 22%, transparent);
+  --mx-tint-2: color-mix(in srgb, var(--mega-blue-text) 26%, transparent);
+  --mx-tint-3: color-mix(in srgb, var(--mega-green) 22%, transparent);
+  --mx-tint-4: color-mix(in srgb, var(--mega-zinc) 34%, transparent);
+  --mx-ok: var(--mega-green);
+  --mx-bar: var(--mega-ink);
+
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --mega-page: #f4f3ee;
+  --mega-surface: #ffffff;
+  --mega-surface-2: #e9e7df;
+  --mega-ink: var(--mega-black-1);
+  --mega-ink-body: #33333a;
+  --mega-ink-muted: #5f5f68;
+  --mega-line: #d9d7cd;
+  --mega-line-strong: #b9b7ac;
+  --mega-accent-ink: #d80000;
+  --mega-chip-bg: #ffffff;
+  --mega-table-stripe: #eceae2;
+  --mega-focus: var(--mega-blue);
+  --mega-code-bg: #ffffff;
+  --mega-code-ink: var(--mega-black-1);
+  --mega-code-muted: #5f5f68;
+  --mega-code-red: #d80000;
+  --mega-code-blue: var(--mega-blue);
+  --mega-plate: #ffffff;
+  --mega-plate-well: #f4f3ee;
+  --mega-plate-line: #b9b7ac;
+  --mega-plate-ink-muted: #5f5f68;
+
+  --mx-tint-1: color-mix(in srgb, var(--mega-red) 14%, transparent);
+  --mx-tint-2: color-mix(in srgb, var(--mega-blue) 13%, transparent);
+  --mx-tint-3: color-mix(in srgb, #16a34a 16%, transparent);
+  --mx-tint-4: color-mix(in srgb, var(--mega-zinc) 20%, transparent);
+  --mx-ok: #15803d;
+
+  color-scheme: light;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--mega-page);
+  color: var(--mega-ink);
+  font: 400 var(--mega-text-base) / var(--mega-leading-body) var(--mega-sans);
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: var(--mega-blue);
+  color: var(--mega-offwhite);
+}
+:focus-visible {
+  outline: 2px solid var(--mega-focus);
+  outline-offset: 2px;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+[hidden] {
+  display: none !important;
+}
+code,
+kbd,
+pre {
+  font-family: var(--mega-ui-mono);
+}
+
+/* In the viewer's frame the page never scrolls: the frame grows to fit it. */
+html.mx-embedded {
+  overflow: hidden;
+}
+
+/* An example page: a padded column. The viewer frames it. */
+.mx-page {
+  padding: var(--mega-space-6) 0 var(--mega-space-10);
+  display: grid;
+  gap: var(--mega-space-6);
+}
+/* minmax(0, 1fr): a long line (JSON, code) scrolls in its own box instead of
+   widening the page. */
+.mx-page,
+.mx-stack {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ── Type ─────────────────────────────────────────────────────────────── */
+.mx-label {
+  font: 500 var(--mega-text-2xs) / 1.2 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-ink-muted);
+}
+.mx-kicker {
+  font: 400 var(--mega-text-xs) / 1 var(--mega-ui-mono);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--mega-accent-ink);
+}
+.mx-title {
+  font: 400 var(--mega-text-3xl) / 1.05 var(--mega-heading);
+  letter-spacing: var(--mega-tracking-tight);
+  margin: 0;
+}
+.mx-h2 {
+  font: 400 var(--mega-text-xl) / 1.15 var(--mega-heading);
+  margin: 0;
+}
+.mx-h3 {
+  font: 500 var(--mega-text-base) / 1.35 var(--mega-sans);
+  color: var(--mega-ink);
+  margin: 0;
+}
+/* A section heading: a short title and one sentence under it. */
+.mx-section-head {
+  display: grid;
+  gap: 0.2rem;
+}
+.mx-section-head p {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-muted);
+  max-width: 70ch;
+}
+.mx-lead {
+  font-size: var(--mega-text-lg);
+  line-height: 1.6;
+  color: var(--mega-ink-muted);
+  margin: 0;
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.mx-muted {
+  color: var(--mega-ink-muted);
+}
+.mx-small {
+  font-size: var(--mega-text-sm);
+}
+.mx-mono {
+  font-family: var(--mega-ui-mono);
+}
+
+/* ── Layout helpers ───────────────────────────────────────────────────── */
+.mx-stack {
+  display: grid;
+  gap: var(--mega-space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+.mx-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mega-space-2);
+}
+.mx-spread {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mega-space-3);
+}
+
+/* ── Controls ─────────────────────────────────────────────────────────── */
+.mx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mega-space-2);
+  min-height: 2.25rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--mega-line-strong);
+  background: transparent;
+  color: var(--mega-ink);
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color var(--mega-dur-fast) var(--mega-ease-out),
+    background-color var(--mega-dur-fast) var(--mega-ease-out),
+    color var(--mega-dur-fast) var(--mega-ease-out),
+    transform var(--mega-dur-micro) ease-out;
+}
+.mx-btn:hover {
+  border-color: var(--mega-ink);
+}
+.mx-btn:active {
+  transform: scale(0.97);
+}
+.mx-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+.mx-btn--primary {
+  background: var(--mega-red);
+  border-color: var(--mega-red);
+  color: var(--mega-black-1);
+}
+.mx-btn--primary:hover {
+  background: transparent;
+  color: var(--mega-accent-ink);
+  border-color: var(--mega-red);
+}
+.mx-btn--small {
+  min-height: 1.75rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.mx-input,
+.mx-textarea,
+.mx-select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--mega-line-strong);
+  background: var(--mega-surface);
+  color: var(--mega-ink);
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  outline: none;
+  border-radius: 0;
+  transition: border-color var(--mega-dur-fast) var(--mega-ease-out);
+}
+.mx-input:hover,
+.mx-textarea:hover,
+.mx-select:hover {
+  border-color: var(--mega-zinc);
+}
+.mx-input:focus,
+.mx-textarea:focus,
+.mx-select:focus {
+  border-color: var(--mega-ink);
+  outline: 2px solid var(--mega-focus);
+  outline-offset: 2px;
+}
+.mx-textarea {
+  resize: vertical;
+  min-height: 5.5rem;
+}
+/* One arrow for every dropdown, also a select that only has .mx-input. */
+.mx-select,
+select.mx-input {
+  width: auto;
+  padding-right: 2.75rem;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-color: var(--mega-surface);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--mega-ink-muted) 50%),
+    linear-gradient(135deg, var(--mega-ink-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.25rem) calc(50% + 2px),
+    calc(100% - 1.25rem + 5px) calc(50% + 2px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.mx-select:hover,
+select.mx-input:hover {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--mega-ink) 50%),
+    linear-gradient(135deg, var(--mega-ink) 50%, transparent 50%);
+}
+.mx-field {
+  display: grid;
+  gap: var(--mega-space-2);
+  align-content: start;
+}
+/* A switch or a checkbox keeps its own width; it does not stretch to a long hint. */
+.mx-field > .mx-seg,
+.mx-field > .mx-check,
+.mx-field > .mx-input--small:not([class*="-check"]) {
+  justify-self: start;
+}
+/* A row of fields, each with its label above. Wraps by field, never between a label and its control. */
+.mx-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--mega-space-4) var(--mega-space-6);
+}
+.mx-hint {
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  line-height: 1.35;
+}
+.mx-hint code {
+  font-size: 0.95em;
+  color: var(--mega-ink-body);
+}
+/* Settings for a run: fields, then the provider and the run button in one row. */
+.mx-settings {
+  display: grid;
+  gap: var(--mega-space-5);
+}
+.mx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mega-space-4);
+  padding-top: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}
+/* A checkbox with its text, in a field. */
+.mx-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mega-space-2);
+  cursor: pointer;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+  min-height: 2.1rem;
+}
+.mx-check input {
+  accent-color: var(--mega-red);
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+}
+
+/* Provider picker: provider switch and model field in one row. */
+.mx-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mega-space-3);
+}
+.mx-input--small {
+  width: auto;
+  padding: 0.4rem 0.6rem;
+  font: 400 var(--mega-text-xs) / 1.3 var(--mega-ui-mono);
+}
+.mx-picker-model {
+  min-width: 16rem;
+  flex: 1 1 16rem;
+  max-width: 26rem;
+}
+
+/* Segmented control: a row of buttons, one pressed. */
+.mx-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  border: 1px solid var(--mega-line-strong);
+}
+.mx-seg button {
+  border: 0;
+  background: transparent;
+  color: var(--mega-ink-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0.45rem 0.8rem;
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+}
+.mx-seg button + button {
+  border-left: 1px solid var(--mega-line-strong);
+}
+.mx-seg button[aria-pressed="true"] {
+  background: var(--mega-ink);
+  color: var(--mega-page);
+}
+.mx-seg button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Preset chips: small outlined buttons. */
+.mx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  border: 1px solid var(--mega-line-strong);
+  background: var(--mega-chip-bg);
+  color: var(--mega-ink);
+  padding: 0.25rem 0.55rem;
+  font: 400 var(--mega-text-xs) / 1.3 var(--mega-ui-mono);
+  cursor: pointer;
+}
+button.mx-chip:hover {
+  border-color: var(--mega-ink);
+}
+.mx-chip--static {
+  cursor: default;
+}
+
+/* Status dot: ready (key set or none needed) and missing. */
+.mx-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  background: var(--mx-ok);
+}
+.mx-dot--missing {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--mega-zinc);
+}
+
+/* ── Surfaces ─────────────────────────────────────────────────────────── */
+.mx-panel {
+  border: 1px solid var(--mega-line);
+  background: var(--mega-surface);
+  padding: var(--mega-space-5);
+}
+
+/* A plate with corner marks, as in mega.dev figures. */
+.mx-plate {
+  position: relative;
+  background: var(--mega-plate);
+  border: 1px solid var(--mega-line);
+  padding: var(--mega-space-8) var(--mega-space-6);
+}
+.mx-plate::before,
+.mx-plate::after {
+  content: "";
+  position: absolute;
+  width: 1.75rem;
+  height: 1.75rem;
+  pointer-events: none;
+}
+.mx-plate::before {
+  top: 0.6rem;
+  left: 0.6rem;
+  border-top: 2px solid var(--mega-red);
+  border-left: 2px solid var(--mega-red);
+}
+.mx-plate::after {
+  bottom: 0.6rem;
+  right: 0.6rem;
+  border-bottom: 1px solid var(--mega-plate-line);
+  border-right: 1px solid var(--mega-plate-line);
+}
+
+.mx-callout {
+  border: 1px solid var(--mega-line-strong);
+  border-left: 4px solid var(--mega-blue);
+  padding: var(--mega-space-4) var(--mega-space-5);
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.mx-callout--warn {
+  border-left-color: var(--mega-red);
+}
+.mx-callout p {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+
+/* Readout: a big number with a label. */
+.mx-readouts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  border: 1px solid var(--mega-line);
+}
+.mx-readout {
+  padding: var(--mega-space-4) var(--mega-space-5);
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.mx-readout + .mx-readout {
+  border-left: 1px solid var(--mega-line);
+}
+.mx-readout b {
+  font: 400 var(--mega-text-2xl) / 1 var(--mega-pixel);
+}
+
+/* Code: a framed block with a language label and a copy button. */
+.mx-code {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--mega-line);
+  background: var(--mega-code-bg);
+  color: var(--mega-code-ink);
+}
+.mx-code pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: var(--mega-space-4);
+  font-size: var(--mega-text-xs);
+  line-height: 1.7;
+}
+.mx-code-lang {
+  position: absolute;
+  top: 0.5rem;
+  left: var(--mega-space-4);
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-code-muted);
+}
+.mx-code:has(.mx-code-lang) pre {
+  padding-top: 1.9rem;
+}
+.mx-code[data-wrap] pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+/* Syntax colors (Shiki, mega.dev code themes). The frame owns the background;
+   the light theme swaps in the --shiki-light colors, as on mega.dev. */
+.mx-code .shiki {
+  background-color: transparent !important;
+}
+[data-theme="light"] .shiki,
+[data-theme="light"] .shiki span {
+  color: var(--shiki-light) !important;
+}
+.mx-copy {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.4rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-code-muted);
+  padding: 0.35rem;
+}
+.mx-copy:hover {
+  color: var(--mega-code-red);
+}
+
+details.mx-details {
+  border: 1px solid var(--mega-line);
+}
+details.mx-details > summary {
+  cursor: pointer;
+  padding: var(--mega-space-3) var(--mega-space-4);
+  list-style: none;
+  display: flex;
+  gap: var(--mega-space-2);
+  align-items: center;
+}
+details.mx-details > summary::before {
+  content: "+";
+  font-family: var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+  width: 1ch;
+}
+details.mx-details[open] > summary::before {
+  content: "−";
+}
+details.mx-details > .mx-code {
+  border-width: 1px 0 0;
+}
+
+/* A data table for results (runs, levels, models). */
+.mx-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--mega-line-strong);
+}
+.mx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--mega-text-sm);
+}
+.mx-table th {
+  text-align: left;
+  font: 400 var(--mega-text-2xs) / 1.2 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-ink-muted);
+  background: var(--mega-surface);
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--mega-line-strong);
+  white-space: nowrap;
+}
+.mx-table td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--mega-line);
+  vertical-align: top;
+}
+.mx-table tr:last-child td {
+  border-bottom: 0;
+}
+.mx-table .num {
+  text-align: right;
+  font-family: var(--mega-ui-mono);
+  white-space: nowrap;
+}
+.mx-table code {
+  font-size: 0.92em;
+}
+
+/* Result marks: a pass in green, a failure in red. Text, not only color. */
+.mx-good {
+  color: var(--mx-ok);
+}
+.mx-bad {
+  color: var(--mega-accent-ink);
+}
+
+/* A small horizontal bar for shares (0 to 100%). */
+.mx-meter {
+  display: block;
+  height: 0.5rem;
+  background: color-mix(in srgb, var(--mega-ink) 7%, transparent);
+  position: relative;
+  min-width: 4rem;
+}
+.mx-meter i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--mx-bar);
+}
+.mx-meter--accent i {
+  background: var(--mega-red);
+}
+
+/* Output text from a model, as written. */
+.mx-output {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--mega-ink-body);
+  font-size: var(--mega-text-base);
+  line-height: 1.65;
+}
+/* modelText(): paragraphs, code blocks and inline code from model output. */
+.mx-model-text {
+  display: grid;
+  gap: var(--mega-space-3);
+  white-space: normal;
+}
+.mx-model-text p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+.mx-model-text :not(pre) > code {
+  border: 1px solid var(--mega-line);
+  background: var(--mega-surface-2);
+  padding: 0.05em 0.3em;
+  font-size: 0.88em;
+  color: var(--mega-ink);
+}
+.mx-model-text strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+
+/* ── Prose: README text on the Guide tab ──────────────────────────────── */
+.mx-prose {
+  color: var(--mega-ink-body);
+  max-width: var(--mega-measure);
+  line-height: 1.75;
+}
+.mx-prose > :first-child {
+  margin-top: 0;
+}
+.mx-prose h2 {
+  font: 400 var(--mega-text-xl) / 1.15 var(--mega-heading);
+  color: var(--mega-ink);
+  margin: 2.2em 0 0.7em;
+}
+.mx-prose h3 {
+  font: 400 var(--mega-text-lg) / 1.2 var(--mega-heading);
+  color: var(--mega-ink);
+  margin: 1.6em 0 0.6em;
+}
+.mx-prose p {
+  margin: 0 0 1.2em;
+  text-wrap: pretty;
+}
+.mx-prose a {
+  color: var(--mega-accent-ink);
+  text-underline-offset: 0.2em;
+}
+.mx-prose a:hover {
+  color: var(--mega-ink);
+}
+.mx-prose strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.mx-prose ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2em;
+}
+.mx-prose ul > li {
+  position: relative;
+  padding-left: 1.4em;
+  margin-bottom: 0.5em;
+}
+.mx-prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--mega-accent-ink);
+}
+.mx-prose ol {
+  padding-left: 1.4em;
+  margin: 0 0 1.2em;
+}
+.mx-prose ol > li {
+  margin-bottom: 0.5em;
+  padding-left: 0.2em;
+}
+.mx-prose ol > li::marker {
+  font-family: var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+  font-size: 0.85em;
+}
+.mx-prose :not(pre) > code {
+  border: 1px solid var(--mega-line);
+  background: var(--mega-surface-2);
+  padding: 0.05em 0.35em;
+  font-size: 0.88em;
+  color: var(--mega-ink);
+}
+.mx-prose .mx-code {
+  margin: 0 0 1.5em;
+}
+.mx-prose blockquote {
+  margin: 0 0 1.5em;
+  border-left: 3px solid var(--mega-blue);
+  padding: 0.2em 0 0.2em 1.2em;
+}
+.mx-prose hr {
+  border: 0;
+  height: 2px;
+  margin: 2.5em 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--mega-line-strong) 0 8px,
+    transparent 8px 16px
+  );
+}
+.mx-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.5em;
+  font-size: var(--mega-text-sm);
+  border: 1px solid var(--mega-line-strong);
+}
+.mx-prose th {
+  text-align: left;
+  font: 400 var(--mega-text-2xs) / 1.2 var(--mega-ui-mono);
+  letter-spacing: var(--mega-tracking-label);
+  text-transform: uppercase;
+  color: var(--mega-ink-muted);
+  background: var(--mega-surface);
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--mega-line-strong);
+}
+.mx-prose td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--mega-line);
+  vertical-align: top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}

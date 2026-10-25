@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <label class="mx-label" for="name">Name</label>
+      <input id="name" class="mx-input" value="world">
+      <div class="mx-row"><button id="run" class="mx-btn mx-btn--primary" type="button">Run</button></div>
+    </section>
+    <section class="mx-plate">
+      <span class="mx-label">Result</span>
+      <p id="result" class="mx-muted">Press Run.</p>
+    </section>
+    <div id="notice"></div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

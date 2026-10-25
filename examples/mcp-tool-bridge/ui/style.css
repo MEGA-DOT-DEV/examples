@@ -1,0 +1,52 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+#project {
+  justify-self: start;
+  min-width: 10rem;
+}
+#headline > p {
+  margin: 0;
+}
+#headline b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+
+/* The two runs side by side, so the answers compare without clicks. */
+.tb-runs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+.tb-runs .mx-h3 {
+  margin: 0;
+}
+.tb-calls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+  font-size: var(--mega-text-sm);
+}
+.tb-call {
+  display: grid;
+  gap: var(--mega-space-1);
+  border: 1px solid var(--mega-line);
+  background: var(--mega-plate-well);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  overflow-wrap: anywhere;
+}
+.tb-arrow {
+  color: var(--mega-accent-ink);
+}
+.tb-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.tb-raw {
+  padding: 0 var(--mega-space-3) var(--mega-space-3);
+}
+.mx-plate > p {
+  margin: 0;
+}
