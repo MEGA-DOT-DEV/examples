@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semantic anchors</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Can a format's name replace its rules?</h2>
+        <p>A well-known name, such as Gherkin, is a semantic anchor: it points the model to a whole standard that it learned in training, so a few tokens can replace a long rule.</p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="format">Format</label>
+          <select id="format" class="mx-select mx-input--small"></select>
+        </div>
+      </div>
+      <div class="mx-field">
+        <span class="mx-label">Task</span>
+        <p class="sa-task" id="task"></p>
+      </div>
+      <div class="mx-field">
+        <div class="mx-table-wrap">
+          <table class="mx-table sa-versions">
+            <thead><tr><th>Request</th><th>Added to the instructions</th><th class="num">Tokens</th></tr></thead>
+            <tbody id="versions"></tbody>
+          </table>
+        </div>
+        <span class="mx-hint" id="base"></span>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Compare 3 modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" id="result">
+      <p class="mx-muted sa-empty" id="empty">Press Compare 3 modes. 3 paid requests, under 1 cent.</p>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

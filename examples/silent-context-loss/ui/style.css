@@ -1,0 +1,37 @@
+/* The viewer kit owns colors, buttons, tables and panels. This page lays out evidence. */
+.loss-page {
+  overflow-wrap: break-word;
+}
+.loss-table td {
+  vertical-align: top;
+}
+.loss-table th,
+.loss-value {
+  font-variant-numeric: tabular-nums;
+}
+.loss-value {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-sm);
+  overflow-wrap: anywhere;
+}
+.loss-steps {
+  display: grid;
+  gap: var(--mega-space-4);
+  padding: var(--mega-space-4);
+  min-inline-size: 0;
+}
+.loss-step {
+  display: grid;
+  gap: var(--mega-space-2);
+  min-inline-size: 0;
+  padding-block-start: var(--mega-space-3);
+  border-block-start: 1px solid var(--mega-line);
+}
+.loss-step:first-child {
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+.loss-steps .mx-code pre {
+  max-block-size: 24rem;
+  overflow: auto;
+}

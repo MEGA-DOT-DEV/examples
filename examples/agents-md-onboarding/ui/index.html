@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGENTS.md onboarding</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page onboard-page">
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does AGENTS.md help a new agent find the project rules?</h2>
+        <p>One run gives the same task to 3 new agents in a small virtual project. Code checks the files each agent edits.</p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label for="scope">Task</label>
+          <select id="scope" class="mx-select"></select>
+        </div>
+      </div>
+      <div class="mx-actions"><div id="picker"></div><button id="run" type="button" class="mx-btn mx-btn--primary">Compare 3 modes</button></div>
+    </section>
+    <div id="notice" role="alert"></div>
+    <p id="empty" class="mx-muted"></p>
+    <section id="results" class="mx-stack" hidden>
+      <div id="headline"></div>
+      <div class="onboard-table"><table class="mx-table"><thead><tr><th>Mode</th><th>Result</th><th>Tool calls before the first edit</th><th>Tokens and cost</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <p id="summary" class="mx-muted"></p>
+      <div id="cards" class="onboard-cards"></div>
+    </section>
+    <details class="mx-details"><summary><span class="mx-label">The virtual project</span><span id="files-count" class="mx-small mx-muted"></span></summary><div id="files" class="onboard-files"></div></details>
+    <details class="mx-details"><summary><span class="mx-label">AGENTS.md</span><span class="mx-small mx-muted">2 versions</span></summary><div id="guidance" class="onboard-files"></div></details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.id-num {
+  width: 6rem;
+}
+.id-rule-field .mx-hint {
+  max-width: 30rem;
+}
+.id-fact-hint {
+  max-width: 26rem;
+}
+.id-what {
+  padding: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}
+.id-what-note {
+  margin: var(--mega-space-2) 0 0;
+}
+.id-what .mx-code pre {
+  max-height: 18rem;
+}
+
+.id-pad {
+  padding: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}
+.id-plate {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.id-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.id-meaning {
+  margin: 0;
+  max-width: 70ch;
+}
+.id-styles {
+  margin: 0;
+}
+
+/* The chart: compliance (0 to 100%) against context size. */
+.id-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.id-grid {
+  stroke: var(--mega-line);
+  stroke-width: 1;
+}
+.id-axis {
+  stroke: var(--mega-line-strong);
+  stroke-width: 1;
+}
+.id-tick {
+  fill: var(--mega-ink-muted);
+  font: 400 11px var(--mega-ui-mono);
+}
+.id-axis-label {
+  fill: var(--mega-ink-muted);
+  font: 400 11px var(--mega-ui-mono);
+  letter-spacing: 0.04em;
+}
+.id-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.id-dot {
+  stroke-width: 0;
+}
+.id-series {
+  transition: opacity var(--mega-dur-fast) var(--mega-ease-out);
+}
+.id-series.is-faded {
+  opacity: 0.3;
+}
+
+/* The table of lines: its swatches are the chart's legend. */
+.id-swatch {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  vertical-align: middle;
+}
+.id-row {
+  cursor: pointer;
+}
+.id-row:hover td {
+  background: var(--mega-table-stripe);
+}
+.id-row.is-selected td {
+  background: var(--mega-surface);
+}
+.id-row.is-selected td:nth-child(2) code {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+
+/* Answers, grouped by size. */
+.id-group > summary {
+  flex-wrap: wrap;
+}
+.id-size {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-ui-mono);
+}
+.id-marks {
+  margin-left: auto;
+  font-family: var(--mega-ui-mono);
+}
+.id-group-body {
+  padding: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+  gap: var(--mega-space-5);
+}
+.id-answer {
+  display: grid;
+  gap: var(--mega-space-2);
+  padding-bottom: var(--mega-space-4);
+  border-bottom: 1px solid var(--mega-line);
+}
+.id-answer:last-of-type {
+  border-bottom: 0;
+}
+.id-run-head {
+  font-size: var(--mega-text-sm);
+}
+.id-run-head b {
+  font-weight: 500;
+}
+.id-answer .mx-output {
+  font-size: var(--mega-text-sm);
+}
+
+/* Room for "64k tokens" next to the arrow. */
+.id-size-select {
+  min-width: 9.5rem;
+}

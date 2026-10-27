@@ -1,0 +1,51 @@
+.table-scroll {
+  overflow-x: auto;
+  max-inline-size: 100%;
+}
+.table-scroll table {
+  inline-size: 100%;
+  min-inline-size: 40rem;
+  border-collapse: collapse;
+}
+.table-scroll :is(th, td) {
+  padding: 0.75rem;
+  text-align: start;
+  border-block-end: 1px solid var(--mega-line);
+  font-variant-numeric: tabular-nums;
+}
+.table-scroll th {
+  white-space: nowrap;
+}
+.answers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 27rem), 1fr));
+  gap: 1rem;
+}
+.answer {
+  min-inline-size: 0;
+}
+.answer .mx-code {
+  max-inline-size: 100%;
+  overflow-x: auto;
+}
+.answer .broken {
+  padding-inline-start: 2.4rem;
+}
+.answer .broken li {
+  overflow-wrap: break-word;
+}
+.answer .broken li + li {
+  margin-block-start: 0.4rem;
+}
+.errors {
+  padding-inline-start: 1.2rem;
+  overflow-wrap: anywhere;
+}
+.rule-list {
+  max-block-size: 22rem;
+  overflow-y: auto;
+}
+.rule-list li {
+  padding-block: 0.35rem;
+  overflow-wrap: break-word;
+}

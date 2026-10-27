@@ -27,6 +27,20 @@
         "mcp-tool-bridge",
         "image-detail-probe"
       ]
+    },
+    {
+      "episode": "S01E02",
+      "title": "Steering Models Through Context",
+      "items": [
+        "instruction-drift",
+        "tool-feedback",
+        "fork-or-fresh-subagent",
+        "rule-count",
+        "semantic-anchors",
+        "agents-md-onboarding",
+        "silent-context-loss",
+        "context-self-report"
+      ]
     }
   ]
 }

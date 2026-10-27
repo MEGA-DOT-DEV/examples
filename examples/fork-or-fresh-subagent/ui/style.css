@@ -1,0 +1,63 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.ff-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.ff-constraints {
+  margin-block: 0;
+  padding-inline-start: 1.5rem;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+/* The four plans side by side, so they can be compared without clicks. */
+.ff-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
+  gap: var(--mega-space-4);
+}
+.ff-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mega-space-4);
+  min-inline-size: 0;
+}
+.ff-card > * {
+  margin-block: 0;
+}
+.ff-score {
+  font: 700 var(--mega-text-xl) var(--mega-heading);
+  color: var(--mega-ink);
+}
+.ff-checks {
+  list-style: none;
+  padding-inline-start: 0;
+  margin-block: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.ff-checks li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--mega-space-2);
+  flex-wrap: wrap;
+  border-block-end: 1px solid var(--mega-line);
+  padding-block-end: var(--mega-space-2);
+}
+.ff-checks li.ff-kept > span:first-child {
+  color: var(--mx-ok);
+}
+.ff-checks li.ff-missed > span:first-child {
+  color: var(--mega-accent-ink);
+}
+.ff-steps {
+  padding-inline-start: 1.5rem;
+  font-size: var(--mega-text-sm);
+}
+.ff-brief {
+  overflow-wrap: anywhere;
+}
+.ff-meaning {
+  margin: 0;
+}
+#notice:empty {
+  display: none;
+}

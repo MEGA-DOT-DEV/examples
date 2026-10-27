@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tool feedback</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">How does a tool result change the model's next step?</h2>
+        <p>One run gives the same task to four modes that differ only in what the tools send back to the model.</p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field">
+          <span class="mx-label">Task</span>
+          <p class="mx-output tf-task" id="task"></p>
+          <span class="mx-hint" id="known"></span>
+        </div>
+        <div class="mx-field">
+          <span class="mx-label">Modes</span>
+          <ul class="tf-modes" id="modes"></ul>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Tool definitions</span><span class="mx-small mx-muted" id="tools-count"></span></summary>
+        <div class="tf-pad" id="tool-defs"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span><span class="mx-small mx-muted">1 setting</span></summary>
+        <div class="mx-fields tf-pad">
+          <div class="mx-field">
+            <span class="mx-label">Billing database</span>
+            <label class="mx-check"><input type="checkbox" id="outage"> Make every invoice tool fail</label>
+            <span class="mx-hint">This is a system error. The model cannot fix it, so every mode stops.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Compare 4 modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" aria-label="Result">
+      <p class="mx-muted" id="empty">Press Compare 4 modes. About 15 paid requests, under 1 cent.</p>
+      <div id="headline"></div>
+      <div class="mx-table-wrap" id="table" hidden>
+        <table class="mx-table tf-table">
+          <thead>
+            <tr>
+              <th>Mode</th>
+              <th>Result</th>
+              <th>What happened</th>
+              <th class="num">Requests</th>
+              <th>Input tokens per request</th>
+              <th>Tokens and cost</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted" id="meaning" hidden></p>
+      <div class="mx-stack" id="traces"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

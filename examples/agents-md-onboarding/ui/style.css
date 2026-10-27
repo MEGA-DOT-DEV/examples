@@ -1,0 +1,55 @@
+.onboard-page {
+  --content: 68rem;
+}
+.onboard-cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
+  margin-block-start: 1.25rem;
+}
+.onboard-card {
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.onboard-card > :is(h3, p, ul),
+.onboard-card .mx-spread h3 {
+  margin-block: 0;
+}
+.onboard-card code,
+.onboard-files code {
+  overflow-wrap: anywhere;
+}
+.onboard-writes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.onboard-step + .onboard-step {
+  margin-block-start: 1rem;
+}
+.onboard-files {
+  display: grid;
+  gap: 0.4rem;
+  padding-block: 1rem;
+}
+.onboard-table {
+  overflow-x: auto;
+}
+.onboard-table table {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+.onboard-table :is(th, td) {
+  padding: 0.6rem;
+  text-align: start;
+  border-block-end: 1px solid var(--mega-line);
+  font-variant-numeric: tabular-nums;
+}
+.onboard-table th {
+  white-space: nowrap;
+}
+.onboard-card li {
+  margin-block: 0.5rem;
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Silent context loss</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page loss-page">
+    <section class="mx-panel mx-settings" aria-label="Run settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does the model notice when the harness hides part of a file?</h2>
+        <p id="intro">One run asks the same questions about the same files in each view. Only the tool result changes.</p>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" type="button" id="run">Compare 6 views</button>
+      </div>
+    </section>
+    <div id="notice"></div>
+    <section class="mx-stack" aria-live="polite" id="result"></section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

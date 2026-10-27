@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Context self-report</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The agent's context</h2>
+        <p>Cody is a sample coding agent in the middle of a task. Open a part to read the text the model gets.</p>
+      </div>
+      <div class="mx-stack sr-parts" id="parts"></div>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-field">
+        <label class="mx-label" for="question">Your question</label>
+        <textarea id="question" class="mx-textarea" rows="2" spellcheck="false"></textarea>
+        <span class="mx-hint">It goes in the last message, under the reminder. Ctrl+Enter sends it.</span>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Ask the agent</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <section class="mx-stack" id="result"></section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

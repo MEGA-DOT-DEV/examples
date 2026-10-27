@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instruction drift</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3" id="question"></h2>
+        <p id="plan"></p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field id-rule-field" data-mode="rule">
+          <label class="mx-label" for="rule">Rule in the instructions</label>
+          <select id="rule" class="mx-select mx-input--small"></select>
+          <span class="mx-hint" id="rule-hint"></span>
+        </div>
+        <div class="mx-field" data-mode="fact" hidden>
+          <span class="mx-label">Fact</span>
+          <span class="mx-hint id-fact-hint">One user message says that the staging database is named <code>heron-7</code>. The question asks for that name.</span>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span><span class="mx-small mx-muted" id="advanced-count">5 settings</span></summary>
+        <div class="mx-fields id-pad">
+          <div class="mx-field">
+            <span class="mx-label">What to test</span>
+            <div class="mx-seg" id="modes" role="group" aria-label="What to test"></div>
+          </div>
+          <div class="mx-field">
+            <label class="mx-label" for="max">Largest context</label>
+            <select id="max" class="mx-select mx-input--small id-size-select"></select>
+          </div>
+          <div class="mx-field">
+            <label class="mx-label" for="runs">Runs per size</label>
+            <input id="runs" class="mx-input mx-input--small id-num" type="number" min="1" value="3">
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+          </div>
+          <div class="mx-field" data-mode="rule">
+            <span class="mx-label">Earlier answers</span>
+            <label class="mx-check"><input type="checkbox" id="answers"> Add answers that follow the rule</label>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <div class="mx-row">
+          <button class="mx-btn" id="stop" type="button" hidden>Stop</button>
+          <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p id="empty" class="id-empty"></p>
+      <div id="headline" hidden></div>
+      <div class="mx-plate id-plate" id="chart-box">
+        <svg id="chart" class="id-chart" viewBox="0 0 640 270" role="img" aria-label="Share of runs that passed the check, by context size"></svg>
+        <p id="styles" class="mx-hint id-styles" hidden>Solid line: the fact at the start. Dashed line: the fact in the middle. Dotted line: the fact at the end, before the question.</p>
+      </div>
+      <p id="meaning" class="mx-muted id-meaning" hidden></p>
+    </section>
+
+    <section class="mx-stack" id="series-box" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Lines on the chart</h3>
+        <p id="series-sub"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead id="series-head"></thead>
+          <tbody id="series-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="answers-box" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3" id="answers-title">Answers</h3>
+        <p>Open a size to read each answer and the result of the check.</p>
+      </div>
+      <div class="mx-stack" id="answer-groups"></div>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">Request contents</span><span class="mx-small mx-muted" id="what-parts"></span></summary>
+      <div class="mx-stack id-what" id="what"></div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

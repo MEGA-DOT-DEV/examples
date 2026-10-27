@@ -1,0 +1,87 @@
+/* Styles for this page only. Shared components come from /kit/kit.css. */
+
+/* Fits the longest format name. */
+#format {
+  min-width: 16rem;
+}
+
+/* The task and the guidance are what the model reads: body ink, not hint grey. */
+.sa-task {
+  margin: 0;
+  color: var(--mega-ink);
+  line-height: 1.5;
+}
+.sa-versions td {
+  color: var(--mega-ink);
+}
+.sa-versions .sa-mode {
+  white-space: nowrap;
+  color: var(--mega-ink-body);
+}
+
+/* The three answers side by side. */
+.sa-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-4);
+}
+/* minmax(0, …): a wide code block stays inside its card instead of stretching it. */
+.sa-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-4);
+  align-content: start;
+  min-width: 0;
+}
+.sa-card .mx-spread {
+  flex-wrap: nowrap;
+}
+.sa-block {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.sa-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  font-size: var(--mega-text-sm);
+}
+.sa-list li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+}
+.sa-list .is-miss > span:last-child {
+  color: var(--mega-ink-muted);
+}
+.sa-plus {
+  color: var(--mega-blue);
+}
+.sa-none {
+  margin: 0;
+}
+
+/* The full answer inside its fold. Long lines wrap, so no line is cut off at the card edge. */
+.sa-answer {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  font-size: var(--mega-text-sm);
+}
+.sa-answer .mx-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.sa-empty {
+  margin: 0;
+}
+.sa-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.sa-step {
+  margin: var(--mega-space-2) 0 0;
+  display: flex;
+  gap: var(--mega-space-2);
+  align-items: baseline;
+  flex-wrap: wrap;
+}

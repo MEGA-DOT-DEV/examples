@@ -1,0 +1,43 @@
+/* Styles for this page only. Shared components come from kit.css. */
+/* The parts sit close together, as one list of folds. */
+.sr-parts {
+  gap: var(--mega-space-2);
+}
+/* The answer, with the checklist beside it. One column on a narrow screen. */
+.sr-result {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 18rem);
+  gap: var(--mega-space-6);
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .sr-result {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.sr-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--mega-line);
+}
+.sr-checklist li {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0 var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  font-size: var(--mega-text-sm);
+}
+.sr-checklist li + li {
+  border-top: 1px solid var(--mega-line);
+}
+/* The matched word goes under the part name. */
+.sr-checklist .mx-hint {
+  grid-column: 2;
+  overflow-wrap: anywhere;
+}
+/* The content of a fold sits inside its border, under the summary. */
+.sr-fold {
+  padding: var(--mega-space-3) var(--mega-space-4) var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}

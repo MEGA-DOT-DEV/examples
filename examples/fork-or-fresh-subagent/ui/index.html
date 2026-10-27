@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fork or fresh subagent</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does a subagent keep the user's earlier decisions?</h2>
+        <p>One run sends the same task in 4 ways. Code checks if each plan keeps the 4 decisions from the earlier turns.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Conversation so far</span><span class="mx-muted mx-small">4 user turns, then the task</span></summary>
+        <div class="ff-pad mx-stack">
+          <ol class="ff-constraints" id="constraints"></ol>
+          <p class="mx-output" id="task"></p>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="provider"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Compare 4 contexts</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p id="empty" class="mx-plate mx-muted">Press Compare 4 contexts. 5 paid requests, under 0.1 cent with gpt-6-luna.</p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-callout" id="headline"><p id="headline-text"></p></div>
+      <div id="cards" class="ff-results"></div>
+      <p class="mx-small mx-muted ff-meaning" id="meaning"></p>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

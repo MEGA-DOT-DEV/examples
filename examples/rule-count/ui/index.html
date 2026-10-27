@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rule count</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does a model keep more rules when you give it more?</h2>
+        <p>The model fixes one diff with 3 seeded defects. It gets the first 3, 10, 25 or 50 review rules, or 5 principles. Code checks each rule and tests the fix.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span><span class="mx-small mx-muted">1 setting</span></summary>
+        <div class="mx-fields">
+          <div class="mx-field">
+            <label for="runs">Runs per mode</label>
+            <select id="runs" class="mx-select"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+            <p class="mx-hint">One run can be luck. Three runs show whether a mode keeps every rule each time.</p>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions"><div id="provider"></div><button id="run" class="mx-btn mx-btn--primary" type="button">Compare 6 modes</button></div>
+    </section>
+    <div id="notice" role="alert"></div>
+    <p id="empty" class="mx-muted">Press Compare 6 modes. 9 paid requests, under 1 cent with the default model, 1 to 2 minutes.</p>
+    <section id="result" class="mx-stack" hidden>
+      <div id="headline"></div>
+      <div class="table-scroll"><table class="mx-table"><thead id="head"></thead><tbody id="rows"></tbody></table></div>
+      <p id="summary" class="mx-muted"></p>
+      <div class="mx-section-head"><h3 class="mx-h3">Each answer</h3><p>The rules that each answer broke, and how its fix did on the test orders.</p></div>
+      <div id="answers" class="answers"></div>
+    </section>
+    <details class="mx-details"><summary><span class="mx-label">The diff</span><span class="mx-small mx-muted">3 seeded defects on lines 8, 9 and 10</span></summary><div id="diff"></div></details>
+    <details class="mx-details"><summary><span class="mx-label">The rules</span><span class="mx-small mx-muted">50 review rules · a mode with N rules gets the first N</span></summary><div id="rules" class="rule-list"></div></details>
+    <details class="mx-details"><summary><span class="mx-label">The principles</span><span class="mx-small mx-muted">5 sentences about the money logic</span></summary><p id="principles"></p></details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
