@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task board context</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">The task board improves the agent's design</h2>
+      <p>The agent designs one task with its task note only, then with all notes in <code>tasks/</code>.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-muted">runs per mode, board columns</span></summary>
+        <div class="mx-fields tb-pad">
+          <div class="mx-field">
+            <span class="mx-label">Runs per mode</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per mode"></div>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Columns in “With the board”</span>
+            <div class="mx-row tb-columns" id="columns"></div>
+            <span class="mx-hint">The agent's task note is always in the context. Clear a column to see which checks need it.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run both modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p class="tb-empty" id="empty"></p>
+
+    <section class="mx-stack" id="results" hidden>
+      <div class="mx-stack" id="verdict">
+        <div class="mx-readouts" id="readouts"></div>
+        <p class="tb-meaning" id="meaning"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table tb-table">
+          <thead>
+            <tr><th>Check</th><th>Fact from</th><th class="num" id="head-a"></th><th class="num" id="head-b"></th></tr>
+          </thead>
+          <tbody id="per-check"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted tb-note" id="total"></p>
+    </section>
+
+    <section class="tb-modes" id="modes" hidden>
+      <div class="mx-stack tb-col tb-col--a">
+        <div class="mx-section-head tb-sub">
+          <h2 class="mx-h3" id="title-a"></h2>
+          <p id="about-a"></p>
+        </div>
+        <div class="mx-stack tb-cards" id="mode-a"></div>
+      </div>
+      <div class="mx-stack tb-col tb-col--b">
+        <div class="mx-section-head tb-sub">
+          <h2 class="mx-h3" id="title-b"></h2>
+          <p id="about-b"></p>
+        </div>
+        <div class="mx-stack tb-cards" id="mode-b"></div>
+      </div>
+    </section>
+
+    <section class="mx-stack">
+      <details class="mx-details">
+        <summary><span class="mx-label">The task board</span> <span class="mx-muted" id="board-count"></span></summary>
+        <div class="tb-pad"><div class="tb-board" id="board"></div></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and request</span> <span class="mx-muted">the same in both modes</span></summary>
+        <div class="mx-stack tb-pad">
+          <div id="instructions"></div>
+          <p class="mx-output tb-request" id="request"></p>
+        </div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

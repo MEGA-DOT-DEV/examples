@@ -1,0 +1,150 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.si-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.si-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.si-meaning {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.si-meaning:empty,
+.si-total:empty {
+  display: none;
+}
+.si-total {
+  margin: 0;
+}
+.si-path {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  white-space: nowrap;
+}
+.si-other {
+  display: block;
+  margin-top: 0.15rem;
+}
+.si-flat {
+  border-width: 1px 0 0;
+}
+
+/* index.md: open, in its own scroll box. */
+.si-index pre {
+  max-height: 26rem;
+  overflow: auto;
+}
+
+/* The table: one group of columns per mode. */
+.si-table td:first-child {
+  min-width: 11rem;
+}
+.si-table th.si-group {
+  border-left: 1px solid var(--mega-line-strong);
+}
+.si-table tbody tr td:nth-child(2) {
+  border-left: 1px solid var(--mega-line-strong);
+}
+.si-table tbody tr td:nth-child(6) {
+  border-left: 1px solid var(--mega-line-strong);
+}
+.si-table th[colspan] {
+  text-align: center;
+}
+.si-sum td {
+  font-weight: 500;
+  background: var(--mega-surface);
+}
+
+.si-lines {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: var(--mega-space-2);
+  max-width: 75ch;
+}
+
+/* Answers: per question, the two modes side by side. */
+.si-question {
+  gap: var(--mega-space-3);
+}
+.si-pair {
+  display: grid;
+  gap: var(--mega-space-3);
+  align-items: start;
+}
+@media (min-width: 50rem) {
+  .si-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.si-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  align-content: start;
+}
+.si-card p {
+  margin: 0;
+}
+.si-run {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.si-card > .mx-spread b {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-ui-mono);
+}
+.si-answer {
+  font-size: var(--mega-text-sm);
+  line-height: 1.6;
+}
+.si-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--mega-text-xs);
+}
+.si-checks li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+}
+
+.si-steps {
+  margin: 0;
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  list-style: none;
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.si-call {
+  border: 1px solid var(--mega-line);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.si-call.is-error {
+  border-color: var(--mega-accent-ink);
+}
+.si-call-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+}
+.si-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.si-call .mx-code {
+  border-width: 1px 0 0;
+}
+.si-call .mx-code pre {
+  max-height: 14rem;
+  overflow: auto;
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pointer notes</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">A pointer note says where the data lives</h2>
+      <p>A pointer note does not copy data from the tracker. It says where the data lives and how to read it, so the agent reads the current value, not an old copy.</p>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The notes</h2>
+        <p id="notes-lead"></p>
+      </div>
+      <div class="pn-notes" id="notes"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Three days later, the tracker changed</h2>
+        <p id="changes-lead"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table pn-changes">
+          <thead><tr><th>Issue</th><th>Title</th><th>Change</th><th>In the copy · day 0</th><th>In the tracker · day 3</th></tr></thead>
+          <tbody id="changes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <p class="pn-empty" id="empty"></p>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run all modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Answers that match day 3</h2>
+        <p>Code compares the value in each answer with the tracker on day 3.</p>
+      </div>
+      <div class="mx-stack" id="verdict">
+        <div class="mx-readouts" id="readouts"></div>
+        <p class="pn-meaning" id="meaning"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table pn-counts">
+          <thead id="counts-head"></thead>
+          <tbody id="counts"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted pn-total" id="total"></p>
+    </section>
+
+    <section class="mx-stack" id="sample-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">One question, three notes</h2>
+        <p>The same question, answered with each note.</p>
+      </div>
+      <div id="sample"></div>
+    </section>
+
+    <section class="mx-stack" id="answers-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3" id="answers-title"></h2>
+        <p>Each question, with the answer from each note.</p>
+      </div>
+      <div class="pn-questions" id="answers"></div>
+    </section>
+
+    <section class="mx-stack">
+      <details class="mx-details">
+        <summary><span class="mx-label">Questions</span> <span class="mx-small mx-muted" id="question-count"></span></summary>
+        <ol class="pn-question-list" id="questions"></ol>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span> <span class="mx-small mx-muted" id="instructions-count"></span></summary>
+        <div class="mx-stack pn-pad" id="instructions"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

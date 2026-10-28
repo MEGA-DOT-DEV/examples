@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inbox filing</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">One agent files every item by the same rules</h2>
+      <p>The agent files 8 inbox items into the base with the rules in map.md, and code checks each result.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-muted mx-small">items, reasoning effort</span></summary>
+        <div class="mx-fields if-pad">
+          <div class="mx-field if-items-field">
+            <label class="mx-label" for="items">Items</label>
+            <select id="items" class="mx-select"></select>
+            <span class="mx-hint" id="items-hint"></span>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">File the inbox</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p class="if-empty" id="empty"></p>
+
+    <section class="mx-stack" id="verdict" hidden>
+      <div class="mx-readouts" id="readouts"></div>
+      <p class="if-meaning" id="meaning"></p>
+      <p class="mx-small mx-muted if-usage" id="usage"></p>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The inbox, filed</h2>
+        <p>Each row shows the expected outcome, what the agent did, and the result of each check.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table if-table">
+          <thead id="head"></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">What each check tests</span><span class="mx-muted mx-small" id="checks-note"></span></summary>
+        <dl class="if-pad if-checks" id="checks"></dl>
+      </details>
+    </section>
+
+    <section class="mx-stack" id="tree-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The base after the run</h2>
+        <p>Marks show the new, changed and moved notes. The move tool updates the links to a moved note.</p>
+      </div>
+      <ul class="if-tree" id="tree"></ul>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Item by item</h2>
+        <p>Each card shows the item, the agent's answer, the changed lines, and each failed check.</p>
+      </div>
+      <div class="mx-stack" id="cards"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What the agent reads</h2>
+        <p>With every item, the agent gets the map, the current list of notes and the same tools.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">The map</span><span class="mx-muted mx-small" id="map-note"></span></summary>
+        <div id="map"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">The base before the run</span><span class="mx-muted mx-small" id="seed-note"></span></summary>
+        <div class="if-pad mx-stack" id="seed"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span><span class="mx-muted mx-small" id="tools-note"></span></summary>
+        <div class="if-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

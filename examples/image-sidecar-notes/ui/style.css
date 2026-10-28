@@ -1,0 +1,185 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.sc-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.sc-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.sc-meaning {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.sc-meaning:empty {
+  display: none;
+}
+.sc-path {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  overflow-wrap: anywhere;
+}
+.sc-image-tag {
+  display: inline-block;
+  margin-right: var(--mega-space-2);
+  padding: 0 0.3rem;
+  border: 1px solid var(--mega-red);
+  color: var(--mega-accent-ink);
+  font-size: var(--mega-text-2xs);
+}
+
+/* The three images: they stay white in both themes, as a real screenshot would. */
+.sc-images {
+  display: grid;
+  gap: var(--mega-space-3);
+}
+@media (min-width: 40rem) {
+  .sc-images {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.sc-figure {
+  margin: 0;
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.sc-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--mega-line-strong);
+}
+
+/* What each mode gets: three short lines. */
+.sc-modes {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.sc-mode {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  align-items: baseline;
+}
+.sc-mode b {
+  font: 500 var(--mega-text-sm) / 1.35 var(--mega-sans);
+  color: var(--mega-ink);
+}
+
+/* Sidecars: the image, the note intake wrote, and grep before and after. */
+.sc-sidecars {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.sc-sidecar {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+}
+.sc-sidecar-head {
+  display: grid;
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+@media (min-width: 48rem) {
+  .sc-sidecar-head {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+}
+
+/* Answers: per question, one card per mode side by side. */
+.sc-questions {
+  gap: var(--mega-space-6);
+}
+.sc-question {
+  display: grid;
+  gap: 0.2rem;
+}
+.sc-question b {
+  font: 500 var(--mega-text-base) / 1.4 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.sc-cards {
+  display: grid;
+  gap: var(--mega-space-3);
+  align-items: stretch;
+}
+@media (min-width: 60rem) {
+  .sc-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.sc-cards > div {
+  display: grid;
+}
+.sc-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  align-content: start;
+}
+.sc-card p {
+  margin: 0;
+}
+.sc-run {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.sc-card > .mx-spread b {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-ui-mono);
+}
+.sc-answer {
+  font-size: var(--mega-text-sm);
+  line-height: 1.6;
+}
+.sc-reach {
+  overflow-wrap: anywhere;
+}
+.sc-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--mega-text-xs);
+}
+.sc-checks li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+}
+
+.sc-steps {
+  margin: 0;
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  list-style: none;
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.sc-call {
+  border: 1px solid var(--mega-line);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.sc-call.is-error {
+  border-color: var(--mega-accent-ink);
+}
+.sc-call-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+}
+.sc-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.sc-call .mx-code {
+  border-width: 1px 0 0;
+}
+.sc-call .mx-code pre {
+  max-height: 14rem;
+  overflow: auto;
+}

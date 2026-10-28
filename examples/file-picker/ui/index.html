@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>File picker</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">A file picker shortens the search</h2>
+      <p>Two agents answer the same question about Larder, a made-up grocery app with <span id="file-count"></span> files. Code checks each answer against the one right number.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field fp-wide">
+          <span class="mx-label">Question</span>
+          <div class="mx-seg" id="tasks" role="group" aria-label="Question"></div>
+          <p class="fp-question" id="question"></p>
+        </div>
+      </div>
+      <div class="fp-mode-list" id="mode-list"></div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <p class="fp-empty" id="empty"></p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3" id="result-title"></h2>
+        <p id="result-note"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table fp-compare">
+          <thead><tr><th></th><th class="num">Agent alone</th><th class="num">With a picker</th></tr></thead>
+          <tbody id="compare"></tbody>
+        </table>
+      </div>
+      <p class="fp-meaning" id="meaning"></p>
+    </section>
+
+    <section class="mx-stack" id="per-task" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Per question</h2>
+        <p>Pick a question to see how each agent searched.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table fp-tasks">
+          <thead><tr><th>Question</th><th>Agent alone</th><th>With a picker</th></tr></thead>
+          <tbody id="task-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="trails" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3" id="trails-title">How each agent searched</h2>
+        <p>Each line is one tool call. <span class="fp-hit-key">Red</span> marks the read of the file with the answer.</p>
+      </div>
+      <div class="fp-columns">
+        <div class="mx-stack" id="col-alone"></div>
+        <div class="mx-stack" id="col-picker"></div>
+      </div>
+    </section>
+
+    <section class="mx-stack" aria-label="Reference">
+      <details class="mx-details">
+        <summary><span class="mx-label">The codebase</span> <span class="mx-small mx-muted" id="tree-note"></span></summary>
+        <div class="fp-pad mx-stack" id="tree"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span> <span class="mx-small mx-muted" id="setup-note"></span></summary>
+        <div class="fp-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

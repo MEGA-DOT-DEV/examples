@@ -1,0 +1,142 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.cr-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.cr-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.cr-meaning {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.cr-meaning:empty,
+.cr-total:empty {
+  display: none;
+}
+.cr-total {
+  margin: 0;
+}
+.cr-id {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  white-space: nowrap;
+}
+
+/* What each mode does: two short lines. */
+.cr-modes {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.cr-mode {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  align-items: baseline;
+}
+.cr-mode b {
+  font: 500 var(--mega-text-sm) / 1.35 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.cr-note .mx-code pre {
+  max-height: 14rem;
+  overflow: auto;
+}
+
+/* ── Per-night tables, one per mode ── */
+.cr-tables {
+  display: grid;
+  gap: var(--mega-space-5);
+}
+.cr-start td {
+  color: var(--mega-ink-muted);
+}
+
+/* ── Night cards: one row per night, one column per mode ── */
+.cr-nights {
+  display: grid;
+  gap: var(--mega-space-5);
+}
+.cr-night {
+  display: grid;
+  gap: var(--mega-space-3);
+  align-items: start;
+}
+@media (min-width: 52rem) {
+  .cr-night {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cr-night-head {
+    grid-column: 1 / -1;
+  }
+}
+.cr-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  align-content: start;
+}
+.cr-card p {
+  margin: 0;
+}
+.cr-run {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.cr-score {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-ui-mono);
+}
+
+.cr-lost,
+.cr-skips,
+.cr-ops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  font-size: var(--mega-text-xs);
+}
+.cr-lost li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+}
+.cr-skips li {
+  display: grid;
+  gap: 0.1rem;
+  border-left: 2px solid var(--mega-red);
+  padding-left: var(--mega-space-2);
+}
+.cr-ops {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  overflow-wrap: anywhere;
+}
+.cr-ops li.is-skip code {
+  text-decoration: line-through;
+}
+
+/* A line diff: removed lines struck in the accent, added lines marked with +. */
+.cr-change {
+  gap: var(--mega-space-1);
+}
+.cr-diff {
+  margin: 0;
+  padding: var(--mega-space-2) var(--mega-space-3);
+  border: 1px solid var(--mega-line);
+  font: 400 var(--mega-text-xs) / 1.5 var(--mega-ui-mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 18rem;
+  overflow: auto;
+  color: var(--mega-ink-muted);
+}
+.cr-diff .is-del {
+  color: var(--mega-red);
+  text-decoration: line-through;
+}
+.cr-diff .is-add {
+  color: var(--mega-ink);
+  font-weight: 500;
+}

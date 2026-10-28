@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guided components</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">A component library makes notes consistent</h2>
+      <p>A model writes an <code>.svx</code> note for each of <span id="topic-count"></span> topics in two modes, and code checks every note.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="gc-modes" id="mode-list"></div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-small mx-muted">runs per topic</span></summary>
+        <div class="gc-pad mx-fields">
+          <div class="mx-field">
+            <span class="mx-label">Runs per topic</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per topic"></div>
+            <span class="mx-hint">Consistency shows across runs. Use 2 or more.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Write all notes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <p class="gc-empty" id="empty"></p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-readouts" id="verdict"></div>
+      <p class="gc-meaning" id="meaning"></p>
+      <div class="mx-table-wrap">
+        <table class="mx-table gc-summary">
+          <thead id="kinds-head"></thead>
+          <tbody id="kinds"></tbody>
+        </table>
+      </div>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Checks on every note</h3>
+        <p>Code parses each note, checks its tags against the library, and looks for the key points of the topic.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table gc-summary">
+          <thead id="summary-head"></thead>
+          <tbody id="summary"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted gc-total" id="total"></p>
+    </section>
+
+    <section class="mx-stack" id="notes-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Notes</h2>
+        <p>Every run of one topic. The page renders guided notes from their parsed blocks and shows free notes as source.</p>
+      </div>
+      <div class="mx-seg" id="topic-pick" role="group" aria-label="Topic"></div>
+      <p class="mx-small mx-muted" id="topic-about"></p>
+      <div class="gc-notes" id="notes"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What the model gets</h2>
+        <p>The same topic brief in both modes. Only the guided instructions hold the library and the template.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Library</span> <span class="mx-small mx-muted" id="library-size"></span></summary>
+        <div class="gc-pad gc-library" id="library"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Template</span> <span class="mx-small mx-muted" id="template-size"></span></summary>
+        <div class="gc-pad" id="template"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions</span> <span class="mx-small mx-muted" id="instructions-size"></span></summary>
+        <div class="gc-pad mx-stack" id="instructions"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Topics</span> <span class="mx-small mx-muted" id="topics-size"></span></summary>
+        <div class="gc-pad mx-stack" id="topics"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

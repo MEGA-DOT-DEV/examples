@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image sidecar notes</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">Grep cannot find facts in images</h2>
+      <p>An agent answers six questions about a small knowledge base in three modes. Three answers exist only in an image.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="sc-modes" id="mode-list"></div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run all modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <p class="sc-empty" id="empty"></p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Image facts found</h2>
+        <p>A fact counts only when the answer names its exact value: a port, a number, a name.</p>
+      </div>
+      <div class="mx-stack" id="verdict">
+        <div class="mx-readouts" id="readouts"></div>
+        <p class="sc-meaning" id="meaning"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead id="facts-head"></thead>
+          <tbody id="facts"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="cost-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Intake once, or the image on every question</h2>
+        <p>Intake sends each image once. The view tool sends the image again on every question that needs it.</p>
+      </div>
+      <div class="mx-readouts" id="costs"></div>
+      <p class="sc-meaning" id="cost-meaning"></p>
+    </section>
+
+    <section class="mx-stack" id="intake-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The sidecar notes</h2>
+        <p>The note intake wrote next to each image, and the files a grep finds for each image fact.</p>
+      </div>
+      <div class="sc-sidecars" id="sidecars"></div>
+    </section>
+
+    <section class="mx-stack" id="answers-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Answers</h2>
+        <p>Each answer, with the facts it names. The tool calls of each run are in its fold.</p>
+      </div>
+      <div class="mx-stack sc-questions" id="answers"></div>
+    </section>
+
+    <section class="mx-stack" aria-label="Reference">
+      <details class="mx-details">
+        <summary><span class="mx-label">The knowledge base</span> <span class="mx-small mx-muted" id="base-size"></span></summary>
+        <div class="sc-pad mx-stack">
+          <div class="sc-images" id="images"></div>
+          <div class="mx-stack" id="notes"></div>
+        </div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span> <span class="mx-small mx-muted" id="tools-size"></span></summary>
+        <div id="tools"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

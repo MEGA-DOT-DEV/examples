@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Summary index</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">A model-written index finds notes grep misses</h2>
+      <p>The model writes <code>index.md</code>, one line per note. Then an agent answers <span id="question-count"></span> questions about <span id="note-count"></span> notes twice: with a grep tool, and with the index in its instructions.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-small mx-muted">runs per question</span></summary>
+        <div class="mx-fields si-pad">
+          <div class="mx-field">
+            <span class="mx-label">Runs per question and mode</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per question and mode"></div>
+            <span class="mx-hint">Agents vary. More runs give more stable numbers.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Build the index and run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <p class="si-empty" id="empty"></p>
+
+    <section class="mx-stack" id="verdict" hidden>
+      <div class="mx-readouts" id="readouts"></div>
+      <p class="si-meaning" id="meaning"></p>
+      <div class="mx-table-wrap">
+        <table class="mx-table si-table">
+          <thead id="table-head"></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted si-total" id="total"></p>
+    </section>
+
+    <section class="mx-stack" id="build" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">index.md, written by the model</h2>
+        <p>The model writes it once, before the questions. The index mode sends it with every request.</p>
+      </div>
+      <div class="mx-readouts" id="build-readouts"></div>
+      <div id="index"></div>
+      <details class="mx-details" id="build-requests" hidden>
+        <summary><span class="mx-label" id="build-requests-label"></span></summary>
+        <div class="si-pad mx-stack" id="build-requests-body"></div>
+      </details>
+    </section>
+
+    <section class="mx-stack" id="worth" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What the index costs</h2>
+        <p>You pay for the build once. Then each question costs what its mode costs.</p>
+      </div>
+      <div id="worth-body"></div>
+    </section>
+
+    <section class="mx-stack" id="answers-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Answers</h2>
+        <p>The answer of each run, with the facts that code found in it. Each run's tool calls are folded.</p>
+      </div>
+      <div class="mx-stack" id="answers"></div>
+    </section>
+
+    <section class="mx-stack">
+      <details class="mx-details">
+        <summary><span class="mx-label">The notes</span><span class="mx-small mx-muted" id="notes-size"></span></summary>
+        <div id="notes"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Questions and answer key</span><span class="mx-small mx-muted" id="key-size"></span></summary>
+        <div id="key"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span><span class="mx-small mx-muted" id="tools-size"></span></summary>
+        <div id="tools"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

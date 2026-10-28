@@ -1,0 +1,310 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.gc-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.gc-pad p {
+  margin: 0;
+}
+.gc-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.gc-meaning {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.gc-meaning:empty,
+.gc-total:empty {
+  display: none;
+}
+.gc-total {
+  margin: 0;
+}
+
+/* What each mode gets: two short lines. */
+.gc-modes {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.gc-mode {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  align-items: baseline;
+}
+.gc-mode b {
+  font: 500 var(--mega-text-sm) / 1.35 var(--mega-sans);
+  color: var(--mega-ink);
+}
+
+/* The library fold: one block per component. */
+.gc-library {
+  display: grid;
+  gap: var(--mega-space-5);
+}
+.gc-lib-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.gc-lib .mx-code pre {
+  max-height: 12rem;
+  overflow: auto;
+}
+
+/* Summary tables. */
+.gc-summary td:first-child {
+  min-width: 14rem;
+}
+.gc-names {
+  display: block;
+  font-size: var(--mega-text-2xs);
+  color: var(--mega-ink-muted);
+  white-space: normal;
+}
+.gc-shapes summary {
+  cursor: pointer;
+}
+.gc-shapes ul {
+  margin: var(--mega-space-1) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  font-size: var(--mega-text-2xs);
+}
+
+/* ── Notes: one column per mode, run N of both modes in one row ── */
+.gc-notes {
+  display: grid;
+  gap: var(--mega-space-5);
+  align-items: start;
+}
+.gc-col {
+  display: grid;
+  gap: var(--mega-space-3);
+}
+@media (min-width: 52rem) {
+  .gc-notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--mega-space-3) var(--mega-space-4);
+  }
+  .gc-col {
+    display: contents;
+  }
+  .gc-col:nth-child(1) > * {
+    grid-column: 1;
+  }
+  .gc-col:nth-child(2) > * {
+    grid-column: 2;
+  }
+  .gc-col-head {
+    grid-row: 1;
+    align-self: start;
+  }
+  .gc-slot {
+    grid-row: var(--row, 2);
+  }
+}
+.gc-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  align-content: start;
+  height: 100%;
+  grid-template-columns: minmax(0, 1fr);
+}
+.gc-card p {
+  margin: 0;
+}
+.gc-run {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.gc-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--mega-text-xs);
+}
+.gc-checks li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+}
+.gc-checks .is-miss > span:last-child {
+  color: var(--mega-ink-muted);
+}
+.gc-unknown {
+  color: var(--mega-accent-ink);
+}
+.gc-source pre {
+  max-height: 22rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ── A rendered note ── */
+.gc-rendered {
+  display: grid;
+  gap: var(--mega-space-3);
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.gc-md {
+  display: grid;
+  gap: var(--mega-space-2);
+  font-size: var(--mega-text-sm);
+  line-height: 1.55;
+  color: var(--mega-ink-body);
+}
+.gc-md p,
+.gc-md ul,
+.gc-md ol {
+  margin: 0;
+}
+.gc-md ul,
+.gc-md ol {
+  padding-left: 1.2rem;
+}
+.gc-h {
+  margin: var(--mega-space-1) 0 0;
+  font-family: var(--mega-sans);
+  font-weight: 500;
+  color: var(--mega-ink);
+  line-height: 1.25;
+}
+.gc-h1 {
+  font-size: var(--mega-text-lg);
+}
+.gc-h2 {
+  font-size: var(--mega-text-base);
+}
+.gc-h3,
+.gc-h4,
+.gc-h5,
+.gc-h6 {
+  font-size: var(--mega-text-sm);
+}
+
+.gc-comp {
+  border: 1px solid var(--mega-ink);
+  background: var(--mega-surface);
+  padding: var(--mega-space-3);
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.gc-comp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+}
+.gc-comp-title {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.gc-readout {
+  font: 500 var(--mega-text-xs) / 1.3 var(--mega-ui-mono);
+  color: var(--mega-accent-ink);
+  white-space: nowrap;
+}
+.gc-item {
+  display: block;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink);
+}
+.gc-detail {
+  display: block;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}
+
+.gc-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.gc-tick {
+  display: grid;
+  grid-template-columns: 1.4rem minmax(0, 1fr);
+  align-items: start;
+  cursor: pointer;
+}
+.gc-tick input {
+  accent-color: var(--mega-red);
+  width: 1rem;
+  height: 1rem;
+  margin: 0.15rem 0 0;
+}
+.gc-tick:has(input:checked) .gc-item {
+  text-decoration: line-through;
+  color: var(--mega-ink-muted);
+}
+
+.gc-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.gc-timeline li {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  border-left: 2px solid var(--mega-line-strong);
+  padding-left: var(--mega-space-3);
+}
+.gc-date {
+  font: 500 var(--mega-text-xs) / 1.6 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+
+.gc-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--mega-space-2);
+}
+.gc-option {
+  border: 1px solid var(--mega-line);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  display: grid;
+  gap: var(--mega-space-1);
+  align-content: start;
+}
+.gc-option.is-chosen {
+  border-color: var(--mega-red);
+}
+.gc-chosen {
+  font: 500 var(--mega-text-2xs) / 1.3 var(--mega-ui-mono);
+  color: var(--mega-accent-ink);
+}
+.gc-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-body);
+  display: grid;
+  gap: 0.15rem;
+}
+.gc-points li {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+}
+.gc-sign {
+  font-family: var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.gc-reason {
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.gc-problem {
+  margin: 0;
+  font-size: var(--mega-text-xs);
+}

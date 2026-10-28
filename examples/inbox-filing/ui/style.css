@@ -1,0 +1,235 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.if-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.if-pad > .mx-details > summary {
+  gap: var(--mega-space-3);
+}
+.if-items-field .mx-select {
+  min-width: 16rem;
+}
+.if-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.if-empty[hidden],
+#verdict[hidden],
+#tree-box[hidden] {
+  display: none;
+}
+.if-meaning {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.if-usage {
+  margin: 0;
+}
+
+/* The table: one row per item, one narrow column per check. */
+.if-table td {
+  vertical-align: top;
+}
+.if-table th.if-mark {
+  white-space: normal;
+  text-align: center;
+  width: 4.5rem;
+  padding-left: var(--mega-space-1);
+  padding-right: var(--mega-space-1);
+}
+.if-table td.if-mark {
+  text-align: center;
+  font-weight: 600;
+  padding-left: var(--mega-space-1);
+  padding-right: var(--mega-space-1);
+}
+.if-item-cell {
+  min-width: 10rem;
+}
+.if-expected {
+  min-width: 9rem;
+}
+.if-taken {
+  min-width: 13rem;
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-2xs);
+}
+.if-taken > div {
+  padding-left: 1.4em;
+  text-indent: -1.4em;
+}
+.if-sign {
+  display: inline-block;
+  width: 1.4em;
+  text-indent: 0;
+  color: var(--mega-ink-muted);
+}
+.if-taken div + div {
+  margin-top: var(--mega-space-1);
+}
+.if-table tr.if-missed td:first-child {
+  box-shadow: inset 3px 0 0 var(--mega-red);
+}
+.if-pulse {
+  animation: if-pulse 1.2s ease-in-out infinite;
+}
+@keyframes if-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.if-checks {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--mega-space-2) var(--mega-space-4);
+  font-size: var(--mega-text-sm);
+}
+.if-checks dt {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.if-checks dd {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+
+/* The tree: one line per note, the mark in its own column. */
+.if-tree {
+  list-style: none;
+  margin: 0;
+  padding: var(--mega-space-3) var(--mega-space-4);
+  border: 1px solid var(--mega-line);
+  display: grid;
+  gap: 0.15rem;
+}
+.if-tree li {
+  display: grid;
+  grid-template-columns: 6.5rem max-content 1fr;
+  gap: var(--mega-space-3);
+  align-items: baseline;
+  font-size: var(--mega-text-sm);
+}
+.if-tree li code {
+  color: var(--mega-ink-muted);
+}
+.if-tree-mark {
+  font: 400 var(--mega-text-2xs) / 1.4 var(--mega-ui-mono);
+}
+.if-tree li.is-new .if-tree-mark,
+.if-tree li.is-new code {
+  color: var(--mx-ok);
+}
+.if-tree li.is-changed .if-tree-mark,
+.if-tree li.is-changed code,
+.if-tree li.is-moved .if-tree-mark,
+.if-tree li.is-moved code {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+@media (max-width: 40rem) {
+  .if-tree li {
+    grid-template-columns: 5.5rem 1fr;
+  }
+  .if-tree li > span:last-child {
+    grid-column: 2;
+  }
+}
+
+/* Item cards. */
+.if-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+}
+.if-card-title {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.if-item {
+  margin: 0;
+  padding: var(--mega-space-3) var(--mega-space-4);
+  background: var(--mega-surface);
+  border-left: 3px solid var(--mega-line-strong);
+  font: 400 var(--mega-text-xs) / 1.5 var(--mega-ui-mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--mega-ink-body);
+}
+.if-failed {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+}
+.if-agent {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.if-agent .mx-output {
+  margin: 0;
+}
+.if-nochange {
+  margin: 0;
+}
+.if-change > summary {
+  flex-wrap: wrap;
+}
+.if-change > summary code {
+  overflow-wrap: anywhere;
+}
+.if-diff {
+  margin: 0;
+  padding: var(--mega-space-3) 0;
+  border-top: 1px solid var(--mega-line);
+  background: var(--mega-plate-well);
+  font: 400 var(--mega-text-xs) / 1.55 var(--mega-ui-mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 26rem;
+  overflow-y: auto;
+  color: var(--mega-ink-muted);
+}
+.if-diff span {
+  display: block;
+  padding: 0 var(--mega-space-4);
+  padding-left: calc(var(--mega-space-4) + 2ch);
+  text-indent: -2ch;
+}
+.if-diff .is-add {
+  color: var(--mega-ink);
+  background: color-mix(in srgb, var(--mx-ok) 16%, transparent);
+}
+.if-diff .is-del {
+  color: var(--mega-ink-body);
+  background: color-mix(in srgb, var(--mega-red) 13%, transparent);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--mega-red) 55%, transparent);
+}
+.if-relink .if-diff {
+  border: 1px solid var(--mega-line);
+}
+.if-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.if-call {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.if-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.if-call code {
+  overflow-wrap: anywhere;
+  font-size: var(--mega-text-xs);
+}
+.if-call .mx-code pre {
+  max-height: 14rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}

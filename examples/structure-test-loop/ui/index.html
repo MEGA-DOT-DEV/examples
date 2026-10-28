@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Structure test loop</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">Test a structure until it is good enough</h2>
+      <p>A designer agent files <span id="item-count"></span> raw items into folders. A separate tester agent checks the folder structure.</p>
+    </section>
+
+    <section class="mx-callout" aria-label="Good enough">
+      <span class="mx-label">Good enough</span>
+      <p class="stl-bar" id="bar"></p>
+      <p class="mx-small mx-muted">The tester sees only map.md and the file paths, never the notes. One right place per task. The designer gets the same definition.</p>
+      <details class="mx-details">
+        <summary><span class="mx-label">Tasks</span><span class="mx-small mx-muted" id="tasks-size"></span></summary>
+        <div class="mx-table-wrap stl-pad">
+          <table class="mx-table">
+            <thead><tr><th>Task</th><th>What the tester reads</th><th>The right place</th></tr></thead>
+            <tbody id="tasks"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="stl-modes" id="mode-list"></div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-small mx-muted">runs per mode</span></summary>
+        <div class="mx-fields stl-pad">
+          <div class="mx-field">
+            <span class="mx-label">Runs per mode</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per mode"></div>
+            <span class="mx-hint">Scores change from run to run. Compare several runs.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run all modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <p class="stl-empty" id="empty"></p>
+
+    <section class="mx-stack" id="verdict" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Measured score</h2>
+        <p id="verdict-note"></p>
+      </div>
+      <div class="mx-readouts stl-readouts" id="readouts"></div>
+      <p class="stl-meaning" id="meaning"></p>
+      <details class="mx-details">
+        <summary><span class="mx-label">Requests, tokens and cost</span><span class="mx-small mx-muted" id="usage-size"></span></summary>
+        <div class="mx-table-wrap stl-pad">
+          <table class="mx-table">
+            <thead><tr><th>Mode</th><th>Score per round</th><th class="num">Requests</th><th>Tokens and cost</th><th class="num">Time</th></tr></thead>
+            <tbody id="modes"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="mx-stack" id="build" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">How the structure was built</h2>
+        <p>Pick a mode and a round. Blue marks what the designer changed in that round. Green and red mark the tester's checks.</p>
+      </div>
+      <div class="stl-nav">
+        <div class="mx-seg stl-tabs" id="mode-tabs" role="group" aria-label="Mode"></div>
+        <div class="mx-seg stl-tabs" id="run-tabs" role="group" aria-label="Run"></div>
+      </div>
+      <div class="mx-stack" id="view"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Items and instructions</h2>
+        <p>The same in every mode and every run.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Raw items</span><span class="mx-small mx-muted" id="items-size"></span></summary>
+        <ol class="stl-items" id="items"></ol>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions</span><span class="mx-small mx-muted">3 texts · designer, self-rating, tester</span></summary>
+        <div class="mx-stack stl-pad" id="instructions"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

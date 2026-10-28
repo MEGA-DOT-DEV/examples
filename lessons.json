@@ -41,6 +41,24 @@
         "silent-context-loss",
         "context-self-report"
       ]
+    },
+    {
+      "episode": "S01E03",
+      "title": "Building Knowledge Systems",
+      "items": [
+        "unreached-notes",
+        "hybrid-search",
+        "file-picker",
+        "inbox-filing",
+        "knowledge-health-check",
+        "task-board-context",
+        "summary-index",
+        "guided-components",
+        "image-sidecar-notes",
+        "structure-test-loop",
+        "cleanup-routine-drift",
+        "pointer-notes"
+      ]
     }
   ]
 }

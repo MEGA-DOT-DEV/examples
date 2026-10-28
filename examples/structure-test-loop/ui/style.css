@@ -1,0 +1,290 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.stl-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.stl-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.stl-meaning,
+.stl-story {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.stl-meaning:empty {
+  display: none;
+}
+.stl-mono {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-sm);
+  white-space: nowrap;
+}
+
+/* What the designer changed is blue. The tester's checks are green (right) and red (wrong). */
+:root {
+  --stl-change: var(--mega-blue-text);
+}
+[data-theme="light"] {
+  --stl-change: var(--mega-blue);
+}
+
+/* Good enough: the bar, before the run. */
+.stl-bar {
+  font-size: var(--mega-text-lg);
+}
+.stl-bar b {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+
+/* What each mode does: three short lines. */
+.stl-modes {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.stl-mode {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  align-items: baseline;
+}
+.stl-mode b {
+  font: 500 var(--mega-text-sm) / 1.35 var(--mega-sans);
+  color: var(--mega-ink);
+}
+
+.stl-items {
+  margin: 0;
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  list-style: none;
+  display: grid;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+}
+.stl-items li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--mega-space-2);
+}
+
+/* Under each score: good enough or not, and what the self-rated designer said. The scores stay on one line. */
+.stl-readouts .mx-readout {
+  align-content: start;
+}
+.stl-note {
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}
+.stl-note.mx-good {
+  color: var(--mx-ok);
+}
+.stl-claim {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+
+/* Mode, run and round tabs. A label never wraps. */
+.stl-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-3);
+}
+.stl-tabs button {
+  white-space: nowrap;
+}
+/* Rounds in order: one button each, joined by arrows. */
+.stl-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mega-space-2);
+}
+.stl-arrow {
+  color: var(--mega-ink-muted);
+  font-family: var(--mega-ui-mono);
+}
+.stl-errors {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+/* A round: the folder tree, and the tester's checks beside it. */
+.stl-round {
+  display: grid;
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+@media (min-width: 56rem) {
+  .stl-round {
+    grid-template-columns: minmax(0, 3fr) minmax(15rem, 2fr);
+  }
+}
+
+.stl-tree-box {
+  border: 1px solid var(--mega-line);
+  background: var(--mega-surface);
+  padding: var(--mega-space-3);
+  display: grid;
+  gap: var(--mega-space-3);
+  overflow-x: auto;
+}
+.stl-tree,
+.stl-tree ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.stl-tree ul {
+  margin-left: 0.4rem;
+  padding-left: 0.8rem;
+  border-left: 1px solid var(--mega-line);
+}
+/* A row: the fold arrow, the name with its change note (they wrap), and the marks at the right. */
+.stl-row {
+  display: grid;
+  grid-template-columns: 1ch minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  padding: 0.05rem 0.3rem;
+  font: 400 var(--mega-text-xs) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink-body);
+}
+.stl-row::before {
+  content: "";
+  grid-column: 1;
+  color: var(--mega-ink-muted);
+}
+.stl-label {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--mega-space-2);
+  overflow-wrap: anywhere;
+}
+summary.stl-row {
+  cursor: pointer;
+  list-style: none;
+}
+summary.stl-row::-webkit-details-marker {
+  display: none;
+}
+details[open] > summary.stl-row::before {
+  content: "▾";
+}
+details:not([open]) > summary.stl-row::before {
+  content: "▸";
+}
+.stl-row.is-folder .stl-name {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+
+/* A changed row: a blue tint and a blue note. */
+.stl-row.is-new,
+.stl-row.is-renamed,
+.stl-row.is-moved,
+.stl-row.is-edited {
+  background: color-mix(in srgb, var(--stl-change) 13%, transparent);
+}
+.stl-change {
+  color: var(--stl-change);
+  font-size: var(--mega-text-2xs);
+}
+/* Not in this structure: a removed folder is struck through; a path that the tester made up has a dashed frame. */
+.stl-row.is-ghost .stl-name {
+  color: var(--mega-ink-muted);
+}
+.stl-row.is-removed .stl-name {
+  text-decoration: line-through;
+}
+.stl-row.is-ghost:not(.is-removed) {
+  outline: 1px dashed var(--mega-line-strong);
+  outline-offset: -1px;
+}
+.stl-row.is-ghost:not(.is-removed) .stl-change {
+  color: var(--mega-ink-muted);
+}
+
+/* The tester's marks: solid green right, dashed red wrong, a green outline for the right place it missed. */
+.stl-marks {
+  grid-column: 3;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 0.25rem;
+}
+.stl-mark {
+  display: inline-block;
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  padding: 0.2rem 0.35rem;
+  border: 1px solid;
+  white-space: nowrap;
+  cursor: default;
+}
+.stl-mark.is-hit {
+  border-color: var(--mx-ok);
+  background: color-mix(in srgb, var(--mx-ok) 22%, transparent);
+  color: var(--mega-ink);
+}
+.stl-mark.is-answer {
+  border-style: dashed;
+  border-color: var(--mega-accent-ink);
+  color: var(--mega-accent-ink);
+}
+.stl-mark.is-right {
+  border-color: var(--mx-ok);
+  color: var(--mx-ok);
+}
+.stl-legend {
+  margin: 0;
+  padding-top: var(--mega-space-3);
+  border-top: 1px solid var(--mega-line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-1) var(--mega-space-4);
+  font-size: var(--mega-text-2xs);
+  color: var(--mega-ink-muted);
+}
+
+/* Hover a task: its marks and its line stand out, the other marks fade. */
+.stl-round.has-focus .stl-tree .stl-mark:not(.is-focus) {
+  opacity: 0.25;
+}
+.stl-mark.is-focus {
+  box-shadow: 0 0 0 1px currentColor;
+}
+.stl-checks li.is-focus {
+  background: var(--mega-surface-2);
+}
+
+.stl-checks-box {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.stl-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.1rem;
+  font-size: var(--mega-text-sm);
+}
+.stl-checks li {
+  display: grid;
+  grid-template-columns: 1rem 2.2rem minmax(0, 1fr);
+  gap: var(--mega-space-2);
+  align-items: baseline;
+  padding: 0.25rem 0.4rem;
+  cursor: default;
+}
+.stl-checks code {
+  font-size: var(--mega-text-2xs);
+  color: var(--mega-ink-muted);
+}
+.stl-why {
+  display: block;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}

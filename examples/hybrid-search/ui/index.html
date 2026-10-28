@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hybrid search</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">No search method wins every query</h2>
+      <p id="lead"></p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-field">
+        <label class="mx-label" for="query">Your own query (optional)</label>
+        <input id="query" class="mx-input" spellcheck="false" maxlength="300" placeholder="Who leads Kettlewisp?">
+        <span class="mx-hint">It has no answer key, so the page shows its rankings but does not score it.</span>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-muted">split long notes</span></summary>
+        <div class="mx-field hs-pad">
+          <label class="mx-check"><input type="checkbox" id="split"> Split long notes into paragraphs</label>
+          <span class="mx-hint" id="split-hint"></span>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run 5 queries</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <div class="hs-empty" id="empty">
+      <p id="empty-text"></p>
+      <ol class="hs-queries" id="queries"></ol>
+    </div>
+
+    <section class="mx-stack" id="results" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Which method puts a relevant note first?</h2>
+        <p>Each number is the rank of the first relevant note in that method's list. A method wins a query when the rank is 1.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table hs-board">
+          <thead><tr><th>Query</th><th class="num">Keyword</th><th class="num">Semantic</th><th class="num">Hybrid</th></tr></thead>
+          <tbody id="board"></tbody>
+          <tfoot id="wins"></tfoot>
+        </table>
+      </div>
+      <p class="hs-meaning" id="meaning"></p>
+
+      <div class="mx-section-head hs-gap">
+        <h2 class="mx-h3">The top 5 of each method</h2>
+        <p>Pick a query. Every query is already ranked, so this sends no request.</p>
+      </div>
+      <div class="mx-seg hs-presets" id="presets" role="group" aria-label="Query to show"></div>
+      <p class="hs-query" id="query-about"></p>
+      <div class="hs-columns" id="columns"></div>
+
+      <p class="mx-small mx-muted" id="meta"></p>
+      <details class="mx-details">
+        <summary><span class="mx-label">Requests and responses</span> <span class="mx-muted" id="raw-count"></span></summary>
+        <div class="mx-stack hs-pad" id="raw"></div>
+      </details>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">The wiki</span> <span class="mx-muted" id="notes-count"></span></summary>
+      <ol class="hs-notes" id="notes"></ol>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

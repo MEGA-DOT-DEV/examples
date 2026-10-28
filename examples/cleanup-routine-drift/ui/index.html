@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cleanup routine drift</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">Checked edits keep facts that rewrites lose</h2>
+      <p>Each night a model tidies a team wiki with no review, and code counts the facts that are left.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="cr-modes" id="mode-list"></div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-small mx-muted">nights, reasoning effort</span></summary>
+        <div class="mx-fields cr-pad">
+          <div class="mx-field">
+            <span class="mx-label">Nights</span>
+            <div class="mx-seg" id="nights" role="group" aria-label="Nights"></div>
+            <span class="mx-hint">Each night starts from the wiki that the night before left.</span>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+            <span class="mx-hint">None is the cheap setting. Low fails fewer nights.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run both modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <p class="cr-empty" id="empty"></p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-stack" id="verdict">
+        <div class="mx-readouts" id="readouts"></div>
+        <p class="cr-meaning" id="meaning"></p>
+      </div>
+      <div class="cr-tables" id="tables"></div>
+      <p class="mx-small mx-muted">A fact counts as kept when its value is still anywhere in the wiki, in any note. This measure of loss is lenient.</p>
+      <p class="mx-small mx-muted cr-total" id="total"></p>
+    </section>
+
+    <section class="mx-stack" id="nights-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What each night did</h2>
+        <p>Each card shows the lost facts, the deleted notes and the skipped edits of one night.</p>
+      </div>
+      <div class="cr-nights" id="night-cards"></div>
+    </section>
+
+    <section class="mx-stack" aria-label="The wiki and the instructions">
+      <details class="mx-details">
+        <summary><span class="mx-label">Tracked facts</span> <span class="mx-small mx-muted" id="facts-size"></span></summary>
+        <div class="mx-table-wrap cr-pad">
+          <table class="mx-table">
+            <thead><tr><th>Value</th><th>What it is</th><th>Note at the start</th></tr></thead>
+            <tbody id="facts"></tbody>
+          </table>
+        </div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">The wiki before night 1</span> <span class="mx-small mx-muted" id="wiki-size"></span></summary>
+        <div class="mx-stack cr-pad" id="wiki"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and answer formats</span> <span class="mx-small mx-muted">2 modes, the same task</span></summary>
+        <div class="mx-stack cr-pad" id="formats"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

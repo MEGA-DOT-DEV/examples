@@ -1,0 +1,251 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.un-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.un-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.un-meaning {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.un-meaning:empty,
+.un-total:empty {
+  display: none;
+}
+.un-total {
+  margin: 0;
+}
+.un-path {
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  white-space: nowrap;
+}
+
+/* What each mode gets: three short lines. */
+.un-modes {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.un-mode {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  align-items: baseline;
+}
+.un-mode b {
+  font: 500 var(--mega-text-sm) / 1.35 var(--mega-sans);
+  color: var(--mega-ink);
+}
+
+/* ── The reach map: the lesson's figure, one per mode ── */
+.un-maps {
+  gap: var(--mega-space-5);
+}
+.un-map {
+  display: grid;
+  gap: var(--mega-space-4);
+  padding: var(--mega-space-6) var(--mega-space-6) var(--mega-space-5);
+}
+.un-band {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.un-band-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-3);
+}
+.un-band p {
+  margin: 0;
+}
+/* As in the figure: a dashed rule above the notes the agent never reached. */
+.un-band.is-never {
+  border-top: 1px dashed var(--mega-line-strong);
+  padding-top: var(--mega-space-4);
+}
+.un-notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--mega-space-2);
+}
+
+.un-note {
+  display: grid;
+  gap: 0.15rem;
+  align-content: start;
+  border: 1px solid var(--mega-ink);
+  background: var(--mega-plate);
+  padding: var(--mega-space-2) var(--mega-space-3);
+}
+.un-note-title {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.un-note-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--mega-space-2);
+  font: 400 var(--mega-text-2xs) / 1.3 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.un-note-meta b {
+  font-weight: 500;
+  color: var(--mega-ink);
+}
+/* Read: the accent, as the matched note in the figure. */
+.un-note.is-read {
+  border-color: var(--mega-red);
+}
+/* Seen by name, not read: a quiet solid border. */
+.un-note.is-seen {
+  border-color: var(--mega-line-strong);
+}
+.un-note.is-seen .un-note-title {
+  font-weight: 400;
+}
+/* Never reached: dashed and dimmed. */
+.un-band.is-never .un-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-2);
+}
+.un-note.is-never {
+  border: 1px dashed var(--mega-line-strong);
+  background: transparent;
+  padding: 0.2rem var(--mega-space-2);
+}
+.un-note.is-never .un-note-title {
+  font-weight: 400;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}
+.un-note.is-never .un-note-meta {
+  display: none;
+}
+.un-note.is-never:not(.is-fact) {
+  opacity: 0.7;
+}
+/* A note that holds must-know facts. */
+.un-fact {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.4rem;
+  vertical-align: 0.1em;
+  background: var(--mega-red);
+}
+
+/* ── Answers: one column per mode, run N of every mode in one row ── */
+.un-answers {
+  display: grid;
+  gap: var(--mega-space-5);
+  align-items: start;
+}
+.un-col {
+  display: grid;
+  gap: var(--mega-space-3);
+}
+@media (min-width: 60rem) {
+  .un-answers {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--mega-space-3) var(--mega-space-4);
+  }
+  .un-col {
+    display: contents;
+  }
+  .un-col:nth-child(1) > * {
+    grid-column: 1;
+  }
+  .un-col:nth-child(2) > * {
+    grid-column: 2;
+  }
+  .un-col:nth-child(3) > * {
+    grid-column: 3;
+  }
+  .un-col:nth-child(4) > * {
+    grid-column: 4;
+  }
+  .un-col-head {
+    grid-row: 1;
+    align-self: start;
+  }
+  .un-slot {
+    grid-row: var(--row, 2);
+  }
+}
+.un-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  align-content: start;
+  height: 100%;
+}
+.un-card p {
+  margin: 0;
+}
+.un-run {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.un-card > .mx-spread b {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-ui-mono);
+}
+.un-answer {
+  font-size: var(--mega-text-sm);
+  line-height: 1.6;
+}
+.un-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--mega-text-xs);
+}
+.un-checks li {
+  display: grid;
+  grid-template-columns: 1.1rem minmax(0, 1fr);
+}
+.un-checks .is-miss > span:last-child {
+  color: var(--mega-ink-muted);
+}
+
+.un-steps {
+  margin: 0;
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+  list-style: none;
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.un-call {
+  border: 1px solid var(--mega-line);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.un-call.is-error {
+  border-color: var(--mega-accent-ink);
+}
+.un-call-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+}
+.un-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.un-call .mx-code {
+  border-width: 1px 0 0;
+}
+.un-call .mx-code pre {
+  max-height: 14rem;
+  overflow: auto;
+}

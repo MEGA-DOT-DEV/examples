@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unreached notes</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">A map leads the agent to unreached notes</h2>
+      <p>An agent answers one question about a team wiki of <span id="note-count"></span> notes, in four modes.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <span class="mx-label">Question</span>
+          <div class="mx-seg" id="questions" role="group" aria-label="Question"></div>
+          <span class="mx-hint" id="question-hint"></span>
+        </div>
+      </div>
+      <div class="un-modes" id="mode-list"></div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-small mx-muted">runs per mode</span></summary>
+        <div class="mx-fields un-pad">
+          <div class="mx-field">
+            <span class="mx-label">Runs per mode</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per mode"></div>
+            <span class="mx-hint">Agents vary. More runs give a fairer comparison.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run all modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+    <p class="un-empty" id="empty"></p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Facts in the answers</h2>
+        <p>A fact counts when the answer names its exact value, for example “Tuesday and Thursday”.</p>
+      </div>
+      <div class="mx-stack" id="verdict">
+        <div class="mx-readouts" id="readouts"></div>
+        <p class="un-meaning" id="meaning"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table un-facts">
+          <thead id="facts-head"></thead>
+          <tbody id="facts"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted un-total" id="total"></p>
+    </section>
+
+    <section class="mx-stack" id="reach" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What the agent reached</h2>
+        <p>Each box is one note, in the band that the agent reached in any run. A red square marks a note with required facts.</p>
+      </div>
+      <div class="mx-stack un-maps" id="maps"></div>
+    </section>
+
+    <section class="mx-stack" id="answers-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Answers</h2>
+        <p>Each run's answer, with the facts that code found in it. The tool calls are folded.</p>
+      </div>
+      <div class="un-answers" id="answers"></div>
+    </section>
+
+    <section class="mx-stack" aria-label="Reference">
+      <details class="mx-details">
+        <summary><span class="mx-label">The map</span> <span class="mx-small mx-muted" id="map-size"></span></summary>
+        <div id="map"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span> <span class="mx-small mx-muted" id="tools-size"></span></summary>
+        <div id="tools"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

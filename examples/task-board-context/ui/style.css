@@ -1,0 +1,208 @@
+/* Styles for this page only. Shared components come from /kit/kit.css. */
+
+/* The board: four columns, as in the lesson's figure. */
+.tb-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  border: 1px solid var(--mega-line);
+}
+.tb-column {
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  min-width: 0;
+}
+.tb-column + .tb-column {
+  border-left: 1px solid var(--mega-line);
+}
+.tb-column-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--mega-space-2);
+  min-height: 1.25rem;
+}
+.tb-column.is-active {
+  box-shadow: inset 0 3px 0 var(--mega-red);
+}
+.tb-column.is-off .tb-note-card {
+  opacity: 0.4;
+}
+.tb-tag {
+  color: var(--mega-accent-ink);
+  font-size: var(--mega-text-xs);
+  line-height: 1;
+}
+.tb-note-card {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.tb-note-title {
+  font: 500 var(--mega-text-base) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.tb-path {
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  overflow-wrap: anywhere;
+}
+.tb-note-card > .tb-note-body,
+.tb-note-list {
+  margin-top: var(--mega-space-2);
+}
+.tb-note-body {
+  font-size: var(--mega-text-sm);
+  line-height: 1.55;
+}
+.tb-note-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.tb-note-list li {
+  position: relative;
+  padding-left: var(--mega-space-3);
+}
+.tb-note-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.3rem;
+  height: 1px;
+  background: var(--mega-ink-muted);
+}
+
+.tb-request {
+  margin: 0;
+}
+.tb-columns {
+  gap: var(--mega-space-4);
+}
+
+.tb-empty {
+  margin: 0;
+  color: var(--mega-ink-muted);
+}
+.tb-meaning {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 70ch;
+}
+.tb-note {
+  margin: 0;
+}
+.tb-note:empty {
+  display: none;
+}
+.tb-table td {
+  vertical-align: top;
+}
+
+/* The two modes stacked on a narrow screen. */
+.tb-modes {
+  display: grid;
+  gap: var(--mega-space-5);
+  align-items: start;
+}
+
+/* Wide: one shared grid, one row per run, so run N of both modes sit side by side. */
+@media (min-width: 46rem) {
+  .tb-modes {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--mega-space-4) var(--mega-space-5);
+  }
+  .tb-col,
+  .tb-cards {
+    display: contents;
+  }
+  .tb-col--a > *,
+  .tb-col--a .tb-cards > * {
+    grid-column: 1;
+  }
+  .tb-col--b > *,
+  .tb-col--b .tb-cards > * {
+    grid-column: 2;
+  }
+  .tb-sub {
+    grid-row: 1;
+    align-self: end;
+  }
+  .tb-cards > * {
+    grid-row: var(--row, 2);
+  }
+}
+
+.tb-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  min-width: 0;
+  align-self: stretch;
+  align-content: start;
+}
+.tb-card p {
+  margin: 0;
+}
+.tb-body {
+  display: grid;
+  gap: var(--mega-space-4);
+  min-width: 0;
+}
+.tb-run {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.tb-score {
+  font-size: var(--mega-text-sm);
+  font-weight: 600;
+}
+.tb-design {
+  font-size: var(--mega-text-sm);
+}
+
+/* The checks under each design: a mark, the check, and the text that decided it. */
+.tb-checks {
+  list-style: none;
+  margin: 0;
+  padding: var(--mega-space-3) 0 0;
+  border-top: 1px solid var(--mega-line);
+  display: grid;
+  gap: var(--mega-space-2);
+  font-size: var(--mega-text-sm);
+}
+.tb-checks li {
+  display: grid;
+  grid-template-columns: 1.2rem minmax(0, 1fr);
+  gap: var(--mega-space-1);
+}
+.tb-checks li > span {
+  font-weight: 700;
+}
+.tb-check-label {
+  display: block;
+  color: var(--mega-ink);
+}
+.tb-evidence {
+  color: var(--mega-ink-muted);
+  font-size: var(--mega-text-xs);
+  line-height: 1.5;
+}
+.tb-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+.tb-raw > summary {
+  flex-wrap: wrap;
+}
+.tb-raw > summary .mx-label {
+  white-space: nowrap;
+}
+.tb-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}

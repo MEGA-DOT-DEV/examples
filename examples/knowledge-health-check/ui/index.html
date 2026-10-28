@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knowledge health check</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">A script checks every fix the model proposes</h2>
+      <p>A script finds the mechanical problems in a wiki, and a model finds the problems of meaning.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <details class="mx-details">
+        <summary><span class="mx-label">Advanced</span> <span class="mx-muted mx-small">runs, reasoning effort</span></summary>
+        <div class="mx-fields hc-pad">
+          <div class="mx-field">
+            <span class="mx-label">Runs</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs"></div>
+            <span class="mx-hint">The model finds different problems in each run.</span>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+            <span class="mx-hint">Medium is the default. A nightly routine can use none, the cheap setting.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run the health check</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p class="mx-plate hc-empty" id="empty"></p>
+
+    <section class="mx-stack" id="result" hidden>
+      <div class="mx-readouts" id="verdict"></div>
+      <p class="mx-small mx-muted hc-total" id="total"></p>
+      <p class="hc-meaning" id="meaning"></p>
+      <div class="mx-table-wrap">
+        <table class="mx-table hc-table">
+          <thead><tr><th>Seeded problem</th><th>Notes</th><th>What is wrong</th><th>Found by</th></tr></thead>
+          <tbody id="seeded"></tbody>
+        </table>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Script findings</span><span class="mx-muted mx-small" id="script-note"></span></summary>
+        <ul class="hc-problems" id="problems"></ul>
+      </details>
+    </section>
+
+    <section class="mx-stack" id="review-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Model findings and guard verdicts</h2>
+        <p>The guard applies each fix to a copy of the wiki and runs the script again. It checks mechanics, not facts.</p>
+      </div>
+      <div class="mx-stack" id="runs-out"></div>
+    </section>
+
+    <details class="mx-details">
+      <summary><span class="mx-label">The wiki</span><span class="mx-muted mx-small" id="base-note"></span></summary>
+      <div class="hc-pad hc-notes" id="notes"></div>
+    </details>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
