@@ -78,3 +78,7 @@
 #notice:empty {
   display: none;
 }
+/* The decoded text can be as long as the input. Let it wrap. */
+.tk-decoded {
+  overflow-wrap: anywhere;
+}

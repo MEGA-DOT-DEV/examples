@@ -85,10 +85,13 @@ function renderTokens(result) {
 const plural = (n, word) =>
   `${n.toLocaleString('en-US')} ${word}${n === 1 ? '' : 's'}`
 
-// The finding first: how many tokens this text takes, and whether the IDs decode back to it.
+// The finding first: how many tokens this text takes, and the text that
+// the IDs decode to. Seeing that text proves the round trip.
 function headline(result) {
   if (!result.characters) {
-    return 'Type a sentence. The page counts the tokens as you type. It runs locally and costs nothing.'
+    return [
+      'Type a sentence. The page counts the tokens as you type. It runs locally and costs nothing.',
+    ]
   }
 
   // Bytes matter only when a character takes more than one byte (Polish, emoji, Japanese).
@@ -96,15 +99,23 @@ function headline(result) {
     result.bytes === result.characters
       ? ''
       : ` (${plural(result.bytes, 'byte')})`
+  const characters = plural(result.characters, 'character')
+  const tokens = plural(result.ids.length, 'token')
   const back = result.roundTrip
-    ? 'Decoding the IDs gives back the same text.'
-    : 'Decoding the IDs does not give back the same text.'
+    ? 'Decoding the IDs gives back the same text: '
+    : 'Decoding the IDs does not give back the same text: '
+  const decoded = el(
+    'code',
+    { class: 'tk-decoded' },
+    JSON.stringify(result.decoded),
+  )
 
-  return `${plural(result.characters, 'character')}${bytes} → ${plural(result.ids.length, 'token')}. ${back}`
+  return [`${characters}${bytes} → ${tokens}.`, el('br'), back, decoded]
 }
 
 function render(result) {
-  document.getElementById('headline-text').textContent = headline(result)
+  const resultText = document.getElementById('headline-text')
+  resultText.replaceChildren(...headline(result))
   document.getElementById('used-by').textContent = `Used by ${result.usedBy}.`
   renderTokens(result)
 
