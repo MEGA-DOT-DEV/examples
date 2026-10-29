@@ -1,0 +1,105 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.se-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.se-edit {
+  gap: var(--mega-space-2);
+}
+.se-text {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 72ch;
+}
+.se-rules {
+  margin: 0;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: 0.2rem;
+  color: var(--mega-ink-body);
+}
+.se-rules b {
+  color: var(--mega-ink);
+}
+.se-note {
+  margin: 0;
+}
+.se-note:empty {
+  display: none;
+}
+
+.se-table td {
+  vertical-align: top;
+}
+.se-ticket {
+  min-width: 16rem;
+  max-width: 34rem;
+}
+.se-ticket b {
+  color: var(--mega-ink);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.se-ticket p {
+  margin: 0.2rem 0 0;
+  color: var(--mega-ink-body);
+}
+.se-nowrap {
+  white-space: nowrap;
+}
+/* The hand-picked row and the total row stand apart from the categories. */
+.se-split + tr td,
+tr + .se-split td {
+  border-top: 1px solid var(--mega-line-strong);
+}
+.se-big {
+  font: 500 var(--mega-text-lg) / 1.2 var(--mega-ui-mono);
+  color: var(--mega-ink);
+  white-space: nowrap;
+}
+/* A rate that got worse or better than in version 1. */
+td.is-worse .se-big {
+  color: var(--mega-accent-ink);
+}
+td.is-better .se-big {
+  color: var(--mx-ok);
+}
+.se-rejected {
+  margin-top: 0.3rem;
+  color: var(--mega-ink-muted);
+}
+.se-flat {
+  border-width: 1px 0 0;
+}
+
+/* One chip per run: green when it matches the policy, red when it does not. */
+.se-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.se-chip {
+  display: inline-block;
+  padding: 0 0.4rem;
+  border: 1px solid var(--mega-line-strong);
+  font: 400 var(--mega-text-xs) / 1.6 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+  white-space: nowrap;
+  cursor: default;
+}
+.se-chip.is-pass {
+  color: var(--mx-ok);
+  border-color: var(--mx-ok);
+}
+.se-chip.is-fail {
+  color: var(--mega-accent-ink);
+  border-color: var(--mega-accent-ink);
+  font-weight: 600;
+}
+.se-pulse {
+  animation: se-pulse 1.2s ease-in-out infinite;
+}
+@keyframes se-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}

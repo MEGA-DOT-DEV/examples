@@ -1,0 +1,178 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.sv-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.sv-line {
+  margin: 0;
+}
+#empty[hidden],
+#result[hidden],
+#pick-box[hidden] {
+  display: none;
+}
+
+/* Ola's report. */
+.sv-report {
+  margin: 0;
+  display: grid;
+  gap: var(--mega-space-1);
+  border-left: 4px solid var(--mega-line-strong);
+  padding: var(--mega-space-2) var(--mega-space-4);
+  background: var(--mega-surface);
+}
+.sv-report p {
+  margin: 0;
+  color: var(--mega-ink);
+}
+
+/* Small titles inside a block: never wrap. */
+.sv-block {
+  gap: var(--mega-space-2);
+  min-width: 0;
+}
+.sv-sub {
+  color: var(--mega-ink);
+  font-size: var(--mega-text-sm);
+  white-space: nowrap;
+}
+.sv-sub-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+}
+.sv-sub-row code {
+  overflow-wrap: anywhere;
+}
+.sv-file {
+  gap: var(--mega-space-1);
+  min-width: 0;
+}
+
+/* Ola's screen: as wide as its text, the wrong books in red. */
+.sv-screen-wrap {
+  width: fit-content;
+  max-width: 100%;
+}
+.sv-screen th,
+.sv-screen td {
+  white-space: nowrap;
+}
+.sv-screen tr.is-wrong td:nth-child(-n + 2) {
+  color: var(--mega-accent-ink);
+}
+
+/* Two columns, one per agent. Each has four parts (head, steps, Ola's screen,
+   requests) on the rows of the outer grid, so the screens line up. */
+.sv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+.sv-col {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  align-items: start;
+  min-width: 0;
+  border-top: 2px solid var(--mega-line-strong);
+  padding-top: var(--mega-space-3);
+}
+.sv-body {
+  gap: var(--mega-space-4);
+  min-width: 0;
+}
+.sv-col-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  white-space: nowrap;
+}
+.sv-col-head b {
+  color: var(--mega-ink);
+}
+
+/* The steps, in plain words, with the screens the agent saw. */
+.sv-steps {
+  margin: 0;
+  padding-left: 1.5rem;
+  display: grid;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.sv-steps li.is-bad > span {
+  color: var(--mega-accent-ink);
+}
+.sv-steps code {
+  overflow-wrap: anywhere;
+}
+.sv-app {
+  margin: var(--mega-space-1) 0 var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  border-left: 3px solid var(--mega-line-strong);
+  background: var(--mega-surface);
+  font: 400 var(--mega-text-xs) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink);
+  overflow-x: auto;
+}
+
+.sv-note {
+  margin: 0;
+  color: var(--mega-ink);
+}
+.sv-words {
+  display: grid;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.sv-said {
+  border-left: 3px solid var(--mega-line-strong);
+  padding-left: var(--mega-space-3);
+  color: var(--mega-ink);
+}
+.sv-said p {
+  margin: 0;
+}
+
+/* Requests, in the fold. */
+.sv-col details.mx-details > summary {
+  flex-wrap: wrap;
+  row-gap: var(--mega-space-1);
+}
+.sv-col details.mx-details > summary .mx-label {
+  white-space: nowrap;
+}
+.sv-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.sv-call {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.sv-call-name {
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.sv-call .mx-code pre {
+  max-height: 12rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.sv-pulse {
+  animation: sv-pulse 1.2s ease-in-out infinite;
+}
+@keyframes sv-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-pulse {
+    animation: none;
+  }
+}

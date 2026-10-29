@@ -1,0 +1,236 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.pb-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.pb-task {
+  margin: var(--mega-space-1) 0 0;
+  color: var(--mega-ink-body);
+}
+.pb-task-setup {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.pb-task-setup .pb-task {
+  margin: 0;
+}
+.pb-task-setup + .pb-task-setup {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.pb-tools td {
+  vertical-align: top;
+}
+
+/* The result: one block per scenario, one row per mode. Labels never wrap; whole chips move to the next row. */
+.pb-note {
+  margin: 0;
+}
+.pb-note:empty {
+  display: none;
+}
+.pb-scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-4);
+}
+.pb-scenario {
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-4);
+  padding: var(--mega-space-4);
+}
+.pb-mode-result {
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.pb-mode-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--mega-space-1) var(--mega-space-3);
+}
+.pb-mode {
+  white-space: nowrap;
+  color: var(--mega-ink);
+}
+.pb-count {
+  white-space: nowrap;
+  font: 500 var(--mega-text-base) / 1.3 var(--mega-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--mega-ink);
+}
+.pb-chip.pb-result-chip {
+  font-size: var(--mega-text-xs);
+  padding: 0.1rem 0.45rem;
+}
+.pb-cost {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+.pb-detail {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+
+/* Chips: foreseen or not, a check, a refused write. */
+.pb-chip {
+  display: inline-block;
+  padding: 0 0.4rem;
+  border: 1px solid var(--mega-line-strong);
+  font: 400 var(--mega-text-2xs) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+  white-space: nowrap;
+}
+.pb-chip.is-new {
+  color: var(--mega-ink);
+  border-style: dashed;
+}
+.pb-chip.is-pass {
+  color: var(--mx-ok);
+  border-color: var(--mx-ok);
+}
+.pb-chip.is-fail {
+  color: var(--mega-accent-ink);
+  border-color: var(--mega-accent-ink);
+  font-weight: 600;
+}
+.pb-chip.is-refused {
+  color: var(--mega-accent-ink);
+  border-color: var(--mega-accent-ink);
+  font-weight: 600;
+}
+.pb-chip.is-error {
+  color: var(--mega-ink-body);
+  border-style: dotted;
+}
+
+/* Task cards: two columns, one per mode. */
+.pb-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+}
+.pb-card-title {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.pb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--mega-space-4);
+}
+.pb-col {
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-3);
+  min-width: 0;
+  border-top: 2px solid var(--mega-line-strong);
+  padding-top: var(--mega-space-2);
+}
+.pb-col-title {
+  margin: 0;
+  font: 600 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.pb-run {
+  display: grid;
+  gap: var(--mega-space-2);
+  min-width: 0;
+}
+.pb-run + .pb-run {
+  border-top: 1px dashed var(--mega-line);
+  padding-top: var(--mega-space-2);
+}
+.pb-run-head {
+  align-items: baseline;
+}
+
+.pb-file {
+  gap: var(--mega-space-1);
+  min-width: 0;
+}
+.pb-path {
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink);
+  overflow-wrap: anywhere;
+}
+.pb-text {
+  margin: 0;
+  padding: var(--mega-space-2) var(--mega-space-3);
+  background: var(--mega-surface);
+  border-left: 3px solid var(--mega-line-strong);
+  font: 400 var(--mega-text-xs) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink-body);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 18rem;
+  overflow: auto;
+}
+.pb-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-1);
+}
+
+.pb-calls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+.pb-call {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  font-size: var(--mega-text-xs);
+}
+.pb-call code {
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.pb-args {
+  color: var(--mega-ink-muted);
+}
+.pb-call.is-refused code {
+  color: var(--mega-accent-ink);
+}
+.pb-answer {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.pb-answer p {
+  margin: 0;
+}
+.pb-steps > summary {
+  flex-wrap: wrap;
+}
+.pb-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.pb-call-out {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.pb-call-name {
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.pb-call-out .mx-code pre {
+  max-height: 12rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.pb-pulse {
+  animation: pb-pulse 1.2s ease-in-out infinite;
+}
+@keyframes pb-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}

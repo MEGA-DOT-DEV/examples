@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Injection defense layers</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Which defense layer stops each attack?</h2>
+        <p id="intro"></p>
+      </div>
+      <dl class="idl-layers" id="layers"></dl>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs per mode, reasoning effort</span></summary>
+        <div class="idl-pad mx-fields">
+          <div class="mx-field">
+            <span class="mx-label">Runs per mode</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per mode"></div>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <p class="mx-muted idl-empty" id="empty"></p>
+
+    <section class="mx-stack" id="results" hidden>
+      <div class="idl-answer-head">
+        <p class="mx-lead idl-lead" id="headline"></p>
+        <p class="mx-small mx-muted idl-flat" id="meaning"></p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table idl-outcomes">
+          <thead id="outcomes-head"></thead>
+          <tbody id="outcomes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="cost-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What the defense costs</h2>
+        <p>A layer can also withhold a benign item. The task is done when Maya gets the invoice number and the offsite date.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table idl-cost">
+          <thead id="cost-head"></thead>
+          <tbody id="cost"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <details class="mx-details" id="details" hidden>
+      <summary><span class="mx-label">Details</span><span class="mx-muted mx-small" id="details-note"></span></summary>
+      <div class="idl-pad mx-stack" id="details-body"></div>
+    </details>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>The inbox, the sanitizer output and the instructions are the same in every run.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">The inbox</span><span class="mx-muted mx-small" id="inbox-note"></span></summary>
+        <div class="idl-pad mx-stack" id="inbox"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Sanitizer output</span><span class="mx-muted mx-small" id="sanitizer-note"></span></summary>
+        <div class="idl-pad mx-stack" id="sanitizer"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions</span><span class="mx-muted mx-small">agent, task, risk scanner, and the gate's allowed domain</span></summary>
+        <div class="idl-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

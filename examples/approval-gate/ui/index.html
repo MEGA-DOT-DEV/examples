@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Approval gate</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Where must the approval policy live?</h2>
+        <p>Six night jobs run in three modes: no policy, a policy in the instructions, and a gate in the harness. Code counts the irreversible actions that run without a yes.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs per mode, reasoning effort</span></summary>
+        <div class="ag-pad mx-fields">
+          <div class="mx-field">
+            <span class="mx-label">Runs per mode</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per mode"></div>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted ag-empty" id="empty"></p>
+      <div class="mx-stack" id="results" hidden>
+        <p class="mx-lead ag-lead" id="headline"></p>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead id="table-head"></thead>
+            <tbody id="table"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted ag-note" id="note"></p>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="jobs-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Job by job</h2>
+        <p>Each mode's actions and pings in order. The marks show which irreversible actions ran, and why.</p>
+      </div>
+      <p class="mx-small ag-legend" id="legend"></p>
+      <div class="mx-stack" id="cards"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>The jobs, the tools and the instructions are the same in every run.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Jobs and tools</span><span class="mx-muted mx-small" id="jobs-note"></span></summary>
+        <div class="ag-pad mx-stack" id="jobs"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions</span><span class="mx-muted mx-small">every mode, and the policy that one mode adds</span></summary>
+        <div class="ag-pad mx-stack" id="instructions"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

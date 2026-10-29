@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skill vs saved script</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">A skill calls the model every morning. A saved script does not.</h2>
+        <p>One daily brief runs for five mornings in two modes, and code scores each brief against an answer key.</p>
+      </div>
+      <ol class="sv-modes">
+        <li><b>A. Skill only</b><span>Every morning, an agent reads <code>daily-brief.md</code>, calls four data tools and writes the brief.</span></li>
+        <li><b>B. Saved script</b><span>On day 1, the agent writes <code>brief(data)</code>. Later mornings run the script with no model. When the script fails, the agent repairs it one time.</span></li>
+      </ol>
+      <p class="mx-small mx-muted" id="rename-note"></p>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">reasoning effort, repeat day</span></summary>
+        <div class="mx-fields sv-pad">
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+            <span class="mx-hint">For every model call in both modes.</span>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Repeat day</span>
+            <div class="mx-seg" id="repeat-day" role="group" aria-label="Repeat day"></div>
+            <span class="mx-hint" id="repeat-hint"></span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" id="result-box">
+      <p class="mx-muted" id="empty"></p>
+      <div class="mx-stack" id="result" hidden>
+        <p class="mx-lead sv-lead" id="headline"></p>
+        <div class="mx-table-wrap">
+          <table class="mx-table sv-totals">
+            <thead><tr><th></th><th class="num">IDs right</th><th class="num">Exact mornings</th><th class="num">Model calls</th><th class="num">Cost</th><th class="num">Time</th><th class="num" id="distinct-head">Distinct briefs</th></tr></thead>
+            <tbody id="totals"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted" id="model-note"></p>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="days-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Day by day</h2>
+        <p>Each morning in both modes. A script morning with no model costs nothing and takes milliseconds.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table sv-days">
+          <thead>
+            <tr><th rowspan="2">Day</th><th colspan="4" class="sv-group">A. Skill only</th><th colspan="5" class="sv-group">B. Saved script</th></tr>
+            <tr><th class="num">Right</th><th class="num">Calls</th><th class="num">Cost</th><th class="num">Time</th><th class="num">Right</th><th class="num">Calls</th><th class="num">Cost</th><th class="num">Time</th><th>Script</th></tr>
+          </thead>
+          <tbody id="days"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="script-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The saved script</h2>
+        <p>The agent wrote it on day 1. It runs every morning without change, correct or not.</p>
+      </div>
+      <div id="script"></div>
+      <div class="mx-stack" id="repairs"></div>
+    </section>
+
+    <section class="mx-stack" id="calls-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Model calls</h2>
+        <p>Each request and response, by mode and morning.</p>
+      </div>
+      <div class="mx-stack" id="calls"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>The skill, the instructions of each mode, and the data of each morning.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">The skill</span><span class="mx-muted mx-small" id="skill-note"></span></summary>
+        <div class="sv-pad" id="skill"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions</span><span class="mx-muted mx-small">A. Skill only · B. Saved script</span></summary>
+        <div class="sv-pad mx-stack" id="instructions"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">The data</span><span class="mx-muted mx-small" id="data-note"></span></summary>
+        <div class="sv-pad mx-stack" id="data"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

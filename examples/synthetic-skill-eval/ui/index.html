@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synthetic skill eval</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Do 3 hand-picked tickets prove a skill edit?</h2>
+        <p>Two versions of a refund skill decide 3 hand-picked tickets and 36 generated tickets. Code scores each decision against the refund policy.</p>
+      </div>
+      <div class="mx-stack se-edit">
+        <span class="mx-label">The edit</span>
+        <div id="edit"></div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs per version, reasoning effort</span></summary>
+        <div class="se-pad mx-fields">
+          <div class="mx-field">
+            <span class="mx-label">Runs per version</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per version"></div>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+            <span class="mx-hint">for the decisions; the generator uses none</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted" id="empty"></p>
+      <p class="mx-lead" id="headline" hidden></p>
+      <div class="mx-table-wrap" id="score-box" hidden>
+        <table class="mx-table se-table">
+          <thead id="score-head"></thead>
+          <tbody id="score"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted se-note" id="note"></p>
+      <p class="mx-small mx-muted se-note" id="cost"></p>
+    </section>
+
+    <section class="mx-stack" id="evidence" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Decisions per ticket</h2>
+        <p>Each mark is the decision of one run. Green matches the policy. Red does not.</p>
+      </div>
+      <span class="mx-label">Hand-picked tickets</span>
+      <div class="mx-table-wrap">
+        <table class="mx-table se-table">
+          <thead id="hand-head"></thead>
+          <tbody id="hand"></tbody>
+        </table>
+      </div>
+      <div class="mx-stack" id="changed-box" hidden>
+        <span class="mx-label">Where the versions differ</span>
+        <div class="mx-table-wrap">
+          <table class="mx-table se-table">
+            <thead id="changed-head"></thead>
+            <tbody id="changed"></tbody>
+          </table>
+        </div>
+      </div>
+      <details class="mx-details" id="tickets-box" hidden>
+        <summary><span class="mx-label">Generated tickets</span><span class="mx-muted mx-small" id="tickets-note"></span></summary>
+        <div class="mx-table-wrap se-flat">
+          <table class="mx-table se-table">
+            <thead id="tickets-head"></thead>
+            <tbody id="tickets"></tbody>
+          </table>
+        </div>
+      </details>
+      <details class="mx-details" id="raw-box" hidden>
+        <summary><span class="mx-label">Requests and responses</span><span class="mx-muted mx-small" id="raw-note"></span></summary>
+        <div class="se-pad mx-stack" id="raw"></div>
+      </details>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>The two skill files, and the policy in code that gives the right decision for each ticket.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Both skill versions</span><span class="mx-muted mx-small" id="skills-note"></span></summary>
+        <div class="se-pad mx-stack" id="skills"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Policy and matrix</span><span class="mx-muted mx-small" id="policy-note"></span></summary>
+        <div class="se-pad mx-stack" id="policy"></div>
+      </details>
+      <details class="mx-details" id="generator">
+        <summary><span class="mx-label">Generator instructions</span><span class="mx-muted mx-small" id="generator-note"></span></summary>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

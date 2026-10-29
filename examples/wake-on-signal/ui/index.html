@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wake on signal</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Wake the model every day, or only when a check trips?</h2>
+        <p id="intro"></p>
+      </div>
+      <ul class="ws-problems" id="problems"></ul>
+      <ul class="ws-agents" id="agents"></ul>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs per agent, reasoning effort</span></summary>
+        <div class="ws-pad mx-fields">
+          <div class="mx-field">
+            <span class="mx-label">Runs per agent</span>
+            <div class="mx-seg" id="runs" role="group" aria-label="Runs per agent"></div>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted" id="empty"></p>
+      <p class="mx-muted mx-small" id="progress" hidden></p>
+      <p class="mx-lead ws-headline" id="headline" hidden></p>
+      <p class="mx-small mx-muted ws-note" id="cost"></p>
+      <div class="mx-table-wrap" id="score-box" hidden>
+        <table class="mx-table ws-score">
+          <thead id="score-head"></thead>
+          <tbody id="score"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted ws-note" id="alarm-note"></p>
+      <details class="mx-details" id="usage-box" hidden>
+        <summary><span class="mx-label">Model calls and tokens</span><span class="mx-muted mx-small" id="usage-note"></span></summary>
+        <div class="mx-table-wrap ws-flat">
+          <table class="mx-table">
+            <thead><tr><th>Agent</th><th class="num">Model calls</th><th class="num">Tokens in</th><th class="num">Tokens out</th><th class="num">Model time</th></tr></thead>
+            <tbody id="usage"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="mx-stack" id="strip-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Day by day</h2>
+        <p>One column per day, one row per agent. The shaded days have a real problem.</p>
+      </div>
+      <div class="ws-legend" id="legend"></div>
+      <div class="mx-table-wrap">
+        <table class="mx-table ws-strip">
+          <thead id="strip-head"></thead>
+          <tbody id="strip"></tbody>
+        </table>
+      </div>
+      <div class="mx-stack" id="days" hidden></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>Both agents get the same instructions. Code scores each report.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Code check</span><span class="mx-muted mx-small" id="check-note"></span></summary>
+        <ul class="ws-list ws-pad" id="check"></ul>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Scoring</span><span class="mx-muted mx-small" id="scoring-note"></span></summary>
+        <ul class="ws-list ws-pad" id="scoring"></ul>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions</span><span class="mx-muted mx-small" id="instructions-note"></span></summary>
+        <div id="instructions"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

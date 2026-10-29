@@ -1,0 +1,218 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.mx-page [hidden] {
+  display: none;
+}
+.idl-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.idl-flat,
+.idl-empty {
+  margin: 0;
+}
+
+/* The layers, one sentence each. */
+.idl-layers {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--mega-space-1) var(--mega-space-4);
+  margin: 0;
+  font-size: var(--mega-text-sm);
+}
+.idl-layers dt {
+  font-weight: 600;
+  color: var(--mega-ink);
+  white-space: nowrap;
+}
+.idl-layers dd {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+
+/* The answer. */
+.idl-answer-head {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.idl-lead {
+  margin: 0;
+}
+.idl-lead strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+
+/* Outcome labels: words first, color second. A label never wraps; a whole label moves to the next row. */
+.idl-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-1);
+}
+.idl-out {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0.1rem 0.45rem;
+  font-size: var(--mega-text-xs);
+  line-height: 1.5;
+  border: 1px solid transparent;
+}
+.idl-out.is-bad {
+  color: var(--mega-accent-ink);
+  border-color: var(--mega-accent-ink);
+  background: color-mix(in srgb, var(--mega-accent-ink) 8%, transparent);
+  font-weight: 600;
+}
+.idl-out.is-good {
+  color: var(--mx-ok);
+  border-color: color-mix(in srgb, var(--mx-ok) 45%, transparent);
+  background: color-mix(in srgb, var(--mx-ok) 8%, transparent);
+}
+.idl-out.is-quiet {
+  color: var(--mega-ink-muted);
+  border-color: var(--mega-line);
+}
+.idl-outcomes td,
+.idl-cost td,
+.idl-scan td {
+  vertical-align: top;
+}
+.idl-attack {
+  min-width: 13rem;
+  max-width: 20rem;
+}
+.idl-mode,
+.idl-name {
+  white-space: nowrap;
+}
+
+/* The inbox and the sanitizer's before and after. */
+.idl-item {
+  display: grid;
+  gap: var(--mega-space-1);
+  min-width: 0;
+}
+.idl-item + .idl-item {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.idl-text {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.idl-tag {
+  white-space: nowrap;
+  padding: 0 0.4rem;
+  border: 1px solid var(--mega-line-strong);
+  font: 400 var(--mega-text-2xs) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.idl-changes {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--mega-ink-body);
+}
+.idl-changes q {
+  overflow-wrap: anywhere;
+}
+.idl-before-after {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--mega-space-3);
+}
+.idl-before-after > div {
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-1);
+  min-width: 0;
+  padding: var(--mega-space-2);
+  background: var(--mega-surface);
+}
+
+/* Details: each agent, one column per mode. */
+.idl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--mega-space-3);
+}
+.idl-col {
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-3);
+  min-width: 0;
+  padding: var(--mega-space-3);
+}
+.idl-col-title {
+  margin: 0;
+  font: 600 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.idl-col .mx-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.idl-col details.mx-details > summary {
+  flex-wrap: wrap;
+}
+.idl-run {
+  display: grid;
+  gap: var(--mega-space-2);
+  min-width: 0;
+}
+.idl-run + .idl-run {
+  border-top: 1px dashed var(--mega-line);
+  padding-top: var(--mega-space-2);
+}
+.idl-calls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-2);
+}
+.idl-call {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-1) var(--mega-space-2);
+  font-size: var(--mega-text-xs);
+}
+.idl-call code {
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.idl-answer {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.idl-answer p {
+  margin: 0 0 var(--mega-space-1);
+}
+.idl-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.idl-tool {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.idl-tool > code {
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.idl-tool .mx-code pre {
+  max-height: 12rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.idl-pulse {
+  animation: idl-pulse 1.2s ease-in-out infinite;
+}
+@keyframes idl-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}

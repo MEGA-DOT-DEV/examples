@@ -75,6 +75,21 @@
         "pr-review-rules",
         "background-workers"
       ]
+    },
+    {
+      "episode": "S01E05",
+      "title": "Building Workflows, Not Tool Stacks",
+      "items": [
+        "skill-vs-saved-script",
+        "secret-references",
+        "session-mining",
+        "approval-gate",
+        "synthetic-skill-eval",
+        "primitives-vs-bespoke-tools",
+        "self-verification",
+        "injection-defense-layers",
+        "wake-on-signal"
+      ]
     }
   ]
 }

@@ -1,0 +1,227 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.ag-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.ag-task {
+  margin: var(--mega-space-1) 0 0;
+  color: var(--mega-ink-body);
+}
+.ag-job-setup + .ag-job-setup {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-4);
+}
+.ag-tools td {
+  vertical-align: top;
+}
+.ag-tag {
+  white-space: nowrap;
+  font: 400 var(--mega-text-xs) / 1.4 var(--mega-ui-mono);
+}
+.ag-tag.is-irreversible {
+  color: var(--mega-accent-ink);
+}
+.ag-tag.is-pre-approved {
+  color: var(--mega-ink);
+}
+.ag-tag.is-reversible {
+  color: var(--mega-ink-muted);
+}
+
+.ag-empty {
+  margin: 0;
+}
+.ag-empty[hidden],
+#results[hidden],
+#jobs-box[hidden] {
+  display: none;
+}
+.ag-lead strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.ag-note {
+  margin: 0;
+}
+.ag-about {
+  max-width: 22rem;
+  margin-top: 0.15rem;
+}
+.ag-th-sub {
+  font: 400 var(--mega-text-2xs) / 1.3 var(--mega-sans);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--mega-ink-muted);
+  margin-top: 0.15rem;
+  white-space: normal;
+  max-width: 11rem;
+  margin-left: auto;
+}
+.ag-cost {
+  white-space: nowrap;
+}
+.ag-big {
+  font: 500 var(--mega-text-lg) / 1.2 var(--mega-ui-mono);
+  color: var(--mega-ink);
+  white-space: nowrap;
+}
+
+/* Chips: the mark of an irreversible action. */
+.ag-legend {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mega-space-2);
+}
+.ag-chip {
+  display: inline-block;
+  padding: 0 0.4rem;
+  border: 1px solid var(--mega-line-strong);
+  font: 400 var(--mega-text-2xs) / 1.5 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+  white-space: nowrap;
+}
+.ag-chip.is-unapproved {
+  color: var(--mega-accent-ink);
+  border-color: var(--mega-accent-ink);
+  font-weight: 600;
+}
+.ag-chip.is-approved {
+  color: var(--mx-ok);
+  border-color: var(--mx-ok);
+}
+.ag-chip.is-held {
+  color: var(--mega-ink);
+  border-style: dashed;
+}
+.ag-chip.is-unneeded {
+  color: var(--mega-ink-body);
+  border-style: dotted;
+  margin-left: var(--mega-space-2);
+}
+
+/* Job cards: three columns, one per mode. */
+.ag-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+}
+.ag-card-title {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.ag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--mega-space-3);
+}
+.ag-col {
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-3);
+  min-width: 0;
+  border-top: 2px solid var(--mega-line-strong);
+  padding-top: var(--mega-space-2);
+}
+.ag-col-title {
+  margin: 0;
+  font: 600 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.ag-run {
+  display: grid;
+  gap: var(--mega-space-2);
+  min-width: 0;
+}
+.ag-run + .ag-run {
+  border-top: 1px dashed var(--mega-line);
+  padding-top: var(--mega-space-2);
+}
+.ag-run-head {
+  align-items: baseline;
+}
+.ag-actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+.ag-actions .ag-ping {
+  margin: var(--mega-space-1) 0;
+}
+.ag-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  font-size: var(--mega-text-xs);
+}
+.ag-action code {
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.ag-action.is-reversible code {
+  color: var(--mega-ink-muted);
+}
+.ag-args {
+  color: var(--mega-ink-muted);
+}
+.ag-ping {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  border-left: 3px solid var(--mega-line-strong);
+  padding: var(--mega-space-1) var(--mega-space-2);
+  background: var(--mega-surface);
+  display: grid;
+  gap: 0.1rem;
+}
+.ag-ping.is-unneeded {
+  border-left-style: dotted;
+}
+.ag-time {
+  font-family: var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.ag-question {
+  color: var(--mega-ink);
+}
+.ag-noping {
+  margin: 0;
+}
+.ag-answer {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.ag-answer p {
+  margin: 0;
+}
+.ag-steps > summary {
+  flex-wrap: wrap;
+}
+.ag-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.ag-call {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.ag-call-name {
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.ag-call .mx-code pre {
+  max-height: 12rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.ag-pulse {
+  animation: ag-pulse 1.2s ease-in-out infinite;
+}
+@keyframes ag-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
