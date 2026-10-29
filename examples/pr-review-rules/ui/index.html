@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fresh pull-request reviews</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page mx-stack">
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does a fresh reviewer need the team rules?</h2>
+        <p>A new reviewer reviews eight pull requests twice: with the diff only, and with the team rules and touched files. Code checks each finding against an answer key.</p>
+      </div>
+      <div class="mx-actions">
+        <div id="provider"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run</button>
+      </div>
+    </section>
+    <div id="notice" role="status"></div>
+    <section class="mx-stack" aria-live="polite">
+      <p id="headline" class="mx-muted">Press Run. 16 requests, about 0.2 cents.</p>
+      <div id="totals" class="mx-stack" hidden>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead><tr><th>Mode</th><th class="num">Caught, of 6</th><th class="num">False alarms on clean changes</th><th class="num">All false alarms</th><th class="num">Unverified</th><th class="num">Words per comment</th><th class="num">Cost</th></tr></thead>
+            <tbody id="scores"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted">A false alarm is a finding that the answer key does not hold. An unverified finding points to a line that the diff does not change. It counts as a false alarm too.</p>
+      </div>
+    </section>
+    <section id="reviews" class="mx-stack" hidden>
+      <div class="mx-section-head"><h3 class="mx-h3">Each review</h3><p>The two reviews of each pull request, side by side. The title line shows what the answer key holds.</p></div>
+      <div id="results" class="mx-stack"></div>
+    </section>
+    <section class="mx-stack">
+      <div class="mx-section-head"><h3 class="mx-h3">Inputs</h3><p>Both modes send the diff. Only the second mode also sends the team rules and the touched files.</p></div>
+      <details id="rules" class="mx-details"><summary><span class="mx-label">Team rules</span><span id="rules-note" class="mx-muted mx-small"></span></summary></details>
+      <div id="cases" class="mx-stack"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

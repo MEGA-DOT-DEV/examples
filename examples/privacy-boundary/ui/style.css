@@ -1,0 +1,131 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.pb-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+#route-result[hidden],
+#task-result[hidden] {
+  display: none;
+}
+#task-headline {
+  margin: 0;
+  color: var(--mega-ink-body);
+  max-width: 72ch;
+}
+tr.pb-strong td {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.pb-pulse {
+  animation: pb-pulse 1.2s ease-in-out infinite;
+}
+@keyframes pb-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* The 24 requests: the route each router chose, leaks and over-blocks marked. */
+.pb-requests td {
+  vertical-align: top;
+}
+.pb-project {
+  white-space: nowrap;
+}
+.pb-private {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.pb-text {
+  min-width: 18rem;
+  color: var(--mega-ink-body);
+}
+.pb-route {
+  white-space: nowrap;
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}
+.pb-route span {
+  display: block;
+  font-size: var(--mega-text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--mega-tracking-label);
+}
+.pb-route.is-leak {
+  color: var(--mega-accent-ink);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--mega-red) 13%, transparent);
+}
+.pb-route.is-over {
+  color: var(--mega-ink);
+  box-shadow: inset 3px 0 0 var(--mega-line-strong);
+}
+.pb-reply {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.pb-reply .mx-output {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+}
+
+/* Part 2: one card per run, the two modes side by side. */
+.pb-runs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+@media (max-width: 48rem) {
+  .pb-runs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.pb-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+}
+.pb-calls {
+  margin: 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+}
+.pb-call {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.pb-refused {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.pb-answer {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.pb-answer .mx-output {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+}
+.pb-leaked .mx-code pre,
+.pb-step .mx-code pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 14rem;
+  overflow: auto;
+}
+.pb-card details > summary {
+  flex-wrap: wrap;
+}
+.pb-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+  min-width: 0;
+}
+.pb-args {
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+}

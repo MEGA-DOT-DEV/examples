@@ -1,0 +1,83 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.wh-page {
+  --wh-gap: clamp(0.75rem, 2cqi, 1.25rem);
+}
+.wh-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.wh-task {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+#evidence[hidden] {
+  display: none;
+}
+.mx-lead strong {
+  color: var(--mega-ink);
+}
+.wh-answers {
+  display: grid;
+  gap: var(--wh-gap);
+}
+.wh-modes,
+.wh-reports {
+  display: grid;
+  gap: var(--wh-gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+.wh-mode,
+.wh-report {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wh-gap);
+  min-inline-size: 0;
+  padding: var(--wh-gap);
+}
+.wh-mode-head,
+.wh-answer-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.wh-mode > p {
+  margin-block: 0;
+}
+.wh-mode .mx-details {
+  margin-block-start: auto;
+}
+.wh-score {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.wh-answer {
+  display: grid;
+  gap: 0.4rem;
+  padding: var(--wh-gap);
+  min-inline-size: 0;
+  border: 1px solid var(--mega-line);
+  background: var(--mega-page);
+}
+.wh-fact {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  column-gap: 0.35rem;
+  font-size: var(--mega-text-sm);
+  overflow-wrap: break-word;
+}
+.wh-fact > :last-child {
+  grid-column: 2;
+}
+.wh-mark {
+  grid-row: span 2;
+}
+.wh-report .mx-code {
+  min-inline-size: 0;
+}
+.wh-report pre,
+.wh-mode pre,
+#screens pre {
+  max-block-size: 24rem;
+  overflow: auto;
+}

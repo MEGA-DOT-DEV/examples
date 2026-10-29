@@ -1,0 +1,13 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.er-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.er-pad ol {
+  margin: 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.er-pad p {
+  margin: 0;
+}

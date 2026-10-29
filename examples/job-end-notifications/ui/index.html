@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Job end notifications</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does the Coordinator see a job end at once?</h2>
+        <p>Four Workers run on a simulated clock, and one crashes. The Coordinator polls the job folders, or the harness sends it a message. Code counts the requests and how many ticks late it sees each job end.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs per mode</span></summary>
+        <div class="je-pad mx-fields">
+          <div class="mx-field">
+            <label class="mx-label" for="runs">Runs per mode</label>
+            <select id="runs" class="mx-select"></select>
+            <span class="mx-hint">Each run: the Workers once, then both Coordinators on the same job folder.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted" id="empty"></p>
+      <div class="mx-stack" id="result" hidden>
+        <p class="mx-lead" id="headline"></p>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead><tr><th>Mode</th><th class="num">Requests per run</th><th class="num">Input tokens per run</th><th>Ticks late</th><th class="num">Right statuses</th><th>Cost</th></tr></thead>
+            <tbody id="summary"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted">Ticks late: ticks from a job end to the tick the Coordinator sees it.</p>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="clock-box" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">The clock</h3>
+        <p>A dot is a Coordinator request. A numbered mark shows when it saw a job end; a red line shows how late.</p>
+      </div>
+      <div class="je-clock" id="clock"></div>
+    </section>
+
+    <section class="mx-stack" id="runs-box" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Run by run</h3>
+        <p>The last status report of each Coordinator. Code checks it against the known results and the crash.</p>
+      </div>
+      <div class="mx-stack" id="cards"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Inputs</h3>
+        <p>The same jobs and the same job folder go to both modes.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Jobs</span><span class="mx-muted mx-small" id="jobs-note"></span></summary>
+        <div class="je-pad mx-stack" id="jobs"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Coordinator setup</span><span class="mx-muted mx-small" id="setup-note"></span></summary>
+        <div class="je-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

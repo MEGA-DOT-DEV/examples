@@ -1,0 +1,258 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+:root {
+  --ws-signal: var(--mega-blue-text);
+}
+[data-theme="light"] {
+  --ws-signal: var(--mega-blue);
+}
+
+.ws-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.ws-empty,
+.ws-note,
+.ws-about,
+.ws-legend,
+.ws-result {
+  margin: 0;
+}
+.ws-empty[hidden],
+#result[hidden],
+.ws-open[hidden] {
+  display: none;
+}
+.ws-lead {
+  color: var(--mega-ink);
+}
+
+/* The task and the correction: the two texts the Worker gets. */
+.ws-brief {
+  display: grid;
+  gap: var(--mega-space-1);
+  border-left: 4px solid var(--mega-line-strong);
+  padding: var(--mega-space-2) var(--mega-space-4);
+  background: var(--mega-surface);
+}
+.ws-brief p {
+  margin: 0;
+  color: var(--mega-ink);
+}
+.ws-brief.is-correction {
+  border-left-color: var(--ws-signal);
+}
+
+/* One panel per mode: its name, how the correction travels, and a row of tiles per run. */
+.ws-mode {
+  gap: var(--mega-space-3);
+}
+.ws-mode-name {
+  color: var(--mega-ink);
+}
+.ws-about {
+  color: var(--mega-ink-body);
+}
+
+/* What the harness adds to the conversation, word for word. */
+.ws-said {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+  padding: var(--mega-space-2) var(--mega-space-3);
+  border-left: 3px solid var(--ws-signal);
+  background: var(--mega-page);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink);
+}
+.ws-said code {
+  font-size: var(--mega-text-2xs);
+  color: var(--mega-ink-muted);
+}
+
+/* A row of tiles: one per text, with marks in the gaps between them. */
+.ws-run {
+  display: grid;
+  gap: var(--mega-space-2);
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.ws-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--mega-space-2);
+}
+.ws-tile {
+  width: 3.25rem;
+  min-height: 3.6rem;
+  padding: 0.35rem 0;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.2rem;
+  border: 1px solid var(--mega-line-strong);
+  background: var(--mega-surface);
+  color: var(--mega-ink);
+  font: inherit;
+  cursor: pointer;
+}
+.ws-tile.is-plan {
+  cursor: default;
+  background: var(--mega-page);
+}
+.ws-tile.is-pass {
+  border-color: var(--mx-ok);
+  background: var(--mx-tint-3);
+}
+.ws-tile.is-fail {
+  border-color: var(--mega-accent-ink);
+  background: var(--mx-tint-1);
+}
+.ws-tile.is-missing {
+  border-style: dashed;
+}
+.ws-tile[aria-expanded="true"] {
+  outline: 2px solid var(--mega-ink);
+  outline-offset: 2px;
+}
+.ws-tile:focus-visible {
+  outline: 2px solid var(--mega-focus);
+  outline-offset: 2px;
+}
+.ws-n {
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.ws-sym {
+  font: 400 var(--mega-text-xl) / 1 var(--mega-pixel);
+}
+.is-pass .ws-sym {
+  color: var(--mx-ok);
+}
+.is-fail .ws-sym {
+  color: var(--mega-accent-ink);
+}
+/* A quiet note: the Worker saved this text again with euros after the correction. */
+.ws-fixed {
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+.ws-legend-fixed {
+  margin-left: var(--mega-space-2);
+}
+.ws-gap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  padding-left: var(--mega-space-2);
+  border-left: 2px dashed var(--mega-line-strong);
+}
+.ws-gap:has(.is-signal) {
+  border-left: 2px solid var(--ws-signal);
+}
+.ws-mark {
+  font: 500 var(--mega-text-2xs) / 1.3 var(--mega-ui-mono);
+  white-space: nowrap;
+}
+.ws-mark.is-signal {
+  color: var(--ws-signal);
+}
+.ws-mark.is-quiet {
+  color: var(--mega-ink-muted);
+}
+.ws-mark.is-read {
+  color: var(--mega-ink);
+  border: 1px solid var(--mega-line-strong);
+  padding: 0 0.3rem;
+}
+.ws-result {
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.ws-result strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+
+/* The legend: the same looks as the tiles. */
+.ws-legend {
+  color: var(--mega-ink-body);
+}
+.ws-swatch {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0 0.2em 0 var(--mega-space-2);
+  border: 1px solid;
+  font-family: var(--mega-pixel);
+  vertical-align: -0.3em;
+}
+.ws-swatch:first-child {
+  margin-left: 0;
+}
+.ws-swatch.is-pass {
+  color: var(--mx-ok);
+  background: var(--mx-tint-3);
+}
+.ws-swatch.is-fail {
+  color: var(--mega-accent-ink);
+  background: var(--mx-tint-1);
+}
+
+/* The open tile: the text as the Worker left it. */
+.ws-open {
+  padding: var(--mega-space-3) var(--mega-space-4);
+  background: var(--mega-page);
+}
+.ws-open b {
+  color: var(--mega-ink);
+  font-size: var(--mega-text-sm);
+}
+.ws-text-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-2);
+}
+.ws-text {
+  font-size: var(--mega-text-xs);
+  line-height: 1.5;
+  color: var(--mega-ink-body);
+}
+.ws-text p {
+  margin: 0;
+}
+
+.ws-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.ws-step code {
+  overflow-wrap: anywhere;
+  font-size: var(--mega-text-xs);
+}
+.ws-pulse {
+  animation: ws-pulse 1.2s ease-in-out infinite;
+}
+@keyframes ws-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ws-pulse {
+    animation: none;
+  }
+}
+
+/* Folds in a run: the label stays on one line, the meta wraps under it. */
+.ws-run details.mx-details > summary {
+  flex-wrap: wrap;
+  row-gap: var(--mega-space-1);
+}
+.ws-run details.mx-details > summary .mx-label {
+  white-space: nowrap;
+}

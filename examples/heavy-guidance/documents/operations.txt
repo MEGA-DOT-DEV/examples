@@ -1,0 +1,66 @@
+Field operations handbook — autumn pilot sites
+Owner: Service Operations; revision 2026-09-28
+Scope: pilot sites only; production contracts use another handbook.
+
+Intake
+Every incoming case receives a site name, a local timestamp and a service tag.
+The service desk checks the site name before assigning any numeric route.
+A route identifier is not a priority level or a response deadline.
+Use the register below for the current pilot mapping.
+
+Pilot register
+Aurora is the east-coast pilot of the telemetry relay.
+Aurora has route identifier A17 in the service desk register.
+Zenith is the mountain pilot of the telemetry relay.
+Zenith has route identifier Z04 in the service desk register.
+Delta is the lakeside pilot and uses route identifier D12.
+These identifiers stay the same if a site changes its local contact.
+
+Restart windows
+A restart window starts when the desk acknowledges a valid case.
+The window measures the allowed time for the first controlled restart.
+Aurora's restart window is 45 minutes.
+Zenith's restart window is 90 minutes.
+Delta's restart window is 60 minutes.
+Weekends do not change the pilot restart windows.
+The site operator may stop the restart when a safety alarm is active.
+The case still stays open until the desk records a new action.
+
+Normal handling
+First, confirm the site and the route identifier in the register.
+Next, check whether the unit still sends a heartbeat.
+If the heartbeat is present, collect a diagnostic snapshot.
+If the heartbeat is absent, call the local operator before restarting.
+Record the acknowledgement time in the ticket timeline.
+Never infer a restart deadline from the case's creation timestamp.
+The duty engineer may request a longer window for a safety hold.
+Such a hold must be explicit in the ticket timeline.
+
+Shift handover
+Incoming engineers read all open pilot tickets before accepting a shift.
+They note any active holds and the last confirmed heartbeat.
+The desk retains the original acknowledgement time at shift change.
+The local operator is not responsible for changing route identifiers.
+Handover notes list the site name rather than just the route number.
+A missing route number is resolved against the pilot register.
+The register is the authority for route identifiers.
+
+Escalation directory
+Use the channel associated with the route after the restart window.
+This directory is keyed by route, not by site name.
+Route Z04 escalates to channel zenith-watch.
+Route D12 escalates to channel delta-duty.
+Route A17 escalates to channel aurora-oncall.
+Do not substitute the general support room for a route channel.
+An active safety hold does not change the listed channel.
+An engineer adds the case link when posting an escalation.
+The desk keeps the case owner until a duty engineer accepts it.
+
+Closeout
+The case is closed only after a heartbeat and operator confirmation.
+The desk logs the restart attempt even if no reboot occurred.
+A closed case can be reopened by the local operator.
+The post-incident review uses the ticket timeline, not chat history.
+Notify the shift lead when a case remains open after handover.
+Archive the snapshot under the case's own identifier.
+End of field operations handbook.

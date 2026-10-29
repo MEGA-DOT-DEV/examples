@@ -1,0 +1,25 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.hg-empty,
+.hg-note {
+  margin: 0;
+}
+.hg-empty[hidden],
+#results[hidden],
+#evidence[hidden] {
+  display: none;
+}
+.hg-lead strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.hg-step {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  padding-block-start: var(--mega-space-3);
+  border-block-start: 1px solid var(--mega-line);
+}
+.hg-chunks {
+  margin: 0;
+  padding-inline-start: 1.4rem;
+  font-size: var(--mega-text-sm);
+}

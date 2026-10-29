@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worktree isolation</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Do two Workers in one checkout keep each other's edits?</h2>
+        <p>Two Workers change different rules in the same file, first in one shared checkout, then in one Git worktree each. Tests count the edits that survive.</p>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p id="empty" class="mx-muted wi-empty"></p>
+      <div id="results" class="mx-stack" hidden>
+        <p class="mx-lead wi-lead" id="headline"></p>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead id="table-head"></thead>
+            <tbody id="table"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted wi-note">An edit is kept when the Worker saved it and its own test passes in its checkout or branch.</p>
+      </div>
+    </section>
+
+    <section id="modes-box" class="mx-stack" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Save by save</h2>
+        <p>Each save runs both tests. A red mark shows a save that broke the other Worker's passing test.</p>
+      </div>
+      <div id="cards" class="wi-grid"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>Both modes use the same tasks and start from the same <code>quote.js</code>. Each run makes a temporary local repository and deletes it at the end.</p>
+      </div>
+      <div class="wi-grid" id="tasks"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Background Workers</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does Theo wait while the Workers run?</h2>
+        <p>A Coordinator gives three long jobs to Workers on a simulated clock, and Theo sends three messages. Code counts the ticks each message waits for an answer.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs per mode</span></summary>
+        <div class="bw-pad mx-fields">
+          <div class="mx-field">
+            <label class="mx-label" for="runs">Runs per mode</label>
+            <select id="runs" class="mx-select"></select>
+            <span class="mx-hint">Each run: the Workers once, then both Coordinators on their results.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted" id="empty"></p>
+      <div class="mx-stack" id="result" hidden>
+        <p class="mx-lead" id="headline"></p>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead><tr><th>Mode</th><th>Wait per message, ticks</th><th class="num">Last reply at tick</th><th class="num">Results told</th><th class="num">Right answers</th><th class="num">Requests</th><th>Cost</th></tr></thead>
+            <tbody id="summary"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted">Wait: ticks from a message to the first reply after it. Results told: job results that reached Theo.</p>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="clock-box" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">The clock</h3>
+        <p>A bar is a job. A numbered mark is a message from Theo, with a line to its answer. A dot is a Coordinator request; a hatched span is a blocking call.</p>
+      </div>
+      <div id="clock"></div>
+    </section>
+
+    <section class="mx-stack" id="runs-box" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Run by run</h3>
+        <p>The answer to each message, and the tick when each job result reached Theo.</p>
+      </div>
+      <div class="mx-stack" id="cards"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Inputs</h3>
+        <p>The same jobs and the same messages go to both modes.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Jobs and messages</span><span class="mx-muted mx-small" id="jobs-note"></span></summary>
+        <div class="bw-pad mx-stack" id="jobs"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Coordinator setup</span><span class="mx-muted mx-small" id="setup-note"></span></summary>
+        <div class="bw-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

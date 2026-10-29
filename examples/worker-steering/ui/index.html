@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worker steering</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">How does a correction reach a busy Worker?</h2>
+        <p id="intro"></p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs</span></summary>
+        <div class="ws-pad mx-fields">
+          <div class="mx-field">
+            <label class="mx-label" for="runs">Runs</label>
+            <select id="runs" class="mx-select"></select>
+            <span class="mx-hint">Each run starts all three modes at the same time.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted ws-empty" id="empty"></p>
+      <div class="mx-stack" id="result" hidden>
+        <p class="mx-lead ws-lead" id="headline"></p>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead id="compare-head"></thead>
+            <tbody id="compare"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted ws-note" id="note"></p>
+        <details class="mx-details">
+          <summary><span class="mx-label">Requests, tokens, time and cost</span><span class="mx-muted mx-small">per run</span></summary>
+          <div class="mx-table-wrap ws-pad">
+            <table class="mx-table">
+              <thead id="details-head"></thead>
+              <tbody id="details"></tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The 8 texts, in the order the Worker wrote them</h2>
+        <p>Each tile is one text. Click a tile to read it.</p>
+      </div>
+      <p class="mx-small ws-legend" id="legend"></p>
+      <div class="mx-stack" id="modes"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>Every mode gets the same task, catalog and correction.</p>
+      </div>
+      <div class="ws-brief">
+        <span class="mx-label">Task</span>
+        <p id="brief"></p>
+      </div>
+      <div class="ws-brief is-correction">
+        <span class="mx-label" id="correction-label"></span>
+        <p id="correction"></p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Catalog</span><span class="mx-muted mx-small" id="catalog-note"></span></summary>
+        <div class="ws-pad" id="catalog"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span><span class="mx-muted mx-small" id="setup-note"></span></summary>
+        <div class="ws-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
