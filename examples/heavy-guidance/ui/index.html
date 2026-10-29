@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heavy guidance</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does a fixed procedure help the model answer?</h2>
+        <p id="intro"></p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="question">Question</label>
+          <select id="question" class="mx-select"></select>
+          <span class="mx-hint" id="question-text"></span>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" aria-live="polite">
+      <p id="empty" class="mx-muted hg-empty"></p>
+      <div id="results" class="mx-stack" hidden>
+        <p class="mx-lead hg-lead" id="headline"></p>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead id="table-head"></thead>
+            <tbody id="table"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted hg-note" id="note"></p>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="evidence" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Requests</h2>
+        <p>The procedure's summaries show what each chunk kept for the final answer.</p>
+      </div>
+      <div class="mx-stack" id="calls"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>Both methods read the same chunks of two synthetic documents.</p>
+      </div>
+      <ul class="hg-chunks" id="chunks"></ul>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

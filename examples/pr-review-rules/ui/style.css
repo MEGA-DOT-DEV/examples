@@ -1,0 +1,38 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+#totals[hidden],
+#reviews[hidden] {
+  display: none;
+}
+.pr-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--mega-space-4);
+}
+.pr-case {
+  border-top: 2px solid var(--mega-line-strong);
+  padding-top: var(--mega-space-3);
+}
+.pr-case h4,
+.pr-mode h4 {
+  margin: 0;
+}
+.pr-mode {
+  min-inline-size: 0;
+  padding: var(--mega-space-4);
+  border: 1px solid var(--mega-line);
+}
+.pr-mode p {
+  margin-block: 0;
+}
+.pr-finding {
+  padding: var(--mega-space-3);
+  border-inline-start: 3px solid currentColor;
+  background: color-mix(in oklch, currentColor 5%, transparent);
+  overflow-wrap: anywhere;
+}
+.pr-finding p {
+  margin-block: var(--mega-space-1);
+}
+.pr-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}

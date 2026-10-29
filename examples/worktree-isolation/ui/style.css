@@ -1,0 +1,48 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.wi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1rem;
+}
+.wi-empty,
+.wi-note {
+  margin: 0;
+}
+.wi-empty[hidden],
+#results[hidden],
+#modes-box[hidden] {
+  display: none;
+}
+.wi-lead strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+.wi-task,
+.wi-mode,
+.wi-step {
+  min-inline-size: 0;
+}
+.wi-task p {
+  margin-block-end: 0;
+}
+.wi-mode {
+  align-content: start;
+}
+.wi-events {
+  margin-block: 0;
+  padding-inline-start: 1.4rem;
+}
+.wi-events li + li {
+  margin-block-start: 0.4rem;
+}
+.wi-pad {
+  padding: 1rem;
+}
+.wi-step + .wi-step {
+  padding-block-start: 1rem;
+  border-block-start: 1px solid var(--mega-line);
+}
+.wi-step p {
+  margin-block: 0;
+  overflow-wrap: anywhere;
+}

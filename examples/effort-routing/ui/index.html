@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Effort routing</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does routed effort cost less per solved task?</h2>
+        <p>The same model solves ten arithmetic tasks three times: at high effort, at low effort, and at the effort a Coordinator selects. Code checks each answer.</p>
+      </div>
+      <div class="mx-actions"><div id="picker"></div><button id="run" class="mx-btn mx-btn--primary" type="button">Run</button></div>
+    </section>
+    <div id="notice"></div>
+    <section class="mx-stack">
+      <p id="empty" class="mx-muted">Press Run. 31 requests, under 1 cent.</p>
+      <div id="result" class="mx-stack" hidden>
+        <p id="lead" class="mx-lead"></p>
+        <div class="mx-table-wrap"><table class="mx-table"><thead><tr><th>Mode</th><th class="num">Correct</th><th class="num">Requests</th><th class="num">Output tokens</th><th class="num">Cost</th><th class="num">Cost per solved task</th></tr></thead><tbody id="totals"></tbody></table></div>
+        <p class="mx-small mx-muted">The routed cost includes the Coordinator request. Output tokens include reasoning tokens.</p>
+      </div>
+    </section>
+    <section id="evidence" class="mx-stack" hidden>
+      <div class="mx-section-head"><h2 class="mx-h3">Answers per task</h2><p>Each cell shows the effort, the answer and the check against the answer key.</p></div>
+      <div class="mx-table-wrap"><table class="mx-table"><thead id="tasks-head"></thead><tbody id="tasks"></tbody></table></div>
+      <div id="calls" class="mx-stack"></div>
+    </section>
+    <section class="mx-stack">
+      <div class="mx-section-head"><h2 class="mx-h3">Inputs</h2><p>The tasks and the recommendation that the Coordinator gets.</p></div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Tasks</span><span class="mx-muted mx-small" id="tasks-note"></span></summary>
+        <div class="er-pad"><ol id="task-list" class="mx-small"></ol></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Recommendation</span><span class="mx-muted mx-small">the routing rule for the Coordinator · 2 sentences</span></summary>
+        <div class="er-pad"><p id="recommendation"></p></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

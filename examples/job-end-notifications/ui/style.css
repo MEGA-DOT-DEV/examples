@@ -1,0 +1,238 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.je-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.je-nowrap {
+  white-space: nowrap;
+}
+.je-task {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+#result[hidden],
+#clock-box[hidden],
+#runs-box[hidden],
+#empty[hidden] {
+  display: none;
+}
+#empty {
+  margin: 0;
+}
+.mx-lead strong {
+  color: var(--mega-ink);
+}
+
+/* A job's number: the same badge in the table, the clock and the reports. */
+.je-num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.2rem;
+  border: 1px solid var(--mega-line-strong);
+  font: 600 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink);
+  vertical-align: middle;
+}
+
+/* The clock: a label column, then a track where --at / --max places a mark. */
+.je-chart {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--mega-line);
+  padding: var(--mega-space-3) var(--mega-space-4);
+  overflow-x: auto;
+}
+.je-lane {
+  display: grid;
+  grid-template-columns: 10rem minmax(24rem, 1fr);
+  align-items: stretch;
+}
+.je-lane-label {
+  display: flex;
+  align-items: center;
+  gap: var(--mega-space-2);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+  padding-right: var(--mega-space-3);
+}
+.je-lane-label code {
+  font-size: var(--mega-text-xs);
+  white-space: nowrap;
+}
+.je-group {
+  padding: var(--mega-space-3) 0 var(--mega-space-1);
+  font-weight: 600;
+  color: var(--mega-ink);
+  font-size: var(--mega-text-sm);
+  border-top: 1px solid var(--mega-line);
+  margin-top: var(--mega-space-2);
+}
+.je-track {
+  position: relative;
+  height: 1.9rem;
+  margin: 0 0.75rem;
+}
+.je-track.is-run {
+  height: 2.6rem;
+}
+.je-track > span {
+  position: absolute;
+  left: calc(var(--at) / var(--max) * 100%);
+}
+.je-guide {
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed var(--mega-line-strong);
+}
+.je-bar {
+  left: 0 !important;
+  width: calc(var(--at) / var(--max) * 100%);
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: var(--mega-line-strong);
+}
+.je-end {
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  display: grid;
+  place-items: center;
+  font: 600 var(--mega-text-xs) / 1 var(--mega-ui-mono);
+  background: var(--mega-page);
+  border: 1px solid var(--mega-line-strong);
+}
+.je-end.is-done {
+  color: var(--mx-ok);
+}
+.je-end.is-crash {
+  color: var(--mega-red);
+  border-color: var(--mega-red);
+}
+
+/* A request: a dot on the top row; requests at the same tick share it. */
+.je-dot {
+  top: 0.15rem;
+  transform: translateX(-50%);
+  min-width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  padding: 0 0.15rem;
+  background: var(--mega-ink);
+  color: var(--mega-page);
+  font: 600 0.6rem / 0.85rem var(--mega-ui-mono);
+  text-align: center;
+}
+.je-dot:not(:empty) {
+  min-width: 1.05rem;
+  height: 1.05rem;
+  line-height: 1.05rem;
+  top: 0.05rem;
+  border-radius: 0.55rem;
+}
+/* When it first saw a job's end: a badge on the bottom row, and a red line back to the end. */
+.je-seen {
+  bottom: 0.1rem;
+  transform: translateX(-50%);
+  padding: 0 0.25rem;
+  height: 1.1rem;
+  white-space: nowrap;
+  border: 1px solid var(--mx-ok);
+  color: var(--mega-ink);
+  background: var(--mega-page);
+  font: 600 var(--mega-text-2xs) / 1.05rem var(--mega-ui-mono);
+}
+.je-seen.is-late {
+  border-color: var(--mega-red);
+}
+.je-late {
+  left: calc(var(--from) / var(--max) * 100%) !important;
+  width: calc((var(--to) - var(--from)) / var(--max) * 100%);
+  bottom: calc(0.35rem + var(--row) * 3px);
+  height: 2px;
+  background: var(--mega-red);
+}
+.je-lane.is-axis .je-track {
+  height: 1.4rem;
+}
+.je-tick {
+  top: 0.2rem;
+  transform: translateX(-50%);
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+
+/* Run by run: both modes side by side. */
+.je-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+}
+.je-workers {
+  margin: 0;
+  color: var(--mega-ink-body);
+  overflow-wrap: anywhere;
+}
+.je-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-4);
+}
+.je-col {
+  align-content: start;
+}
+.je-col-head {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.je-col-head b {
+  color: var(--mega-ink);
+}
+.je-report td {
+  vertical-align: top;
+}
+.je-report code {
+  overflow-wrap: anywhere;
+}
+.je-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.je-woke {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.je-call {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.je-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.je-call .mx-code pre {
+  max-height: 14rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.je-pulse {
+  margin: 0;
+  animation: je-pulse 1.2s ease-in-out infinite;
+}
+@keyframes je-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Folds in a narrow column: the label stays on one line, the meta wraps under it. */
+.je-col details.mx-details > summary {
+  flex-wrap: wrap;
+  row-gap: var(--mega-space-1);
+}
+.je-col details.mx-details > summary .mx-label {
+  white-space: nowrap;
+}

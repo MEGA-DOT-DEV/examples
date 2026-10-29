@@ -59,6 +59,22 @@
         "cleanup-routine-drift",
         "pointer-notes"
       ]
+    },
+    {
+      "episode": "S01E04",
+      "title": "Working with AI Harnesses",
+      "items": [
+        "self-configuring-agent",
+        "job-end-notifications",
+        "worker-steering",
+        "privacy-boundary",
+        "worker-result-handoff",
+        "worktree-isolation",
+        "effort-routing",
+        "heavy-guidance",
+        "pr-review-rules",
+        "background-workers"
+      ]
     }
   ]
 }

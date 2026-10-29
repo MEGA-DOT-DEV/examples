@@ -1,0 +1,155 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.sc-request {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: var(--mega-ui-mono);
+  font-size: var(--mega-text-sm);
+  border-left: 4px solid var(--mega-red);
+  padding: var(--mega-space-3) var(--mega-space-4);
+  background: var(--mega-surface);
+}
+.sc-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.sc-pad > .mx-details > summary {
+  gap: var(--mega-space-3);
+}
+.sc-mode + .sc-mode {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+
+.sc-totals td:first-child {
+  color: var(--mega-ink-body);
+}
+.sc-totals tr.sc-strong td {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+
+.sc-wishes td {
+  vertical-align: top;
+}
+.sc-wish {
+  min-width: 16rem;
+}
+.sc-wish code {
+  font-size: var(--mega-text-2xs);
+  overflow-wrap: anywhere;
+}
+.sc-marks-head {
+  white-space: nowrap;
+}
+.sc-marks {
+  white-space: nowrap;
+  font-family: var(--mega-ui-mono);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+.sc-pulse {
+  animation: sc-pulse 1.2s ease-in-out infinite;
+}
+@keyframes sc-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* One card per run, run 1 of every mode in the first row. */
+.sc-files {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: var(--mega-space-4);
+  align-items: start;
+}
+.sc-card {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding: var(--mega-space-4);
+  min-width: 0;
+}
+.sc-file {
+  margin: 0;
+  padding: var(--mega-space-2) 0;
+  background: var(--mega-plate-well);
+  border: 1px solid var(--mega-line);
+  font: 400 var(--mega-text-2xs) / 1.55 var(--mega-ui-mono);
+  overflow-x: auto;
+  color: var(--mega-ink-body);
+}
+.sc-file span {
+  display: block;
+  padding: 0 var(--mega-space-3);
+  white-space: pre;
+}
+.sc-file .is-invented,
+.sc-key--invented {
+  color: var(--mega-accent-ink);
+  background: color-mix(in srgb, var(--mega-red) 13%, transparent);
+}
+.sc-file .is-type,
+.sc-key--type {
+  color: var(--mega-accent-ink);
+  text-decoration: underline wavy;
+  text-decoration-color: var(--mega-red);
+  text-underline-offset: 3px;
+}
+.sc-key {
+  padding: 0 0.2em;
+}
+.sc-errors {
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--mega-accent-ink);
+}
+.sc-errors code {
+  overflow-wrap: anywhere;
+}
+.sc-answer {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.sc-answer .mx-output {
+  margin: 0;
+  font-size: var(--mega-text-sm);
+}
+.sc-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.sc-call,
+.sc-step,
+.sc-card details,
+.sc-card .sc-pad {
+  min-width: 0;
+}
+.sc-call {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--mega-space-1);
+}
+.sc-call-name {
+  font-weight: 600;
+  color: var(--mega-ink);
+}
+.sc-call-args {
+  overflow-wrap: anywhere;
+  font-size: var(--mega-text-xs);
+}
+.sc-call .mx-code pre {
+  max-height: 14rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.sc-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+/* A narrow card: the usage goes under the label, the label stays on one line. */
+.sc-card details > summary {
+  flex-wrap: wrap;
+}
+.sc-card details > summary .mx-label {
+  white-space: nowrap;
+}

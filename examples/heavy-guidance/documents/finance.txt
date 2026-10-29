@@ -1,0 +1,67 @@
+Pilot finance and retention guide — autumn release
+Owner: Finance Operations; revision 2026-09-29
+Scope: relay pilot sites and their supporting records.
+
+Record intake
+Attach each approved service ticket to its finance route.
+The route is the service desk's identifier, not an invoice number.
+The finance team never replaces the route with a site nickname.
+Audit attachments must preserve the original ticket timeline.
+
+Archive storage
+Diagnostic snapshots go in the encrypted pilot archive.
+The default retention for a pilot snapshot is 30 days.
+Zenith is an exception: retain its fallback archive for 21 days.
+Delta's fallback archive is retained for 14 days.
+A fallback archive is a copy of the diagnostic snapshot.
+Aurora has no separate fallback archive policy.
+The pilot archive deletes expired fallback copies at midnight UTC.
+Retention applies from archive creation, not the case close time.
+Safety holds pause deletion but do not change the base policy.
+
+Reconciliation process
+Finance reconciles pilot tickets against the route ledger weekly.
+A reconciliation day is the day the weekly run starts.
+A late ticket is included in the next run for its route.
+The service desk does not schedule these runs.
+A finance route is taken from the field operations register.
+Do not use the day a ticket was created as its run day.
+The weekly run occurs even when there are no new tickets.
+Finance marks an empty run as complete in the ledger.
+
+Review controls
+The reviewer checks both the ticket and archive timestamps.
+A route mismatch is returned to the desk, not silently corrected.
+An archive hold is recorded independently of the weekly run.
+If a snapshot is missing, the reviewer asks operations for a copy.
+The reviewer cannot extend retention without approval.
+Approved extensions are logged against the route and ticket.
+Customer names do not appear in the route ledger export.
+Any manual reconciliation must follow the same route schedule.
+
+Ledger keys
+Every row below gives a route, a weekly run day and an owner.
+These days are local to Finance Operations, not the pilot site.
+The order of rows does not show case priority.
+The route letters and numbers must match the operations register.
+Use the latest operations register when a pilot name changes.
+Do not treat these rows as a new mapping from names to routes.
+
+Weekly route ledger
+Route D12 runs every Thursday; owner Mira.
+Route Z04 runs every Friday; owner Theo.
+Route A17 runs every Tuesday; owner Nia.
+The owners review unresolved tickets after each weekly run.
+Each row applies to all pilot cases with that route.
+A newly approved ticket can miss this week's run cutoff.
+If so, the route's next scheduled day still applies.
+The ledger stores both the original and the reviewed ticket status.
+The weekly run produces a list of reconciled ticket IDs.
+
+Export and close
+A reviewer signs the weekly export before it is shared.
+Exports must include the route and the run date.
+Any reopened case is linked to its earlier ledger entry.
+The finance owner signs off only after the desk resolves mismatches.
+Closed tickets remain in the archive until retention ends.
+End of pilot finance and retention guide.

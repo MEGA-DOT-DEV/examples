@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Self-configuring agent</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Can an agent set up a harness it has never seen?</h2>
+        <p id="intro"></p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs per mode, reasoning effort</span></summary>
+        <div class="mx-fields sc-pad">
+          <div class="mx-field">
+            <label class="mx-label" for="runs">Runs per mode</label>
+            <select id="runs" class="mx-select"></select>
+            <span class="mx-hint">The agent changes from run to run. More runs show how much.</span>
+          </div>
+          <div class="mx-field">
+            <span class="mx-label">Reasoning effort</span>
+            <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted" id="empty"></p>
+      <div class="mx-stack" id="result" hidden>
+        <p class="mx-lead" id="lead"></p>
+        <div class="mx-stack" id="totals-box">
+          <div class="mx-table-wrap">
+            <table class="mx-table sc-totals">
+              <thead id="totals-head"></thead>
+              <tbody id="totals"></tbody>
+            </table>
+          </div>
+          <p class="mx-small mx-muted" id="note"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="evidence" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Runs</h2>
+        <p>One mark per run for each wish, then the last <code>settings.json</code> that each run saved.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table sc-wishes">
+          <thead id="wishes-head"></thead>
+          <tbody id="wishes"></tbody>
+        </table>
+      </div>
+      <p class="mx-small mx-muted"><span class="sc-key sc-key--invented">Marked</span> lines are keys that Tarnwick does not have. <span class="sc-key sc-key--type">Underlined</span> lines are real keys with a value of the wrong type.</p>
+      <div class="sc-files" id="files"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Inputs</h2>
+        <p>The same user message goes to every mode. Only the tools differ.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">User message</span><span class="mx-muted mx-small" id="request-note"></span></summary>
+        <div class="sc-pad"><p class="mx-output sc-request" id="request"></p></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Tarnwick docs</span><span class="mx-muted mx-small" id="docs-note"></span></summary>
+        <div class="sc-pad mx-stack" id="docs"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Schema</span><span class="mx-muted mx-small">what the validator checks · the check Tarnwick runs at start</span></summary>
+        <div id="schema"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span><span class="mx-muted mx-small" id="modes-note"></span></summary>
+        <div class="sc-pad mx-stack" id="modes"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
