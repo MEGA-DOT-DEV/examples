@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secret references</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does the API key reach the model provider?</h2>
+        <p>An agent sends a digest through a fake Mailer API in two modes: with the key in its context, or with a reference that the harness fills in. Code counts the requests to the model provider that hold the key.</p>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="go" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <p class="mx-muted" id="headline">Press Run. About 6 requests, under 0.1 cent.</p>
+      <div class="mx-stack" id="totals" hidden>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th class="num">Requests with the key</th>
+                <th class="num">Digest sent</th>
+                <th class="num">Key in the answer</th>
+                <th class="num">Cost</th>
+              </tr>
+            </thead>
+            <tbody id="scores"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted">Requests with the key: request bodies sent to the model provider that hold a vault value.</p>
+      </div>
+    </section>
+
+    <section class="mx-stack" id="evidence" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Each mode's run</h3>
+        <p>The tool calls as the model wrote them, the tool results it read, and its answer. Keys are marked in red.</p>
+      </div>
+      <div class="sr-grid" id="runs"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Inputs</h3>
+        <p>The task and the instructions are the same in both modes. Only the config differs.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Task and configs</span><span class="mx-muted mx-small" id="setup-note"></span></summary>
+        <div class="sr-pad mx-stack" id="setup"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+#totals[hidden],
+#evidence[hidden] {
+  display: none;
+}
+.sr-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.sr-text {
+  margin: 0;
+  color: var(--mega-ink-body);
+  font-size: var(--mega-text-sm);
+}
+
+/* The secret, wherever it shows up. */
+.sr-secret {
+  background: var(--mega-accent-ink);
+  color: #fff;
+  padding: 0 0.15em;
+  font-weight: 600;
+}
+.sr-code pre {
+  max-height: 22rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.sr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-4);
+}
+.sr-col {
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-3);
+  min-width: 0;
+  border-top: 2px solid var(--mega-line-strong);
+  padding-top: var(--mega-space-2);
+}
+.sr-col-title {
+  margin: 0;
+  font: 600 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+}
+.sr-calls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-3);
+}
+.sr-call {
+  display: grid;
+  gap: var(--mega-space-1);
+  min-width: 0;
+}
+.sr-call-name {
+  font-size: var(--mega-text-xs);
+  overflow-wrap: anywhere;
+  color: var(--mega-ink);
+}
+.sr-out {
+  display: grid;
+  gap: var(--mega-space-1);
+}
+.sr-answer {
+  margin-top: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.sr-answer p {
+  margin: 0;
+}

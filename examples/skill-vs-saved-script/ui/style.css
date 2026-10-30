@@ -1,0 +1,104 @@
+/* Styles for this page only. Shared components come from /kit/kit.css. */
+.sv-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+.sv-lead strong {
+  color: var(--mega-ink);
+  font-weight: 600;
+}
+#rename-note {
+  margin: 0;
+}
+
+/* The two modes, side by side. */
+.sv-modes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  border: 1px solid var(--mega-line);
+}
+.sv-modes li {
+  padding: var(--mega-space-3) var(--mega-space-4);
+  display: grid;
+  align-content: start;
+  gap: var(--mega-space-1);
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink-body);
+}
+.sv-modes li + li {
+  border-left: 1px solid var(--mega-line);
+}
+.sv-modes b {
+  font-weight: 500;
+  color: var(--mega-ink);
+}
+
+/* Tables: row names in the first column, numbers on the right. */
+.sv-totals th[scope="row"],
+.sv-days th[scope="row"] {
+  font: 500 var(--mega-text-sm) / 1.3 var(--mega-sans);
+  color: var(--mega-ink);
+  text-transform: none;
+  letter-spacing: 0;
+  background: none;
+  border-bottom: 1px solid var(--mega-line);
+  white-space: nowrap;
+}
+.sv-days thead th.sv-group {
+  text-align: center;
+  border-left: 1px solid var(--mega-line);
+}
+.sv-days thead tr + tr th:nth-child(5) {
+  border-left: 1px solid var(--mega-line);
+}
+.sv-days tbody td:nth-child(2),
+.sv-days tbody td:nth-child(6) {
+  border-left: 1px solid var(--mega-line);
+}
+.sv-days thead tr:first-child th[rowspan] {
+  vertical-align: bottom;
+}
+.sv-sub {
+  display: block;
+  font: 400 var(--mega-text-2xs) / 1.3 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+  margin-top: 0.15rem;
+}
+/* Ten columns: tighter cells, so the Script column fits without a scroll. */
+.sv-days th,
+.sv-days td {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+}
+.sv-wrong {
+  display: block;
+  max-width: 8rem;
+  margin-left: auto;
+  white-space: normal;
+  text-align: right;
+  font-size: var(--mega-text-2xs);
+  line-height: 1.5;
+  color: var(--mega-ink-muted);
+}
+.sv-rename {
+  background: var(--mega-plate-well);
+}
+.sv-rename .sv-sub {
+  color: var(--mega-accent-ink);
+}
+.sv-script-cell {
+  min-width: 9rem;
+  font-size: var(--mega-text-sm);
+}
+.sv-script-cell code {
+  white-space: normal;
+}
+.sv-repair {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.sv-repair-box .mx-section-head {
+  margin: 0;
+}
