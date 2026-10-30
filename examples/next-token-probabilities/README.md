@@ -42,6 +42,19 @@ Not every model sends token probabilities.
 - OpenAI sends probabilities only with reasoning effort `none`. GPT-6 Luna (the default) and GPT-6 Sol support it. GPT-6 Astra and GPT-6.1 Sol do not. GPT-6 Luna can send fewer candidates than you ask for, sometimes only the picked token. The page and the terminal say when this happens.
 - Anthropic models do not send token probabilities.
 
+## Use a local model
+
+A local server such as Ollama is free to use. It sends token probabilities only on `/chat/completions`, not on `/responses`. `MEGA_LOGPROBS_API=chat` makes this example use `/chat/completions`. Add these lines to `.env`:
+
+```
+MEGA_OPENAI_BASE_URL=http://localhost:11434/v1
+OPENAI_API_KEY=ollama
+MEGA_OPENAI_LOGPROBS_MODEL=llama3.1:8b
+MEGA_LOGPROBS_API=chat
+```
+
+Ollama needs any value for `OPENAI_API_KEY`. Run `ollama pull llama3.1:8b` first, and use `--provider openai`. These lines also send the other examples to Ollama, so remove them when you are done.
+
 `predict.ts` holds the requests and the parsing. `index.ts` prints the result, and `api.ts` sends it to the page in `ui/`.
 
 ## Try this

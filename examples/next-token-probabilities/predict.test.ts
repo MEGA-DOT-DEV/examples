@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createServer } from 'node:http'
 import { after, before, beforeEach, test } from 'node:test'
 import {
   type MockLlm,
@@ -149,4 +150,63 @@ test('a reply without logprobs explains which models support them', async () => 
     ]).candidates,
     [],
   )
+})
+
+test('MEGA_LOGPROBS_API=chat: a local server on /chat/completions', async () => {
+  undo = useMockEnv(mock, ['openai'])
+  // A Chat Completions reply, shaped like Ollama's (checked October 2026).
+  const sent: any[] = []
+  const server = createServer(async (req, res) => {
+    let raw = ''
+    for await (const chunk of req) {
+      raw += chunk
+    }
+    sent.push({ url: req.url, body: JSON.parse(raw) })
+    const token = (t: string, p: number) => ({ token: t, logprob: Math.log(p) })
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(
+      JSON.stringify({
+        model: 'llama3.1:8b',
+        choices: [
+          {
+            message: { role: 'assistant', content: ' Paris.' },
+            logprobs: {
+              content: [
+                {
+                  ...token(' Paris', 0.9),
+                  top_logprobs: [token(' the', 0.06), token(' Paris', 0.9)],
+                },
+              ],
+            },
+          },
+        ],
+      }),
+    )
+  })
+  await new Promise<void>((done) => server.listen(0, '127.0.0.1', done))
+  const { port } = server.address() as { port: number }
+  process.env.MEGA_OPENAI_BASE_URL = `http://127.0.0.1:${port}/v1`
+  process.env.MEGA_LOGPROBS_API = 'chat'
+  try {
+    const result = await predictNext({
+      prompt: 'The capital of France is',
+      provider: 'openai',
+      model: 'llama3.1:8b',
+      top: 2,
+    })
+    assert.equal(sent[0].url, '/v1/chat/completions')
+    assert.equal(sent[0].body.logprobs, true)
+    assert.equal(sent[0].body.top_logprobs, 2)
+    assert.equal(sent[0].body.messages[1].content, 'The capital of France is')
+    assert.equal(mock.requests.length, 0, 'no request to /responses')
+    assert.deepEqual(
+      result.candidates.map((c) => c.token),
+      [' Paris', ' the'],
+    )
+    assert.equal(result.chosen?.token, ' Paris')
+    assert.equal(result.continuation, ' Paris.')
+  } finally {
+    delete process.env.MEGA_LOGPROBS_API
+    await new Promise((done) => server.close(done))
+  }
 })

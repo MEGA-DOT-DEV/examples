@@ -1,7 +1,14 @@
 // Asks a model for the most likely next tokens after a text, with their
 // probabilities. Shared by the CLI (index.ts) and the browser page (api.ts).
+import { getKey, loadEnv } from '#shared/env.ts'
 import { createResponse, pickProvider, type ResponseBody } from '#shared/llm.ts'
-import type { ProviderId } from '#shared/providers.ts'
+import { redactSecrets } from '#shared/print.ts'
+import {
+  baseUrl,
+  model as defaultModel,
+  PROVIDERS,
+  type ProviderId,
+} from '#shared/providers.ts'
 
 // Chat models answer as an assistant. This asks them to continue the text
 // instead, so the first output token is the next token of your text.
@@ -103,6 +110,93 @@ export function readLogprobs(output: any[]) {
   }
 }
 
+// ── Local servers: Chat Completions ─────────────────────────────────────
+
+// Local servers such as Ollama serve POST /responses, but send token
+// probabilities only on POST /chat/completions. MEGA_LOGPROBS_API=chat
+// switches this example to that endpoint. The provider still gives the
+// base URL, the key and the model.
+export function useChatApi(): boolean {
+  loadEnv()
+  return process.env.MEGA_LOGPROBS_API?.trim().toLowerCase() === 'chat'
+}
+
+/** The first token's logprobs in a Chat Completions reply. */
+export function readChatLogprobs(json: any) {
+  const first: Logprob | undefined = json?.choices?.[0]?.logprobs?.content?.[0]
+  return {
+    chosen: first ? candidate(first.token, first.logprob) : null,
+    candidates: (first?.top_logprobs ?? []).map((t) =>
+      candidate(t.token, t.logprob),
+    ),
+  }
+}
+
+async function chatCompletion(
+  provider: ProviderId,
+  prompt: string,
+  top: number,
+  model?: string,
+) {
+  const spec = PROVIDERS[provider]
+  const key = getKey(spec.envKey)
+  const request = {
+    method: 'POST' as const,
+    url: `${baseUrl(provider)}/chat/completions`,
+    body: {
+      model: model?.trim() || defaultModel(provider, 'logprobs'),
+      messages: [
+        { role: 'system', content: INSTRUCTIONS },
+        { role: 'user', content: prompt },
+      ],
+      logprobs: true,
+      top_logprobs: top,
+      max_tokens: 16,
+    },
+  }
+
+  const started = performance.now()
+  let response: Response
+  try {
+    response = await fetch(request.url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...spec.auth(key) },
+      body: JSON.stringify(request.body),
+      signal: AbortSignal.timeout(90_000),
+    })
+  } catch (error) {
+    throw new Error(
+      redactSecrets(
+        `Request to ${request.url} failed: ${(error as Error).message}. Is the local server running?`,
+        [key],
+      ),
+    )
+  }
+  const json = (await response.json().catch(() => null)) as any
+  const ms = Math.round(performance.now() - started)
+
+  if (!response.ok || json?.error) {
+    const detail =
+      json?.error?.message ??
+      (json ? JSON.stringify(json).slice(0, 300) : 'no JSON in the reply')
+    throw new Error(
+      redactSecrets(
+        `${request.url} returned HTTP ${response.status} for ${request.body.model}: ${detail}`,
+        [key],
+      ),
+    )
+  }
+
+  return {
+    model: request.body.model,
+    text: String(json?.choices?.[0]?.message?.content ?? ''),
+    read: readChatLogprobs(json),
+    ms,
+    request,
+    response: json,
+  }
+}
+
 const NO_LOGPROBS_HINT: Record<ProviderId, string> = {
   openai:
     'Token probabilities need reasoning effort "none". GPT-6 Luna and GPT-6 Sol support it; GPT-6 Astra and GPT-6.1 Sol do not.',
@@ -126,16 +220,25 @@ export async function predictNext(
   const top = Math.min(MAX_TOP, Math.max(1, Math.round(options.top ?? 10)))
   const provider = pickProvider(options.provider)
 
-  const result = await createResponse(
-    body(provider, prompt, top, options.model),
-    { provider, purpose: 'logprobs' },
-  )
+  const chat = useChatApi()
+  const result = chat
+    ? await chatCompletion(provider, prompt, top, options.model)
+    : await createResponse(body(provider, prompt, top, options.model), {
+        provider,
+        purpose: 'logprobs',
+      })
 
-  const read = readLogprobs(result.output)
+  const read = 'read' in result ? result.read : readLogprobs(result.output)
   if (!read.candidates.length && !read.chosen) {
-    throw new Error(
-      `${result.model} returned no token probabilities. ${NO_LOGPROBS_HINT[provider]}`,
-    )
+    let hint = NO_LOGPROBS_HINT[provider]
+    if (chat) {
+      hint =
+        'The server sent no logprobs on /chat/completions. Check that it supports logprobs and top_logprobs.'
+    } else if (baseUrl(provider) !== PROVIDERS[provider].baseUrl) {
+      // A changed base URL is often a local server, such as Ollama.
+      hint += ' For a local server, set MEGA_LOGPROBS_API=chat.'
+    }
+    throw new Error(`${result.model} returned no token probabilities. ${hint}`)
   }
 
   // Some models return only the picked token. Show it as the one candidate.
