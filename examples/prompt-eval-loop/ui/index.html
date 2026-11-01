@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prompt eval loop</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <div class="mx-section-head">
+      <h2 class="mx-h3">Four prompt versions, two scores</h2>
+      <p>A model rewrites a routing prompt three times. It sees only the training failures. Held-out cases check each version on messages the rewriter never saw.</p>
+    </div>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice" role="status"></div>
+
+    <section class="mx-stack" aria-live="polite">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Scores per version</h2>
+        <p>Each version answers 12 training cases and 8 held-out cases. Code checks each label.</p>
+      </div>
+      <p id="empty" class="mx-muted">Press Run. 83 requests, about 1 minute, under 1 cent.</p>
+      <p id="verdict" class="pe-verdict" hidden></p>
+      <div class="mx-readouts" id="readouts" hidden></div>
+      <div class="mx-table-wrap" id="table-box" hidden>
+        <table class="mx-table">
+          <thead><tr><th>Version</th><th class="num">Training</th><th class="num">Held out</th><th class="num">Prompt length</th><th class="num">Cost</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="mx-stack" id="versions"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

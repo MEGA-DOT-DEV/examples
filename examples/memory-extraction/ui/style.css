@@ -1,0 +1,95 @@
+.me-corpus {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.me-session {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  padding: 1rem;
+  border: 1px solid var(--mega-line-strong);
+  border-radius: 0.65rem;
+  min-inline-size: 0;
+}
+.me-session p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+/* The settings hold only the actions row, so its top rule separates nothing. */
+.mx-settings > .mx-actions:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.me-empty,
+.me-verdict {
+  margin: 0;
+}
+.me-verdict {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.me-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+.me-mode {
+  display: grid;
+  gap: 0.9rem;
+  min-inline-size: 0;
+}
+.me-mode h3,
+.me-mode p {
+  margin-block: 0;
+}
+.me-documents {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 0.6rem;
+}
+.me-document {
+  padding: 0.75rem;
+  border: 1px solid var(--mega-line-strong);
+  border-radius: 0.5rem;
+  min-inline-size: 0;
+}
+.me-document ul {
+  padding-inline-start: 1.25rem;
+  margin-block: 0.5rem 0;
+  overflow-wrap: anywhere;
+}
+.me-document p {
+  margin-block: 0.5rem 0;
+}
+.me-history {
+  display: grid;
+  gap: 0.5rem;
+}
+.me-history-row {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  border-block-start: 1px solid var(--mega-line);
+  min-inline-size: 0;
+}
+.me-history-row p,
+.me-changes {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.me-changes {
+  padding-inline-start: 1.25rem;
+}
+.me-history-row details {
+  min-inline-size: 0;
+}
+.me-exchange {
+  min-inline-size: 0;
+  overflow: auto;
+  padding-block: 0.5rem;
+}

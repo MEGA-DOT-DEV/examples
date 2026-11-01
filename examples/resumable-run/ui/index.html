@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resumable run</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page mx-stack">
+    <div class="mx-section-head">
+      <h2 class="mx-h3">Crash after approval</h2>
+      <p>The agent waits for approval, which can take days. Then it runs the action and crashes before it saves the tool result. Three recovery modes continue the job in a new process.</p>
+    </div>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <span class="mx-label">Job</span>
+          <div class="mx-seg" id="jobs" role="group" aria-label="Job"></div>
+          <span class="mx-hint">Simulated. No email or payment leaves your computer.</span>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run 3 recovery modes</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Actions in the outside service</h2>
+        <p id="lead">Press Run 3 recovery modes. 7 model calls, under 1 cent.</p>
+      </div>
+      <p id="verdict" class="rr-verdict" hidden></p>
+      <div id="readouts" class="mx-readouts" hidden></div>
+      <p id="reason" class="rr-reason" hidden></p>
+      <div id="cards" class="rr-grid"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

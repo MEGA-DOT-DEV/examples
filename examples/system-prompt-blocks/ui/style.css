@@ -1,0 +1,72 @@
+.sp-page {
+  overflow-wrap: break-word;
+}
+.sp-inputs {
+  grid-template-columns: minmax(0, 1fr);
+}
+.sp-task {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+/* One block per line: its name, then the exact text the run adds. */
+.sp-blocks {
+  margin: 0;
+  padding-inline-start: 1.4rem;
+  display: grid;
+  gap: 0.5rem;
+  color: var(--mega-ink-body);
+}
+.sp-blocks li {
+  padding-inline-start: 0.25rem;
+}
+.sp-blocks b {
+  display: block;
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.sp-empty {
+  margin: 0;
+}
+.sp-empty b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.sp-verdict {
+  margin: 0;
+  font-size: var(--mega-text-lg);
+  color: var(--mega-ink);
+}
+.sp-results {
+  display: grid;
+  gap: 1.25rem;
+}
+.sp-result {
+  display: grid;
+  gap: 0.9rem;
+  border: 1px solid var(--mega-line);
+  border-radius: 0.9rem;
+  padding: clamp(1rem, 2cqi, 1.5rem);
+  min-inline-size: 0;
+}
+.sp-answer {
+  display: grid;
+  gap: 0.5rem;
+  min-inline-size: 0;
+}
+.sp-answer > p {
+  margin-block: 0;
+}
+.sp-step {
+  display: grid;
+  gap: 0.5rem;
+  padding-block: 0.85rem;
+  border-block-start: 1px solid var(--mega-line);
+  min-inline-size: 0;
+}
+.sp-step p {
+  margin-block: 0;
+  overflow-wrap: anywhere;
+}
+.sp-result .mx-details {
+  min-inline-size: 0;
+}

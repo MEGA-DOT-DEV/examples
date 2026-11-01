@@ -90,6 +90,21 @@
         "injection-defense-layers",
         "wake-on-signal"
       ]
+    },
+    {
+      "episode": "S02E01",
+      "title": "Agentic Primitives",
+      "items": [
+        "prompt-cache-prefix",
+        "loop-error-recovery",
+        "resumable-run",
+        "tool-search",
+        "system-prompt-blocks",
+        "prompt-eval-loop",
+        "memory-extraction",
+        "contextual-recall",
+        "per-user-workspaces"
+      ]
     }
   ]
 }
