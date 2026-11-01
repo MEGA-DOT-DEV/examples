@@ -1,0 +1,38 @@
+.ts-verdict {
+  margin: 0;
+  font-size: var(--mega-text-lg);
+  color: var(--mega-ink);
+  text-wrap: pretty;
+}
+.ts-run {
+  display: grid;
+  gap: var(--mega-space-4);
+}
+.ts-run-title {
+  margin: 0;
+}
+.ts-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--mega-space-5);
+}
+.ts-step {
+  display: grid;
+  gap: var(--mega-space-3);
+  padding-block-start: var(--mega-space-4);
+  border-block-start: 1px solid var(--mega-line);
+}
+.ts-action {
+  display: grid;
+  gap: var(--mega-space-2);
+  min-width: 0;
+}
+.ts-action p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.ts-args {
+  color: var(--mega-ink-muted);
+}

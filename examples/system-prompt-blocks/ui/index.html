@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>System prompt blocks</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page sp-page">
+    <header class="mx-section-head">
+      <h1 class="mx-h3">An agent without a user needs a map</h1>
+      <p>The same background task runs five times. Each run adds one block to the system prompt.</p>
+    </header>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields sp-inputs">
+        <div class="mx-field">
+          <span class="mx-label">Task</span>
+          <p id="task" class="sp-task"></p>
+        </div>
+        <div class="mx-field">
+          <span class="mx-label">System prompt blocks</span>
+          <ol id="blocks" class="sp-blocks"></ol>
+          <span class="mx-hint">Run 1 gets block 1. Run 5 gets all five blocks.</span>
+        </div>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Tools the agent gets</span><span class="mx-muted mx-small" id="tool-names"></span></summary>
+        <div id="tool-defs"></div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Compare five prompts</button>
+      </div>
+    </section>
+
+    <div id="notice" role="status"></div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Results</h2>
+        <p>A correct report has 17 orders, 3 refunds and the decision HOLD.</p>
+      </div>
+      <p id="empty" class="mx-muted sp-empty">Press <b>Compare five prompts</b>. 5 runs, about 30 requests in total, under 1 cent with the default OpenAI model.</p>
+      <p id="verdict" class="sp-verdict" hidden></p>
+      <div class="mx-table-wrap" id="table-box" hidden>
+        <table class="mx-table">
+          <thead><tr><th>Prompt</th><th>Correct report</th><th class="num">Questions to the user</th><th class="num">False “cannot” claims</th><th class="num">Notification calls</th><th class="num">Steps</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div id="results" class="sp-results"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contextual recall</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page mx-stack">
+    <header class="mx-section-head">
+      <h2 class="mx-h3">Find the memory the conversation needs</h2>
+      <p>Three searches look in the same 20 memories. One uses only the last message. Two use the whole conversation and the user profile.</p>
+    </header>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="thread">Conversation</label>
+          <select id="thread" class="mx-input"></select>
+          <span class="mx-hint">The last message is vague without the earlier turns.</span>
+        </div>
+      </div>
+      <div id="conversation" class="cr-conversation"></div>
+      <details class="mx-details">
+        <summary><span class="mx-label">User profile and memories</span><span id="catalog-count" class="mx-small mx-muted"></span></summary>
+        <div id="catalog" class="mx-stack"></div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run three searches</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What each search loaded</h2>
+        <p id="empty">Press <b>Run three searches</b>. Up to 7 requests, under 1 cent.</p>
+        <p id="verdict" class="cr-verdict" hidden></p>
+      </div>
+      <div id="results" class="mx-stack" hidden>
+        <div id="scores" class="mx-readouts"></div>
+        <p id="key" class="mx-small mx-muted"></p>
+        <div id="modes" class="cr-modes"></div>
+        <p id="usage" class="mx-small mx-muted"></p>
+        <details class="mx-details">
+          <summary><span class="mx-label">Requests and responses</span><span id="raw-count" class="mx-small mx-muted"></span></summary>
+          <div id="raw" class="mx-stack"></div>
+        </details>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

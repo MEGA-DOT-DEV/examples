@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Memory extraction</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Six conversations</h2>
+        <p>Three memory modes read these messages in order, each from empty memory.</p>
+      </div>
+      <ol id="corpus" class="me-corpus"></ol>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run three modes</button>
+      </div>
+    </section>
+
+    <div id="notice" role="status" aria-live="polite"></div>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Results</h2>
+        <p>How each mode stores the same facts, and the errors it makes.</p>
+      </div>
+      <p id="empty" class="me-empty">Press <b>Run three modes</b>. About 24 requests, under 1 cent.</p>
+      <p id="verdict" class="me-verdict" hidden></p>
+      <div id="score-box" class="mx-stack" hidden>
+        <div class="mx-table-wrap">
+          <table class="mx-table">
+            <thead><tr><th>Mode</th><th class="num">Facts kept</th><th class="num">Outdated</th><th class="num">Mixed people</th><th class="num">Duplicates</th><th class="num">Held notes</th><th class="num">Requests</th><th class="num">Cost</th></tr></thead>
+            <tbody id="scores"></tbody>
+          </table>
+        </div>
+        <p class="mx-small mx-muted">Outdated: an old value kept after a change. Mixed people: facts of the two Alexes in one place. Duplicates: one fact saved twice. Held note: a fact kept aside until it is clear which Alex it is about. Memory tools sends one more request when the agent calls a tool.</p>
+      </div>
+      <div id="modes" class="me-modes"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

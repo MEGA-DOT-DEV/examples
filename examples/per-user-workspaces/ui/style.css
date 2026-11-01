@@ -1,0 +1,41 @@
+/* Styles for this page only. Shared components come from /kit/kit.css. */
+.pw-verdict {
+  margin: 0;
+  color: var(--mega-ink-body);
+}
+.pw-verdict b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.pw-modes {
+  margin: 0;
+  padding-inline-start: 1.1rem;
+  display: grid;
+  gap: 0.25rem;
+  color: var(--mega-ink-body);
+}
+.pw-modes b {
+  color: var(--mega-ink);
+  font-weight: 500;
+}
+.mx-table td code {
+  white-space: nowrap;
+}
+/* Mode names wrap, so the paths keep one line each. */
+.pw-paths th {
+  white-space: normal;
+}
+.pw-task {
+  padding-block-start: 1rem;
+  border-block-start: 1px solid var(--mega-line);
+}
+.pw-call {
+  min-inline-size: 0;
+}
+.pw-call code {
+  overflow-wrap: anywhere;
+  font-size: var(--mega-text-sm);
+}
+.pw-detail {
+  padding: 0.75rem 1rem;
+}
