@@ -3,3 +3,12 @@ node_modules/
 .env.*
 !.env.example
 .DS_Store
+
+.claude/skills/read/*
+.claude/skills/transcribe/*
+challenge-s01e01/
+challenge-s01e02/
+challenge-s01e03/
+challenge-s01e04/
+transcriber/
+wake-notes/
