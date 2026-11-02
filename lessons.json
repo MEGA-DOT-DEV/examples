@@ -105,6 +105,13 @@
         "contextual-recall",
         "per-user-workspaces"
       ]
+    },
+    {
+      "episode": "S02E02",
+      "title": "Building an Agent",
+      "items": [
+        "false-success-tool"
+      ]
     }
   ]
 }

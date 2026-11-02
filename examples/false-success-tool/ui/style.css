@@ -1,0 +1,35 @@
+.fs-score {
+  font-size: clamp(1.25rem, 1rem + 1cqi, 1.65rem);
+}
+.fs-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-block-start: 1rem;
+}
+.fs-row {
+  display: grid;
+  gap: 0.45rem;
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+}
+.fs-row > p {
+  margin-block: 0;
+}
+.fs-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.fs-verdict {
+  margin-inline-start: auto;
+  font-weight: 600;
+}
+.fs-reply {
+  min-inline-size: 0;
+}
+.fs-calls {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--mega-ui-mono);
+}
