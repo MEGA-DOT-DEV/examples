@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tool and skill links</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page tl-page">
+    <header class="mx-section-head">
+      <h1 class="mx-h3">Does the agent load the style skill before it calls the image tool?</h1>
+      <p>One server has an image tool and three style skills. The agent sees a skill only if it looks for one. The same five requests run twice: without links, and with links in both directions.</p>
+    </header>
+    <section class="mx-panel mx-settings" aria-label="Run settings">
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run 5 requests in both modes</button>
+      </div>
+    </section>
+    <div id="notice" role="status"></div>
+    <section class="mx-plate tl-plate">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What reached the image tool</h2>
+        <p>A styled image passes when the agent loaded its skill and every argument matches the skill.</p>
+      </div>
+      <p id="empty" class="mx-muted">Press <b>Run 5 requests in both modes</b>. About 20 requests, under 1 cent.</p>
+      <div id="readouts" class="mx-readouts" hidden></div>
+      <p id="verdict" class="tl-verdict" hidden></p>
+      <div class="mx-table-wrap" id="table-box">
+        <table class="mx-table tl-table">
+          <thead><tr><th>Request</th><th id="head-unlinked"></th><th id="head-linked"></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div id="steps" class="mx-stack"></div>
+    </section>
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What changes between the modes</h2>
+        <p>Only the text: the tool description, and each skill's description and body. The tools and the requests stay the same.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Tool description</span><span class="mx-small mx-muted">generate_image · 2 modes</span></summary>
+        <div id="tool-text" class="tl-pad mx-stack"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Skills</span><span class="mx-small mx-muted" id="skills-note"></span></summary>
+        <div id="skill-text" class="tl-pad mx-stack"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

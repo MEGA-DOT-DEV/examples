@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pass@1 and pass^k</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page pk-page">
+    <header class="mx-section-head">
+      <h1 class="mx-h3">Is a task reliable when it passes most of the time?</h1>
+      <p>Ten short tasks, each with one right answer. Each task runs k times with the same request. Code checks every answer.</p>
+    </header>
+    <section class="mx-panel mx-settings" aria-label="Run settings">
+      <div class="mx-fields">
+        <div class="mx-field">
+          <span class="mx-label">Reasoning effort</span>
+          <div class="mx-seg" id="efforts" role="group" aria-label="Reasoning effort"></div>
+        </div>
+        <div class="mx-field">
+          <span class="mx-label">Trials per task (k)</span>
+          <div class="mx-seg" id="ks" role="group" aria-label="Trials per task"></div>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run</button>
+      </div>
+    </section>
+    <div id="notice" role="status"></div>
+    <section class="mx-plate pk-plate">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">One cell per trial</h2>
+        <p>pass@1 is the share of green cells. pass^k counts the tasks whose row is green in every trial.</p>
+      </div>
+      <div id="readouts" class="mx-readouts" hidden></div>
+      <p id="verdict" class="pk-verdict"></p>
+      <div id="grid" class="pk-grid" role="table" aria-label="Trials per task"></div>
+      <details class="mx-details" id="answers-box" hidden>
+        <summary><span class="mx-label">Questions and answers</span><span class="mx-small mx-muted" id="answers-note"></span></summary>
+        <div class="mx-table-wrap pk-flat">
+          <table class="mx-table">
+            <thead><tr><th>Task</th><th>Question</th><th>Right answer</th><th>Wrong answers</th></tr></thead>
+            <tbody id="answers"></tbody>
+          </table>
+        </div>
+      </details>
+      <details class="mx-details" id="sample-box" hidden>
+        <summary><span class="mx-label">Request and response · first trial</span></summary>
+        <div class="pk-pad" id="sample"></div>
+      </details>
+    </section>
+    <section class="mx-stack" id="history-box" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Your runs</h2>
+        <p>Run effort none and effort low with the same k, and compare the gap between the two numbers.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead><tr><th>Effort</th><th class="num">k</th><th class="num">pass@1</th><th class="num">pass^k</th><th class="num">Cost</th></tr></thead>
+          <tbody id="history"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

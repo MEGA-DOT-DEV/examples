@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent card boundary</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page ac-page">
+    <header class="mx-section-head">
+      <h1 class="mx-h3">What can another agent get from Angie's agent?</h1>
+      <p>Mia's scheduling agent sends Angie's agent three messages: ask for a free hour, ask what is at 14:00, and ask to clear 14:00. Code sends the same three messages to each mode. Only the boundary changes.</p>
+    </header>
+    <section class="mx-panel mx-settings" aria-label="Run settings">
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run 3 modes</button>
+      </div>
+    </section>
+    <div id="notice" role="status"></div>
+    <section class="mx-plate ac-plate">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">The same messages, three boundaries</h2>
+        <p>Red marks a word from a private event title, and an event that was deleted.</p>
+      </div>
+      <p id="empty" class="mx-muted">Press <b>Run 3 modes</b>. About 15 requests, under 1 cent.</p>
+      <p id="verdict" class="ac-verdict" hidden></p>
+      <div id="board" class="ac-board" hidden></div>
+    </section>
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">What each mode gets</h2>
+        <p>Angie's calendar, the card that the agent publishes, and the instructions and tools of each mode.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Angie's Friday</span><span class="mx-small mx-muted" id="events-note"></span></summary>
+        <div class="mx-table-wrap ac-flat">
+          <table class="mx-table">
+            <thead><tr><th>Time</th><th>Title</th><th>Id</th></tr></thead>
+            <tbody id="events"></tbody>
+          </table>
+        </div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Agent card</span><span class="mx-small mx-muted">/.well-known/agent-card.json · 1 skill</span></summary>
+        <div id="card"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span><span class="mx-small mx-muted">3 modes</span></summary>
+        <div id="modes" class="ac-pad mx-stack"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

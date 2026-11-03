@@ -1,0 +1,58 @@
+/* Shared controls and type come from the viewer kit. */
+.ab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--mega-space-4);
+}
+.ab-card {
+  min-inline-size: 0;
+}
+.ab-brief {
+  margin-block: 0;
+  overflow-wrap: break-word;
+}
+.ab-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.ab-title h3,
+.ab-card p,
+.ab-exchange p {
+  margin-block: 0;
+}
+.ab-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 0.75rem;
+  margin-block: 0;
+}
+.ab-facts dd {
+  margin-inline: 0;
+  margin-block-start: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+.ab-exchange {
+  padding: var(--mega-space-4);
+  border: 1px solid var(--mega-line);
+  background: var(--mega-page);
+  overflow-wrap: break-word;
+}
+.ab-traces {
+  padding-block: var(--mega-space-4);
+}
+.ab-traces pre,
+.ab-card pre {
+  max-block-size: 22rem;
+  overflow: auto;
+}
+.ab-card .mx-output,
+.ab-exchange {
+  overflow-wrap: break-word;
+}
+:focus-visible {
+  outline: max(2px, 0.08em) solid currentColor;
+  outline-offset: 0.2em;
+}

@@ -1,0 +1,197 @@
+/* Styles for this page only. Shared components come from ../../kit/kit.css. */
+.ssf-pad {
+  padding: 0 var(--mega-space-4) var(--mega-space-4);
+}
+#result[hidden],
+#empty[hidden] {
+  display: none;
+}
+#empty {
+  margin: 0;
+}
+.mx-lead strong {
+  color: var(--mega-ink);
+}
+.ssf-card {
+  gap: var(--mega-space-4);
+}
+.ssf-note {
+  margin: 0;
+}
+
+/* The timeline: a label column, then a track where `left` and `width` place each mark. */
+.ssf-chart {
+  display: grid;
+  gap: var(--mega-space-1);
+  border: 1px solid var(--mega-line);
+  padding: var(--mega-space-3) var(--mega-space-4);
+  overflow-x: auto;
+}
+.ssf-lane {
+  display: grid;
+  grid-template-columns: 10rem minmax(30rem, 1fr);
+  align-items: center;
+}
+.ssf-lane-label {
+  display: grid;
+  font-size: var(--mega-text-sm);
+  color: var(--mega-ink);
+  white-space: nowrap;
+  padding-right: var(--mega-space-3);
+}
+.ssf-lane-label code {
+  font-size: var(--mega-text-2xs);
+  color: var(--mega-ink-muted);
+}
+.ssf-track {
+  position: relative;
+  height: 2.1rem;
+  margin-right: 6rem;
+}
+.ssf-track > span {
+  position: absolute;
+  white-space: nowrap;
+}
+.ssf-guide {
+  top: -0.3rem;
+  bottom: -0.3rem;
+  width: 0;
+  border-left: 1px dashed var(--mega-ink-muted);
+}
+
+/* research.md: yesterday's version until research writes today's. */
+.ssf-file {
+  top: 0.35rem;
+  bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--mega-space-2);
+  overflow: hidden;
+  font: 500 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink);
+  background: var(--mega-chip-bg);
+  border: 1px solid var(--mega-line-strong);
+}
+.ssf-file.is-old {
+  color: var(--mega-ink-muted);
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 4px,
+    var(--mega-line) 4px 6px
+  );
+}
+
+/* Research: a bar, cut into one segment per source read. */
+.ssf-bar {
+  top: 50%;
+  height: 0.9rem;
+  transform: translateY(-50%);
+  background: var(--mega-line);
+}
+.ssf-read {
+  top: 50%;
+  height: 0.9rem;
+  transform: translateY(-50%);
+  overflow: hidden;
+  box-sizing: border-box;
+  border-right: 2px solid var(--mega-page);
+  background: var(--mega-ink-muted);
+  color: var(--mega-page);
+  font: 500 var(--mega-text-2xs) / 0.9rem var(--mega-ui-mono);
+  padding-left: 0.3rem;
+}
+.ssf-mark {
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.6rem;
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-body);
+}
+
+/* A brief: a dot when it starts. Red only when it sent yesterday's facts. */
+.ssf-dot {
+  top: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--mega-ink);
+}
+.ssf-dot.is-bad {
+  background: var(--mega-red);
+}
+.ssf-dot.is-hollow {
+  background: var(--mega-page);
+  border: 2px solid var(--mega-ink-muted);
+}
+.ssf-lane:last-child .ssf-track {
+  height: 1.2rem;
+}
+.ssf-tick {
+  top: 0.2rem;
+  transform: translateX(-50%);
+  font: 400 var(--mega-text-2xs) / 1 var(--mega-ui-mono);
+  color: var(--mega-ink-muted);
+}
+
+/* The two sent briefs, side by side. */
+.ssf-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--mega-space-4);
+}
+.ssf-col {
+  align-content: start;
+}
+.ssf-col-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--mega-space-1) var(--mega-space-3);
+}
+.ssf-col-head b,
+.ssf-col-head code {
+  white-space: nowrap;
+}
+.ssf-col-head b {
+  color: var(--mega-ink);
+}
+.ssf-state {
+  margin: 0;
+}
+.ssf-brief {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--mega-line);
+  padding: var(--mega-space-3) var(--mega-space-4);
+  color: var(--mega-ink-body);
+  line-height: 1.65;
+}
+.ssf-stale {
+  color: var(--mega-accent-ink);
+  background: color-mix(in srgb, var(--mega-red) 8%, transparent);
+}
+.ssf-col p {
+  margin: 0;
+}
+.ssf-step {
+  border-top: 1px solid var(--mega-line);
+  padding-top: var(--mega-space-3);
+}
+.ssf-call {
+  overflow-wrap: anywhere;
+}
+.ssf-text {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Folds in a narrow column: the label stays on one line, the meta wraps under it. */
+.ssf-col details.mx-details > summary,
+.ssf-card > details.mx-details > summary {
+  flex-wrap: wrap;
+  row-gap: var(--mega-space-1);
+}
+.ssf-card details.mx-details > summary .mx-label {
+  white-space: nowrap;
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When an eval is too easy</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-section-head">
+      <h2 class="mx-h3">A perfect score can hide a weak search</h2>
+      <p>Six title-shaped questions and six user questions ask for the same policy notes.</p>
+    </section>
+
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-field">
+        <label for="dataset" class="mx-label">Question set</label>
+        <select id="dataset" class="mx-input">
+          <option value="title">Title questions</option>
+          <option value="user">User questions</option>
+        </select>
+      </div>
+      <div class="mx-actions">
+        <button id="score" class="mx-btn mx-btn--primary" type="button">Score both versions</button>
+      </div>
+    </section>
+
+    <div id="notice" role="alert"></div>
+    <p class="mx-muted" id="empty">Press Score both versions. No model or paid request is used.</p>
+
+    <section id="results" class="mx-stack" hidden>
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Correct first result</h2>
+        <p>Both search versions use word overlap; only the indexed fields differ.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead><tr><th scope="col">Search version</th><th scope="col">Title questions</th><th scope="col">User questions</th></tr></thead>
+          <tbody id="scores"></tbody>
+        </table>
+      </div>
+      <p id="meaning" class="mx-muted"></p>
+      <div class="mx-section-head">
+        <h2 id="queries-title" class="mx-h3"></h2>
+        <p>Each row checks the actual top result against the fixed answer key. No match counts as wrong.</p>
+      </div>
+      <div class="mx-table-wrap">
+        <table class="mx-table">
+          <thead><tr><th scope="col">Question</th><th scope="col">Expected note</th><th scope="col">Title-only returned</th><th scope="col">Title + text returned</th></tr></thead>
+          <tbody id="cases"></tbody>
+        </table>
+      </div>
+      <details class="mx-details">
+        <summary>Question twins · 6 title and user pairs</summary>
+        <ol id="pairs" class="eval-pairs"></ol>
+      </details>
+      <details class="mx-details">
+        <summary>Policy notes · 6 titles and bodies</summary>
+        <ol id="notes" class="eval-pairs"></ol>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
