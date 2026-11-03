@@ -95,6 +95,7 @@
       "episode": "S02E01",
       "title": "Agentic Primitives",
       "items": [
+        "retail-agent-order-lookup",
         "prompt-cache-prefix",
         "loop-error-recovery",
         "resumable-run",
@@ -110,7 +111,37 @@
       "episode": "S02E02",
       "title": "Building an Agent",
       "items": [
+        "retail-agent-exchanges",
         "false-success-tool"
+      ]
+    },
+    {
+      "episode": "S02E03",
+      "title": "Agentic Capabilities",
+      "items": [
+        "retail-agent-mcp-capabilities",
+        "tool-skill-links",
+        "rule-with-reason"
+      ]
+    },
+    {
+      "episode": "S02E04",
+      "title": "Multi-Agent Collaboration",
+      "items": [
+        "retail-agent-collaboration",
+        "agent-card-boundary",
+        "stale-shared-file",
+        "subagent-asks-back"
+      ]
+    },
+    {
+      "episode": "S02E05",
+      "title": "Agent Reliability",
+      "items": [
+        "retail-agent-reliability",
+        "pass-k-reliability",
+        "step-replay",
+        "too-easy-eval"
       ]
     }
   ]

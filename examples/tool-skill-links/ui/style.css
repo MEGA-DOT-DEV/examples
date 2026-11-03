@@ -1,0 +1,39 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.tl-page {
+  overflow-wrap: break-word;
+}
+.tl-plate {
+  display: grid;
+  gap: 1rem;
+}
+.tl-plate > p {
+  margin: 0;
+}
+.tl-verdict {
+  font-weight: 600;
+  color: var(--mega-ink);
+  max-width: 75ch;
+}
+.tl-table th:not(:first-child),
+.tl-table td:not(:first-child) {
+  inline-size: 34%;
+}
+.tl-request {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--mega-ink);
+}
+.tl-cell {
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--mega-text-sm);
+}
+.tl-path {
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+  padding-top: 0.2rem;
+}
+.tl-pad {
+  padding: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}

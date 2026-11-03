@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Subagent asks back</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page ab-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Can the subagent get the missing date?</h2>
+        <p>The parent knows the client's new delivery date. Both subagents get the same brief; only one can ask the parent and resume.</p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label class="mx-label" for="handoff">Handoff</label>
+          <select id="handoff" class="mx-select">
+            <option value="omit">Omit date</option>
+            <option value="include">Include date</option>
+          </select>
+          <span class="mx-hint">The parent keeps the client conversation in both cases.</span>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run</button>
+      </div>
+    </section>
+    <div id="notice"></div>
+    <section id="result" class="mx-stack" aria-live="polite">
+      <p class="mx-muted">Press Run. About 3–5 paid model requests, depending on whether the subagent asks.</p>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

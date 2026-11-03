@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A rule with its reason</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does the agent know why?</h2>
+        <p>Two support agents get the same rule. Only the second one also gets the reason for it.</p>
+      </div>
+      <dl id="setup" class="rr-setup"></dl>
+      <details class="mx-details">
+        <summary><span class="mx-label">Customer record</span><span class="mx-small mx-muted" id="record-size"></span></summary>
+        <dl id="record" class="rr-setup"></dl>
+      </details>
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label for="runs" class="mx-label">Runs per agent</label>
+          <select id="runs" class="mx-input"><option value="1">1</option><option value="3" selected>3</option></select>
+          <span class="mx-hint">Repeat the request to see if the result holds.</span>
+        </div>
+      </div>
+      <div class="mx-actions"><div id="provider"></div><button id="run" type="button" class="mx-btn mx-btn--primary">Run</button></div>
+    </section>
+    <div id="notice" role="alert"></div>
+    <p id="empty" class="mx-muted">Press Run. 6 paid requests, under 1 cent.</p>
+    <section id="result" hidden>
+      <div class="mx-section-head">
+        <h3 class="mx-h3">Replies</h3>
+        <p id="meaning"></p>
+      </div>
+      <div id="grid" class="reply-grid"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

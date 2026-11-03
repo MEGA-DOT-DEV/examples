@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Step replay</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page sr-page">
+    <div id="notice" role="status"></div>
+
+    <section class="sr-section" aria-labelledby="run-title">
+      <h2 class="mx-h3" id="run-title">1. The recorded run failed</h2>
+      <ol class="sr-steps" id="trace-steps"></ol>
+    </section>
+
+    <section class="sr-section" aria-labelledby="why-title">
+      <h2 class="mx-h3" id="why-title">2. Ask the agent why</h2>
+      <p id="why-question"></p>
+      <div><button id="why" class="mx-btn sr-main" type="button">Ask the agent why</button></div>
+      <div id="why-notice" role="status"></div>
+      <div id="why-result"></div>
+    </section>
+
+    <section class="sr-section" aria-labelledby="check-title">
+      <h2 class="mx-h3" id="check-title">3. Check the answer</h2>
+      <p>If the agent blames its instructions, remove that line and replay step 1.</p>
+      <div class="sr-sides">
+        <div class="sr-side">
+          <span class="sr-label">Recorded</span>
+          <p class="sr-instructions" id="recorded"></p>
+          <p class="sr-result" id="recorded-result"></p>
+        </div>
+        <div class="sr-side">
+          <label class="sr-label" for="instructions">Your edit</label>
+          <textarea id="instructions" class="mx-textarea" rows="3" spellcheck="false"></textarea>
+          <p class="sr-result" id="edited-result"></p>
+        </div>
+      </div>
+      <p class="sr-verdict" id="verdict" hidden></p>
+      <div class="mx-row">
+        <button id="run" class="mx-btn" type="button">Replay step 1</button>
+        <button id="reset" class="mx-btn" type="button" hidden>Reset the edit</button>
+      </div>
+      <div id="run-notice" role="status"></div>
+    </section>
+
+    <div class="sr-folds">
+      <details class="sr-fold">
+        <summary id="settings-summary">More settings</summary>
+        <div id="picker"></div>
+      </details>
+      <details class="sr-fold">
+        <summary>Details: requests, responses and cost</summary>
+        <div class="sr-details">
+          <p class="sr-note">Ask the agent why sends 1 request. Replay step 1 sends 10: 5 as recorded and 5 with your edit. Each press costs under 1 cent.</p>
+          <div class="sr-block" id="trace-details"></div>
+          <div class="sr-block" id="why-details"></div>
+          <div class="sr-block" id="run-details"></div>
+        </div>
+      </details>
+    </div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+/* The kit supplies layout, tables, colors and controls. */
+.eval-pairs {
+  display: grid;
+  gap: 0.75rem;
+  padding-inline-start: 1.5rem;
+  margin-block: 1rem 0;
+}
+
+.eval-pairs li {
+  overflow-wrap: anywhere;
+}
+
+.eval-pairs li span {
+  display: block;
+  margin-block-start: 0.25rem;
+}
+
+#cases td {
+  min-inline-size: 9rem;
+  overflow-wrap: anywhere;
+}

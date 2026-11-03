@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stale shared file</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <section class="mx-panel mx-settings" aria-label="Settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Does the morning brief carry today's research?</h2>
+        <p>A research agent writes research.md from sources that answer after random delays. The brief agent sends Angie's brief from that file at 07:00, or when research is done.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">More settings</span><span class="mx-muted mx-small">runs</span></summary>
+        <div class="ssf-pad mx-fields">
+          <div class="mx-field">
+            <label class="mx-label" for="runs">Runs</label>
+            <select id="runs" class="mx-select"></select>
+            <span class="mx-hint">Each run: research once, then both briefs on the same research.md.</span>
+          </div>
+        </div>
+      </details>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button class="mx-btn mx-btn--primary" id="run" type="button">Run</button>
+      </div>
+    </section>
+
+    <div id="notice"></div>
+
+    <section class="mx-stack" aria-live="polite">
+      <p class="mx-muted" id="empty"></p>
+      <div class="mx-stack" id="result" hidden></div>
+      <div class="mx-stack" id="cards"></div>
+    </section>
+
+    <section class="mx-stack">
+      <div class="mx-section-head">
+        <h3 class="mx-h3">What the agents get</h3>
+        <p>Both modes use the same instructions and the same task. Only the brief's trigger changes.</p>
+      </div>
+      <details class="mx-details">
+        <summary><span class="mx-label">Sources and yesterday's research.md</span><span class="mx-muted mx-small" id="sources-note"></span></summary>
+        <div class="ssf-pad mx-stack" id="sources"></div>
+      </details>
+      <details class="mx-details">
+        <summary><span class="mx-label">Instructions and tools</span><span class="mx-muted mx-small" id="agents-note"></span></summary>
+        <div class="ssf-pad mx-stack" id="agents"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

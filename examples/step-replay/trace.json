@@ -1,0 +1,70 @@
+{
+  "id": "trace-0412",
+  "recorded": "2026-10-18",
+  "question": "What did we decide on Monday?",
+  "request": {
+    "model": "gpt-6-luna",
+    "instructions": "You are the Halo team's assistant. Use web_search to look up facts before you answer.",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "What did we decide on Monday?"
+          }
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "name": "web_search",
+        "description": "Search the public web. Returns titles, links and snippets.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "additionalProperties": false
+        }
+      },
+      {
+        "type": "function",
+        "name": "files_read",
+        "description": "Read one file by its exact path.",
+        "strict": true,
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    ],
+    "reasoning": {
+      "effort": "low"
+    },
+    "max_output_tokens": 1000
+  },
+  "call": {
+    "call_id": "call_qRGvdL4FbhWJf4AcjpfAW2cP",
+    "name": "web_search",
+    "arguments": "{\"query\":\"Halo team Monday decisions meeting notes\"}"
+  },
+  "result": "{\"results\":[{\"title\":\"Monday meetings: five ways to start the week\",\"url\":\"https://blog.example.com/monday-meetings\",\"snippet\":\"Start the week with a short planning meeting and write down every decision.\"},{\"title\":\"Halo Sports: team builder\",\"url\":\"https://halo-sports.example.org\",\"snippet\":\"Build your team roster and plan the season.\"}]}",
+  "answer": "I don’t have access to your team’s Monday notes or chat, so I can’t tell what you decided. If you share the meeting notes or a link, I can summarize them."
+}

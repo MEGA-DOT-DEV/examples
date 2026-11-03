@@ -1,0 +1,191 @@
+/* Styles for this page only. Shared components come from kit.css.
+
+   One type scale, from the kit's tokens:
+   - Heading: text-base, 500, sans, ink (the kit's .mx-h3).
+   - Body: text-base, 400, sans, ink. Buttons use the heading weight. The verdict is the one body sentence at 500.
+   - Small: text-sm, 400, sans, ink-muted: labels, notes and fold titles. The only grey.
+   - Code: text-sm, 400, mono: tool calls, instructions and JSON. Nothing else is mono.
+   Line height: 1.6 for text, 1.35 for headings, buttons and inputs.
+   Spacing: --sr-between between sections, --sr-within between the blocks of a section.
+   The lines of one block (a label, its box and its result) have no gap. */
+.sr-page {
+  --sr-between: var(--mega-space-8);
+  --sr-within: var(--mega-space-4);
+  gap: var(--sr-between);
+  color: var(--mega-ink);
+  overflow-wrap: break-word;
+}
+.sr-page p {
+  margin: 0;
+}
+/* .mx-btn sets display, so the hidden attribute needs help. */
+.sr-page [hidden],
+.sr-page [role="status"]:empty {
+  display: none;
+}
+
+/* Small. The kit draws labels and code block titles in uppercase mono; here they use this style. */
+.sr-label,
+.sr-note,
+.sr-fold > summary,
+.sr-page details.mx-details > summary,
+.sr-page .mx-label,
+.sr-page .mx-code-lang,
+.sr-page .mx-copy {
+  font: 400 var(--mega-text-sm) / var(--mega-leading-body) var(--mega-sans);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--mega-ink-muted);
+}
+.sr-label,
+.sr-page .mx-label {
+  white-space: nowrap;
+}
+
+/* Code. */
+.sr-page code,
+.sr-page .mx-code pre,
+.sr-instructions,
+.sr-side textarea {
+  font: 400 var(--mega-text-sm) / var(--mega-leading-body) var(--mega-ui-mono);
+}
+
+/* Buttons: one style for all. The main one is filled with ink, the kit's "on" color. Red stays for the failure. */
+.sr-page .mx-btn,
+.sr-page .mx-seg button {
+  font: 500 var(--mega-text-base) / var(--mega-leading-snug) var(--mega-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.sr-page .mx-input--small {
+  font: 400 var(--mega-text-base) / var(--mega-leading-snug) var(--mega-sans);
+}
+.sr-main {
+  background: var(--mega-ink);
+  border-color: var(--mega-ink);
+  color: var(--mega-page);
+}
+.sr-main:hover {
+  background: transparent;
+  color: var(--mega-ink);
+}
+
+/* Model text: body style, not the kit's lighter ink and bolder strong. */
+.sr-page .mx-output,
+.sr-page .mx-callout p {
+  color: inherit;
+  line-height: var(--mega-leading-body);
+}
+.sr-page .mx-model-text {
+  gap: var(--sr-within);
+}
+.sr-page .mx-model-text strong {
+  font-weight: 500;
+}
+
+/* Layout. */
+.sr-section,
+.sr-block,
+.sr-page .mx-stack {
+  display: grid;
+  gap: var(--sr-within);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* The recorded run: who spoke on the left, what happened on the right. */
+.sr-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sr-within);
+}
+.sr-steps li {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--mega-space-3);
+  align-items: baseline;
+}
+.sr-call {
+  display: grid;
+}
+
+.sr-answer {
+  border-left: 3px solid var(--mega-blue);
+  padding-left: var(--mega-space-4);
+}
+
+.sr-sides {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--sr-within) var(--mega-space-6);
+}
+.sr-side {
+  display: grid;
+  align-content: start;
+  min-inline-size: 0;
+}
+/* The recorded text sits where the edit box sits, so the two read side by side: the same padding, border and height (3 lines). */
+.sr-instructions {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid transparent;
+  background: var(--mega-surface-2);
+}
+.sr-instructions,
+.sr-side textarea {
+  min-height: calc(3lh + 1.2rem + 2px);
+}
+.sr-result:empty {
+  display: none;
+}
+.sr-verdict {
+  font-weight: 500;
+}
+
+/* Two quiet folds at the bottom: no boxes, one line of small text each. */
+.sr-folds {
+  display: grid;
+  gap: var(--sr-within);
+  padding-top: var(--sr-within);
+  border-top: 1px solid var(--mega-line);
+}
+.sr-fold > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.sr-fold > summary::-webkit-details-marker {
+  display: none;
+}
+.sr-fold > summary::before {
+  content: "+";
+  display: inline-block;
+  width: 2ch;
+}
+.sr-fold[open] > summary::before {
+  content: "−";
+}
+.sr-fold > summary::before,
+.sr-page details.mx-details > summary::before {
+  font-family: var(--mega-sans);
+}
+.sr-fold > summary:hover {
+  color: var(--mega-ink);
+}
+.sr-fold > :not(summary) {
+  margin-top: var(--sr-within);
+}
+.sr-details {
+  display: grid;
+  gap: var(--sr-between);
+  grid-template-columns: minmax(0, 1fr);
+}
+.sr-block:empty {
+  display: none;
+}
+.sr-list {
+  margin: 0;
+  padding-left: 1.5rem;
+  display: grid;
+  gap: var(--sr-within);
+  overflow-wrap: anywhere;
+}

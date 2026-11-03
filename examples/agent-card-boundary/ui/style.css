@@ -1,0 +1,122 @@
+/* Styles for this page only. Shared components come from kit.css. */
+.ac-page {
+  overflow-wrap: break-word;
+}
+.ac-plate {
+  display: grid;
+  gap: 1rem;
+}
+.ac-plate > p {
+  margin: 0;
+}
+.ac-verdict {
+  font-weight: 600;
+  color: var(--mega-ink);
+  max-width: 75ch;
+}
+
+/* Three columns, one per mode. A visitor message spans all three. */
+.ac-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--mega-line-strong);
+}
+.ac-board > * {
+  padding: 0.75rem 0.9rem;
+  border-top: 1px solid var(--mega-line);
+  min-inline-size: 0;
+}
+.ac-board > [data-col="1"],
+.ac-board > [data-col="2"] {
+  border-left: 1px solid var(--mega-line);
+}
+.ac-board > :nth-child(-n + 3) {
+  border-top: 0;
+}
+.ac-head {
+  display: grid;
+  gap: 0.3rem;
+  background: var(--mega-surface);
+}
+.ac-head p {
+  margin: 0;
+}
+.ac-message {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.25rem;
+  background: var(--mega-surface);
+}
+.ac-message p {
+  margin: 0;
+  color: var(--mega-ink);
+}
+.ac-cell {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+  font-size: var(--mega-text-sm);
+}
+.ac-score {
+  gap: 0.5rem;
+}
+.ac-score-line {
+  display: grid;
+  gap: 0.1rem;
+}
+.ac-score-line b {
+  font-weight: 600;
+}
+.ac-reply {
+  margin: 0;
+  color: var(--mega-ink-body);
+  line-height: 1.55;
+}
+.ac-leak {
+  background: var(--mx-tint-1);
+  color: var(--mega-accent-ink);
+  font-weight: 600;
+  padding: 0 0.15em;
+}
+.ac-call {
+  display: grid;
+  gap: 0.1rem;
+  font-size: var(--mega-text-xs);
+  color: var(--mega-ink-muted);
+}
+.ac-call code {
+  color: var(--mega-ink);
+}
+.ac-call.is-delete code {
+  color: var(--mega-accent-ink);
+  font-weight: 600;
+}
+.ac-output {
+  font-family: var(--mega-ui-mono);
+  overflow-wrap: anywhere;
+}
+
+.ac-flat {
+  border-width: 1px 0 0;
+}
+.ac-pad {
+  padding: var(--mega-space-4);
+  border-top: 1px solid var(--mega-line);
+}
+
+.ac-col-label {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .ac-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ac-board > [data-col] {
+    border-left: 0;
+  }
+  .ac-col-label {
+    display: block;
+    color: var(--mega-ink);
+  }
+}
