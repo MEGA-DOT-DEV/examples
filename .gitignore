@@ -12,3 +12,6 @@ challenge-s01e03/
 challenge-s01e04/
 transcriber/
 wake-notes/
+challenge-s02e01/
+.claude/recheck.local.json
+.claude/hooks/recheck-sources.mjs
