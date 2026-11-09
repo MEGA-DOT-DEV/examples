@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Decision record guard</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page dg-page">
+    <header class="mx-section-head">
+      <h1 class="mx-h3">Which side of the mismatch should change?</h1>
+      <p>Finance says harbor invoices come out 1–2 cents higher than the accounting export. Fix the mismatch. Only the source of product intent changes: none, an ADR, or a test.</p>
+    </header>
+    <section class="mx-panel mx-settings" aria-label="Run settings">
+      <p>Three trials per mode, up to three agents at a time and 108 paid model requests in total.</p>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run nine trials</button>
+      </div>
+    </section>
+    <div id="notice" role="status"></div>
+    <section class="mx-stack" aria-label="Agent results">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Same task, different evidence</h2>
+        <p id="meaning">Press Run nine trials. Each agent can read, edit, and test the same billing code; this calls a paid API.</p>
+      </div>
+      <div id="results" class="dg-grid"></div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

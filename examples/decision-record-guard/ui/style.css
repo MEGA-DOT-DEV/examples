@@ -1,0 +1,37 @@
+.dg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+.dg-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-inline-size: 0;
+}
+
+.dg-card > * {
+  margin-block: 0;
+}
+
+.dg-score {
+  font-size: clamp(1.4rem, 1rem + 1.5vw, 2rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.dg-metrics {
+  display: grid;
+  gap: 0.3rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.dg-card pre {
+  max-inline-size: 100%;
+  overflow-x: auto;
+}
+
+.dg-card .mx-details {
+  min-inline-size: 0;
+}
