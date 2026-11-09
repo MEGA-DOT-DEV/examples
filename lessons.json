@@ -145,6 +145,11 @@
       "episode": "S03E01",
       "title": "Mechanics Behind Product Engineering",
       "items": ["feature-retirement"]
+    },
+    {
+      "episode": "S03E02",
+      "title": "Translating Intent into Agent Work",
+      "items": ["decision-record-guard"]
     }
   ]
 }
