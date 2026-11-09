@@ -1,0 +1,35 @@
+.fr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+
+.fr-card {
+  min-inline-size: 0;
+}
+
+.fr-number {
+  font-size: clamp(1.25rem, 1rem + 1cqi, 1.7rem);
+  overflow-wrap: anywhere;
+}
+
+.fr-marks {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.fr-scroll {
+  overflow-x: auto;
+  margin-block: 1rem;
+}
+
+.fr-scroll table {
+  min-inline-size: max-content;
+  inline-size: 100%;
+}
+
+.fr-scroll td,
+.fr-scroll th {
+  white-space: nowrap;
+}
