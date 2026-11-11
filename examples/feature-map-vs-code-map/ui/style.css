@@ -1,0 +1,46 @@
+.map-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.map-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-inline-size: 0;
+}
+
+.map-card > * {
+  margin-block: 0;
+}
+
+.map-card-head,
+.map-check {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.map-headline {
+  font-size: clamp(1.2rem, 1rem + 1cqi, 1.6rem);
+  font-weight: 700;
+}
+
+.map-checks {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.map-answer {
+  overflow-wrap: anywhere;
+}
+
+.map-card .mx-details {
+  min-inline-size: 0;
+}
+
+.map-card .mx-details pre {
+  overflow-x: auto;
+}

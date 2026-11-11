@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature map vs code map</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page">
+    <header class="mx-section-head">
+      <h1>Feature map vs code map</h1>
+      <p>Feature maps lead agents to the queue fix; without one, they often run out of requests.</p>
+    </header>
+    <section class="mx-panel mx-settings">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Run the comparison</h2>
+        <p>Editing the playlist rebuilds the queue while shuffle order is cached.</p>
+      </div>
+      <div class="mx-fields">
+        <div class="mx-field">
+          <label for="mode">Map available</label>
+          <select id="mode" class="mx-input">
+            <option value="">All three modes</option>
+            <option value="no map">No map</option>
+            <option value="code map">Code map</option>
+            <option value="feature map">Feature map</option>
+          </select>
+        </div>
+        <div class="mx-field">
+          <label for="runs">Trials per mode</label>
+          <select id="runs" class="mx-input">
+            <option value="1">1</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+      </div>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run agents</button>
+      </div>
+    </section>
+    <div id="notice"></div>
+    <section aria-live="polite">
+      <div class="mx-section-head">
+        <h2 class="mx-h3">Replay result</h2>
+        <p id="meaning">Press Run. Each agent gets up to 18 requests; this calls a paid API.</p>
+      </div>
+      <div id="readouts" class="mx-readouts" hidden></div>
+      <div id="results" class="map-results"></div>
+      <p id="total" class="mx-muted"></p>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

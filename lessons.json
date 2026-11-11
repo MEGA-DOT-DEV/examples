@@ -150,6 +150,11 @@
       "episode": "S03E02",
       "title": "Translating Intent into Agent Work",
       "items": ["decision-record-guard"]
+    },
+    {
+      "episode": "S03E03",
+      "title": "AI-Native Product Development",
+      "items": ["feature-map-vs-code-map"]
     }
   ]
 }
