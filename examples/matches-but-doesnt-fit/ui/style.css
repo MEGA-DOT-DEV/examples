@@ -1,0 +1,72 @@
+.mf-page {
+  max-inline-size: 76rem;
+}
+
+.mf-headline {
+  font-size: clamp(1.05rem, 1rem + 0.7vw, 1.4rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#readouts .mx-readout {
+  align-content: start;
+}
+
+.mf-table {
+  min-inline-size: 53rem;
+  table-layout: fixed;
+}
+
+.mf-col-feature {
+  inline-size: 18%;
+}
+
+.mf-col-answer {
+  inline-size: 16%;
+}
+
+.mf-table th,
+.mf-table td {
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+
+/* Header cells wrap inside their own column instead of running over the next. */
+.mf-table th {
+  white-space: normal;
+}
+
+/* Feature names read as words, not as column labels. */
+.mf-table tbody th {
+  font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--mega-ink);
+}
+
+.mf-mark {
+  margin-block-start: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.mf-wrong {
+  box-shadow: inset 3px 0 0 var(--mega-red);
+}
+
+.mf-reason {
+  margin-block-start: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.mf-meta {
+  margin-block-start: 0.4rem;
+  color: var(--mega-ink-muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mf-traffic {
+  display: grid;
+  gap: 0.5rem;
+}

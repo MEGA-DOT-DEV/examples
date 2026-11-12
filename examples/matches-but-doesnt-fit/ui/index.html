@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matches but doesn't fit</title>
+  <script src="../../kit/theme.js"></script>
+  <link rel="stylesheet" href="../../kit/kit.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="mx-page mf-page">
+    <header class="mx-section-head">
+      <h1 class="mx-h3">Did the feature work, and does it fit?</h1>
+      <p>Six features after 30 days. One judge sees the agreement and signals; the other also sees product context.</p>
+    </header>
+    <section class="mx-panel mx-settings" aria-label="Run settings">
+      <p class="mx-muted">Both modes judge the same six features. Run sends 12 paid requests.</p>
+      <div class="mx-actions">
+        <div id="picker"></div>
+        <button id="run" class="mx-btn mx-btn--primary" type="button">Run 12 requests</button>
+      </div>
+    </section>
+    <div id="notice" role="status"></div>
+    <section class="mx-plate mx-stack" aria-label="Comparison">
+      <div id="headline" class="mf-headline">Press Run. About 12 requests, under 1 cent.</div>
+      <div id="readouts" class="mx-readouts" hidden></div>
+      <p id="meaning" class="mx-muted" hidden></p>
+      <div id="table" class="mx-table-wrap" hidden>
+        <table class="mx-table mf-table">
+          <colgroup><col class="mf-col-feature"><col class="mf-col-answer"><col><col></colgroup>
+          <thead><tr><th>Feature</th><th>Right answer</th><th>Agreement and signals</th><th>With product context</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <details id="evidence" class="mx-details" hidden>
+        <summary>Requests and responses · 12 judgments</summary>
+        <div id="traffic" class="mf-traffic"></div>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
