@@ -155,6 +155,11 @@
       "episode": "S03E03",
       "title": "AI-Native Product Development",
       "items": ["feature-map-vs-code-map"]
+    },
+    {
+      "episode": "S03E05",
+      "title": "Products That Learn After Release",
+      "items": ["matches-but-doesnt-fit"]
     }
   ]
 }
