@@ -286,7 +286,7 @@ function verdictOf(question: Question, answer: string): Verdict {
   ) {
     return 'correct'
   }
-  if (!answer || CANNOT_SEE.test(answer)) {
+  if (!answer || CANNOT_SEE.test(clean)) {
     return 'cannot-see'
   }
   return 'confabulated'
