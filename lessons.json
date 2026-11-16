@@ -160,6 +160,11 @@
       "episode": "S03E05",
       "title": "Products That Learn After Release",
       "items": ["matches-but-doesnt-fit"]
+    },
+    {
+      "episode": "S04E01",
+      "title": "Mechanics Behind Autonomous Systems",
+      "items": ["specter"]
     }
   ]
 }

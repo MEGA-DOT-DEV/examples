@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Specter · Live lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="intro">
+      <h1>Specter<span class="period">.</span></h1>
+      <p class="lede">Specter watches what the user saves and edits in their notes, decides what matters with a cheap first look, keeps its own agenda, and writes back quietly. It has no chat window and no command words.</p>
+      <p>This page is a lab. Start a simulation of the user’s day, watch each step, and break it safely. Every time on the page reads <strong>+m:ss</strong> from the start of the simulation.</p>
+    </div>
+    <div class="sim-control">
+      <p id="sim-state" class="sim-state">Connecting</p>
+      <button type="button" id="sim-button" class="primary" disabled>Start simulation</button>
+      <p id="sim-status" role="status" aria-live="polite">Connecting…</p>
+      <p id="now" class="now" aria-live="polite"></p>
+      <p id="brain" class="brain"></p>
+      <p class="connection" id="connection"><span class="lamp"></span><span id="connection-text">Connecting…</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section class="stage" aria-label="Watch the simulation">
+      <section class="panel timeline" aria-labelledby="timeline-title">
+        <header class="panel-head"><h2 id="timeline-title">Simulation</h2><span class="count" id="sim-clock"></span></header>
+        <p class="panel-say">The user’s day, beat by beat, with each wake from Specter’s agenda. The newest beat says where to look.</p>
+        <ol class="panel-body beats" id="beats"></ol>
+      </section>
+      <div class="flow">
+        <div class="flow-head">
+          <p>The story in three panels: the user changes their notes and a first look judges it, Specter acts, and now and then a message reaches the user.</p>
+          <label class="wire-toggle"><input type="checkbox" id="wire-toggle"> Show log details</label>
+        </div>
+        <section class="panel events" aria-labelledby="events-title">
+          <header class="panel-head"><h2 id="events-title">Events in</h2><span class="count" id="event-count"></span></header>
+          <p class="panel-say">What reaches Specter, and what the first look decides about it: ignore, keep, or wake. Newest first.</p>
+          <div class="panel-body" id="events"><p class="empty">Nothing yet. Press Start simulation above; the paper the user saves will appear here first.</p></div>
+        </section>
+        <section class="panel runs" aria-labelledby="runs-title">
+          <header class="panel-head"><h2 id="runs-title">Runs</h2><span class="count" id="run-count"></span></header>
+          <p class="panel-say">What Specter does in each wake, step by step, ending with its decision. Newest run first.</p>
+          <div class="panel-body" id="runs"><p class="empty">No runs yet. After Start, each step Specter takes appears here, newest first.</p></div>
+        </section>
+        <section class="panel inbox" aria-labelledby="inbox-title">
+          <header class="panel-head"><h2 id="inbox-title">The user’s inbox</h2><span class="count" id="inbox-count"></span></header>
+          <p class="panel-say">What reaches the user, and why it could not wait. Specter emails rarely.</p>
+          <div class="panel-body" id="inbox"><p class="empty">Loading…</p></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="bench" aria-labelledby="bench-title">
+      <h2 id="bench-title">Break it</h2>
+      <p class="section-say">Everything here acts on the same node, during a simulation or without one. Specter must recover by itself.</p>
+      <div class="bench-grid">
+        <div class="tool">
+          <h3>Your switches</h3>
+          <p>The switches in config.yaml, as the user sets them. Each press writes a new config.yaml version and applies at once.</p>
+          <div id="switches" class="switch-list"><p class="empty">Loading…</p></div>
+        </div>
+        <div class="tool">
+          <h3>Crash the node</h3>
+          <p>Crash the node now. It restarts, the interrupted run finishes, and no message is sent twice.</p>
+          <div class="control-row"><button type="button" id="crash" class="danger">Crash node</button></div>
+          <h3>Move the clock</h3>
+          <p>Move Specter’s clock one hour forward. Agenda times and the heartbeat come that much sooner; the clock never moves back.</p>
+          <div class="control-row"><button type="button" id="clock">Clock +1 h</button></div>
+        </div>
+        <form id="fault-form" class="tool control-form">
+          <h3>Fault switches</h3>
+          <label for="model_errors">Fail the next model requests — how many</label>
+          <div class="input-row"><input id="model_errors" type="number" min="0" step="1" value="0"><button type="submit" name="fault" value="model_errors">Set</button></div>
+          <label for="before_deliver_ms">Pause before sending an email — milliseconds (10000 = 10 s)</label>
+          <div class="input-row"><input id="before_deliver_ms" type="number" min="0" step="1" value="0"><button type="submit" name="fault" value="before_deliver_ms">Set</button></div>
+          <label for="after_deliver_ms">Pause after sending, before recording the receipt — milliseconds (10000 = 10 s)</label>
+          <div class="input-row"><input id="after_deliver_ms" type="number" min="0" step="1" value="0"><button type="submit" name="fault" value="after_deliver_ms">Set</button></div>
+          <label for="forget_why_now">Messages to the user the lab brain sends without why_now — how many</label>
+          <div class="input-row"><input id="forget_why_now" type="number" min="0" step="1" value="0"><button type="submit" name="fault" value="forget_why_now">Set</button></div>
+        </form>
+        <div class="tool">
+          <h3>Act as the user</h3>
+          <form id="link-form" class="control-form"><label for="link">Save a link in your notes: a new reading note with it</label><div class="input-row"><input id="link" name="url" type="url" required placeholder="https://arxiv.org/abs/2410.01234" autocomplete="off"><button type="submit">Save</button></div></form>
+          <form id="message-form" class="control-form"><label for="message">Or write to Specter, as a reply to a digest would</label><div class="input-row"><input id="message" name="body" required placeholder="Which of these notes is worth a closer look?" autocomplete="off"><button type="submit">Send</button></div></form>
+          <p class="tool-say">Or play one of the simulation’s events:</p>
+          <div id="samples" class="sample-list"><p class="empty">Loading…</p></div>
+        </div>
+      </div>
+      <p id="control-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="history" aria-labelledby="history-title">
+      <h2 id="history-title">Agenda and history</h2>
+      <p class="section-say">Nothing on this page is cut: every panel keeps each row since the log began, and each earlier simulation sits under its own start line.</p>
+      <div class="history-grid">
+        <section class="panel agenda" aria-labelledby="agenda-title">
+          <header class="panel-head"><h2 id="agenda-title">Agenda &amp; next wake</h2></header>
+          <p class="panel-say">Specter’s own list of open threads in documents/agenda.md. Host code wakes it at each item’s time, and the heartbeat wakes it when nothing else does.</p>
+          <div class="panel-body" id="agenda"><p class="empty">Loading…</p></div>
+        </section>
+        <section class="panel workspace" aria-labelledby="workspace-title">
+          <header class="panel-head"><h2 id="workspace-title">Workspace</h2><span class="count" id="file-count"></span></header>
+          <p class="panel-say">Every file Specter and the user keep, with each version. Open one to see who wrote it and when.</p>
+          <div class="panel-body" id="files"><p class="empty">Loading…</p></div>
+          <div id="file-detail" aria-live="polite"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><p>A saved link in, a sourced note out, and a message to the user only with a reason it cannot wait. Every step above comes from one append-only log, and every simulation can be played again.</p></footer>
+</body>
+</html>

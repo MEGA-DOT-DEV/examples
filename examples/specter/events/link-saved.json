@@ -1,0 +1,13 @@
+{
+  "title": "The user saves a paper in their reading notes",
+  "events": [
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/reading/durable-execution-paper.md",
+      "text": "# Durable execution in long-running agents\n\nSaved from https://arxiv.org/abs/2401.00001. Compare it with my lab notes and https://github.com/specter-lab/README.md.\n",
+      "body": "Saved a paper",
+      "key": "link-saved"
+    }
+  ]
+}

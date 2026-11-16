@@ -1,0 +1,26 @@
+# The user's limits and switches. Only the user edits this file. Specter reads it as a read-only view and cannot change it.
+# An edit applies at the next start of the node (`npm run dev`); the lab console's switches apply at once.
+adam_email: adam@lab.local            # the only push address
+paused: false                         # true: no wake starts, a live run is aborted, and nothing is sent
+sources:                              # each event source: true is on, false is off
+  knowledge_base: true                # the user's notes; in the lab, notes/** and their edits of Specter's documents
+  messages: true                      # what the user writes to Specter: a reply to a digest, a message
+channels:                             # each way out to the user: true is on, false is off
+  email: true                         # pushed to their mailbox
+  mcp: true                           # waits until they pull it
+quiet_hours: ""                       # e.g. "22:00-07:00 Europe/Warsaw": no email reaches the user inside them
+limits:
+  cost_per_month_usd: 5               # read but not metered: the lab brain costs nothing; a real provider's spend is not counted yet
+  wakes_per_day: 200                  # all instances together
+  wakes_per_cause: 4                  # wakes that one root row may cause; stops a reply loop
+  heartbeat: 24h                      # with no other wake, Specter still wakes this long after its last run: a safety net
+  min_sleep: 1m                       # an agenda time sooner than this after Specter wrote it waits until then
+  emails_per_day: 10
+  messages_per_week: 3                # emails to the user in any seven days, digests included
+  email_max_bytes: 4000
+models:                               # lab/brain is the offline stand-in: a script, no key, no cost
+  primary: lab/brain                  # the model of a run. Real: openrouter/anthropic/claude-sonnet-5.5, openai/gpt-6-luna, anthropic/claude-sonnet-5-5
+  secondary: lab/brain                # the small model of the first look. Real: openrouter/anthropic/claude-haiku-5.5, openai/gpt-5-nano, anthropic/claude-haiku-5-5
+                                      # a real provider needs its key in .dev.vars: see .dev.vars.example
+trusted: [arxiv.org, github.com]      # web_fetch refuses every other host, redirects included
+write: [documents/**]                 # the user's own notes (notes/**) stay out of reach

@@ -1,0 +1,13 @@
+{
+  "title": "The user revises their own note",
+  "events": [
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/durable-execution.md",
+      "text": "# Durable execution\n\nA durable run needs a recorded checkpoint and an idempotent receipt before an external effect. I want the source passage beside each claim.\n",
+      "body": "Clarified the checkpoint and receipt distinction",
+      "key": "note-edit"
+    }
+  ]
+}
