@@ -1,0 +1,85 @@
+{
+  "title": "Ten quick edits of the user's scratch note",
+  "events": [
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n",
+      "body": "Thought 1",
+      "key": "burst-1"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n",
+      "body": "Thought 2",
+      "key": "burst-2"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n",
+      "body": "Thought 3",
+      "key": "burst-3"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n- Thought 4: a checkpoint holds the last finished step\n",
+      "body": "Thought 4",
+      "key": "burst-4"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n- Thought 4: a checkpoint holds the last finished step\n- Thought 5: resume reads the checkpoint, then the receipts\n",
+      "body": "Thought 5",
+      "key": "burst-5"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n- Thought 4: a checkpoint holds the last finished step\n- Thought 5: resume reads the checkpoint, then the receipts\n- Thought 6: the agenda is the agent's own list of open threads\n",
+      "body": "Thought 6",
+      "key": "burst-6"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n- Thought 4: a checkpoint holds the last finished step\n- Thought 5: resume reads the checkpoint, then the receipts\n- Thought 6: the agenda is the agent's own list of open threads\n- Thought 7: a version is never overwritten, only added\n",
+      "body": "Thought 7",
+      "key": "burst-7"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n- Thought 4: a checkpoint holds the last finished step\n- Thought 5: resume reads the checkpoint, then the receipts\n- Thought 6: the agenda is the agent's own list of open threads\n- Thought 7: a version is never overwritten, only added\n- Thought 8: silence is a valid answer\n",
+      "body": "Thought 8",
+      "key": "burst-8"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n- Thought 4: a checkpoint holds the last finished step\n- Thought 5: resume reads the checkpoint, then the receipts\n- Thought 6: the agenda is the agent's own list of open threads\n- Thought 7: a version is never overwritten, only added\n- Thought 8: silence is a valid answer\n- Thought 9: a cheap first look saves the expensive run\n",
+      "body": "Thought 9",
+      "key": "burst-9"
+    },
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/scratch.md",
+      "text": "# Scratch\n\n- Thought 1: a durable wake is a row, not a timer in memory\n- Thought 2: a receipt names the effect before it happens\n- Thought 3: the log is the only memory a restart needs\n- Thought 4: a checkpoint holds the last finished step\n- Thought 5: resume reads the checkpoint, then the receipts\n- Thought 6: the agenda is the agent's own list of open threads\n- Thought 7: a version is never overwritten, only added\n- Thought 8: silence is a valid answer\n- Thought 9: a cheap first look saves the expensive run\n- Thought 10: feedback is what I do with a note, not a rating\n",
+      "body": "Thought 10",
+      "key": "burst-10"
+    }
+  ]
+}

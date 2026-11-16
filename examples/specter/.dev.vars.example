@@ -1,0 +1,12 @@
+# Keys for a real model. Copy this file to .dev.vars (git ignores it) and fill
+# in the one key that config.yaml needs. `celld dev` gives these values to the
+# Worker. The offline lab brain (`lab/brain`) needs no key.
+
+# For models: openrouter/<model>, such as openrouter/anthropic/claude-sonnet-5.5
+OPENROUTER_API_KEY=
+
+# For models: openai/<model>, such as openai/gpt-6-luna
+OPENAI_API_KEY=
+
+# For models: anthropic/<model>, such as anthropic/claude-sonnet-5-5
+ANTHROPIC_API_KEY=

@@ -1,0 +1,13 @@
+{
+  "title": "The user saves a blog post from an untrusted site",
+  "events": [
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/reading/receipts-blog.md",
+      "text": "# Receipts, a blog post\n\nSaved from https://outsider.example/research.md. What does it say about receipts?\n",
+      "body": "Saved a blog post",
+      "key": "untrusted-link"
+    }
+  ]
+}

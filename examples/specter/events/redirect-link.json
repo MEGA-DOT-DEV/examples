@@ -1,0 +1,13 @@
+{
+  "title": "The user saves a trusted link that redirects to an untrusted site",
+  "events": [
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "notes/reading/redirect-notice.md",
+      "text": "# Redirect notice\n\nSaved: https://github.com/specter-lab/redirect.md\n",
+      "body": "Saved a link",
+      "key": "redirect-link"
+    }
+  ]
+}

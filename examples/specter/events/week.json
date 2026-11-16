@@ -1,0 +1,299 @@
+{
+  "title": "A recorded week of the user's ambient activity: saves, edits, a busy day, a link, a deletion, a correction. No message to Specter.",
+  "zone": "Europe/Warsaw",
+  "config": { "quiet_hours": "22:00-07:00 Europe/Warsaw" },
+  "end": { "day": 8, "time": "09:00" },
+  "moments": [
+    {
+      "id": "paper-receipts",
+      "day": 1,
+      "time": "09:10",
+      "label": "The user saves a paper on receipt keys in their reading notes",
+      "expect": "note",
+      "why": "On the user's focus (receipts). A linked note is the quiet, useful result; nothing needs the user now.",
+      "source": "https://arxiv.org/abs/2410.01234",
+      "changes": [
+        {
+          "path": "notes/reading/receipts-before-effects.md",
+          "text": "# Receipts before effects\n\nSaved https://arxiv.org/abs/2410.01234 - matches what I am building: the receipt key before the effect.\n",
+          "summary": "Saved a paper"
+        }
+      ]
+    },
+    {
+      "id": "own-question",
+      "day": 1,
+      "time": "11:30",
+      "label": "The user writes an open question into their own note",
+      "expect": "quiet",
+      "why": "The user's own thinking. Specter may record it or fold it into its receipts note; it does not answer it with a message.",
+      "changes": [
+        {
+          "path": "notes/durable-execution.md",
+          "append": "\nOpen question: does the receipt key live in the same transaction as the intent row?\n",
+          "summary": "Added an open question"
+        }
+      ]
+    },
+    {
+      "id": "paper-textures",
+      "day": 1,
+      "time": "16:40",
+      "label": "The user saves an off-focus paper for a side project",
+      "expect": "quiet",
+      "why": "Off focus: a weak wish. Record it at most; do not surface it.",
+      "source": "https://arxiv.org/abs/2410.04321",
+      "changes": [
+        {
+          "path": "notes/reading/texture-synthesis.md",
+          "text": "# Texture synthesis\n\nSaved https://arxiv.org/abs/2410.04321 for the game side project, later.\n",
+          "summary": "Saved a paper"
+        }
+      ]
+    },
+    {
+      "id": "busy-day",
+      "day": 2,
+      "time": "08:05",
+      "label": "The user's daily note: release day, no reading",
+      "expect": "quiet",
+      "why": "A busy day: Specter goes quiet, batches, and defers.",
+      "changes": [
+        {
+          "path": "notes/daily/tuesday.md",
+          "text": "# Tuesday\n\nRelease day. Shipping tonight, no reading today.\n",
+          "summary": "Daily note"
+        }
+      ]
+    },
+    {
+      "id": "work-1",
+      "day": 2,
+      "time": "09:00",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [x] Freeze the branch\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "work-2",
+      "day": 2,
+      "time": "10:15",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [x] Migrate the alarm table\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "work-3",
+      "day": 2,
+      "time": "11:40",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [ ] Fix the flaky retry test\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "work-4",
+      "day": 2,
+      "time": "13:05",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [x] Fix the flaky retry test\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "work-5",
+      "day": 2,
+      "time": "14:30",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [x] Release notes\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "work-6",
+      "day": 2,
+      "time": "16:00",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [ ] Staging soak, two hours\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "work-7",
+      "day": 2,
+      "time": "17:45",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [x] Staging soak, two hours\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "work-8",
+      "day": 2,
+      "time": "19:30",
+      "label": "Release checklist edit",
+      "expect": "quiet",
+      "why": "Work in progress, not a request.",
+      "changes": [
+        {
+          "path": "notes/work/release-checklist.md",
+          "append": "- [x] Shipped\n",
+          "summary": "Checklist"
+        }
+      ]
+    },
+    {
+      "id": "link-note",
+      "day": 3,
+      "time": "10:00",
+      "label": "The user links Specter's receipts note into their own note",
+      "expect": "quiet",
+      "why": "A strong yes. Specter learns from it; it does not answer it.",
+      "changes": [
+        {
+          "path": "notes/durable-execution.md",
+          "append": "\nSee {{note:https://arxiv.org/abs/2410.01234}}: write the key before the effect.\n",
+          "summary": "Linked a note"
+        }
+      ]
+    },
+    {
+      "id": "paper-exactly-once",
+      "day": 3,
+      "time": "14:20",
+      "label": "The user saves a paper that qualifies their receipts notes",
+      "expect": "note",
+      "why": "On focus and contested: a note that names the disagreement with the receipts note.",
+      "source": "https://arxiv.org/abs/2410.05555",
+      "changes": [
+        {
+          "path": "notes/reading/exactly-once.md",
+          "text": "# Exactly-once\n\nSaved https://arxiv.org/abs/2410.05555 - this seems to disagree with my notes on receipts.\n",
+          "summary": "Saved a paper"
+        }
+      ]
+    },
+    {
+      "id": "presentation",
+      "day": 4,
+      "time": "08:30",
+      "label": "The user's daily note: they present the receipts design tomorrow at 10:00",
+      "expect": "message",
+      "why": "Timely: the exactly-once paper qualifies the claim the user presents tomorrow. One short message before Friday 10:00 is worth it, and the digest may come too late.",
+      "source": "https://arxiv.org/abs/2410.05555",
+      "deadline": { "day": 5, "time": "10:00" },
+      "changes": [
+        {
+          "path": "notes/daily/thursday.md",
+          "text": "# Thursday\n\nTomorrow 10:00 I present the receipts design to the team.\n",
+          "summary": "Daily note"
+        }
+      ]
+    },
+    {
+      "id": "delete-weak",
+      "day": 4,
+      "time": "09:00",
+      "label": "The user deletes a weak Specter note",
+      "expect": "quiet",
+      "why": "A strong no. It stays deleted; Specter never writes it again and learns from it.",
+      "changes": [
+        {
+          "path": "{{note:https://arxiv.org/abs/2410.04321|*}}",
+          "delete": true,
+          "summary": "Deleted a note"
+        }
+      ]
+    },
+    {
+      "id": "correct-note",
+      "day": 4,
+      "time": "15:00",
+      "label": "The user corrects Specter's exactly-once note",
+      "expect": "quiet",
+      "why": "The diff is the lesson; Specter keeps the correction and does not repeat the error.",
+      "changes": [
+        {
+          "path": "{{note:https://arxiv.org/abs/2410.05555}}",
+          "append": "\nMy correction: exactly-once holds inside one store; across stores it is at-least-once with deduplication by key.\n",
+          "summary": "Corrected a claim"
+        }
+      ]
+    },
+    {
+      "id": "untrusted-save",
+      "day": 5,
+      "time": "17:00",
+      "label": "The user saves a post from a site that is not on the trusted list",
+      "expect": "quiet",
+      "why": "The harness refuses the fetch; nothing to surface.",
+      "changes": [
+        {
+          "path": "notes/reading/stranger-blog.md",
+          "text": "# A stranger's blog\n\nSaved https://outsider.example/research.md - receipts again.\n",
+          "summary": "Saved a post"
+        }
+      ]
+    },
+    {
+      "id": "paper-workflow",
+      "day": 7,
+      "time": "19:00",
+      "label": "The user saves a durable workflow engine on a Sunday evening",
+      "expect": "note",
+      "why": "On focus (durable wakes). A linked note; nothing that cannot wait for the digest.",
+      "source": "https://github.com/specter-lab/workflow-engine.md",
+      "changes": [
+        {
+          "path": "notes/reading/workflow-engine.md",
+          "text": "# Workflow engine\n\nSaved https://github.com/specter-lab/workflow-engine.md - timers as rows; compare with how Specter keeps its own agenda.\n",
+          "summary": "Saved a repository"
+        }
+      ]
+    }
+  ]
+}

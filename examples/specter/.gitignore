@@ -1,0 +1,6 @@
+node_modules/
+.celld/
+.dev.vars
+.env
+.env.local
+/run/

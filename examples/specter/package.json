@@ -1,0 +1,31 @@
+{
+  "name": "specter",
+  "private": true,
+  "type": "module",
+  "description": "Specter: an ambient research agent, as a teaching lab on celld (self-hosted Durable Objects)",
+  "scripts": {
+    "dev": "sh scripts/dev.sh",
+    "sim": "node scripts/sim.ts",
+    "test": "node scripts/test.ts",
+    "demo:crash": "node scripts/demo-crash.ts",
+    "week": "node scripts/week.ts",
+    "inject": "node scripts/inject.ts",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@earendil-works/chord": "1.5.0",
+    "@earendil-works/pi-ai": "1.5.0",
+    "@earendil-works/pi-durable": "1.5.0",
+    "@earendil-works/pi-schema": "1.5.0",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261103.1",
+    "@types/node": "24.19.2",
+    "esbuild": "0.28.2",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

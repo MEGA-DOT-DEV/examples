@@ -1,0 +1,13 @@
+{
+  "title": "The user corrects the note Specter wrote from the saved link",
+  "events": [
+    {
+      "from": "git",
+      "kind": "edit",
+      "path": "documents/notes/durable-execution-in-long-running-agents.md",
+      "text": "# Durable execution in long-running agents\n\nMy correction: a checkpoint is not enough; the receipt key must exist before the effect, or a retry can send twice.\n",
+      "body": "Corrected the claim about checkpoints and receipts",
+      "key": "correct-note"
+    }
+  ]
+}

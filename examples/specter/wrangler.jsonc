@@ -1,0 +1,20 @@
+{
+  "name": "specter",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "SPECTER", "class_name": "Specter" },
+      { "name": "OUTBOX", "class_name": "Outbox" }
+    ]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Specter", "Outbox"] }],
+  "triggers": { "crons": ["*/10 * * * *"] },
+  "rules": [{ "type": "Text", "globs": ["**/*.md", "**/*.yaml"] }]
+}
