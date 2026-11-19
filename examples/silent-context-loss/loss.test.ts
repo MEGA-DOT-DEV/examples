@@ -134,6 +134,13 @@ test('the source key separates correct, cannot-see and invented assertions', () 
   )
 })
 
+test('an honest "cannot see." with a trailing period is scored cannot-see, not confabulated', () => {
+  assert.equal(
+    score(JSON.stringify({ invoice_day: 'cannot see.' }))[1].verdict,
+    'cannot-see',
+  )
+})
+
 test('a filename without content cannot answer the report, while the full read can', async () => {
   undo = useMockEnv(mock)
   mock.respond = responder()
