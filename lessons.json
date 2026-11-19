@@ -165,6 +165,11 @@
       "episode": "S04E01",
       "title": "Mechanics Behind Autonomous Systems",
       "items": ["specter"]
+    },
+    {
+      "episode": "S04E05",
+      "title": "Building Self-Improving Engineering Systems",
+      "items": ["self-change"]
     }
   ]
 }

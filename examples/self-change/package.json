@@ -1,0 +1,27 @@
+{
+  "name": "self-change",
+  "private": true,
+  "type": "module",
+  "description": "Self-change: an agent changes its own logic, restarts, and recovers from its durable log",
+  "engines": {
+    "node": ">=24.1"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/supervisor.ts",
+    "test": "node --disable-warning=ExperimentalWarning test/demo.ts",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@earendil-works/chord": "1.5.0",
+    "@earendil-works/pi-ai": "1.5.0",
+    "@earendil-works/pi-durable": "1.5.0",
+    "@earendil-works/pi-schema": "1.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "ws": "8.21.0"
+  }
+}

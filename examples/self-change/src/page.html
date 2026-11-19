@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en" data-level="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>An agent that changes its own logic</title>
+<style>
+/* Tokens in the shadcn/ui "zinc" theme. Three colors carry meaning, the same way everywhere:
+   green = passed, or changed by the new rule; red = failed or rejected; blue = what this step did.
+   Everything else is neutral. Amber only marks an urgent ticket.
+
+   Type: five sizes, each with one job. meta (12px) = counts, notes and state words; body (14px) = all content;
+   lead (16px) = a zone title, the rule in use, the second line of the caption; title (20px) = the page title;
+   say (22px) = the sentence of the step. Three weights: 400 text, 500 a label or a control, 600 a title or a key word. */
+*, *::before, *::after { box-sizing: border-box; min-width: 0; }
+:root {
+	color-scheme: light;
+	--background: oklch(0.985 0 0);
+	--card: oklch(1 0 0);
+	--foreground: oklch(0.21 0.006 285.9);
+	--muted: oklch(0.967 0.001 286.4);
+	--muted-foreground: oklch(0.44 0.014 285.9);
+	--border: oklch(0.92 0.004 286.3);
+	--primary: oklch(0.21 0.006 285.9);
+	--primary-foreground: oklch(0.985 0 0);
+	--accent: oklch(0.546 0.215 262.9);
+	--good: oklch(0.5 0.137 150.1);
+	--bad: oklch(0.55 0.215 27.3);
+	--warn: oklch(0.52 0.13 65);
+	--ring: oklch(0.705 0.015 286.1);
+	--radius: 0.75rem;
+	--radius-sm: 0.5rem;
+	--shadow: 0 1px 2px oklch(0 0 0 / 0.05);
+	--sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+	--mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+	--fs-meta: 0.75rem;
+	--fs-body: 0.875rem;
+	--fs-lead: 1rem;
+	--fs-title: 1.25rem;
+	--fs-say: 1.375rem;
+	--lh: 1.45;
+	--lh-tight: 1.3;
+	--ease: cubic-bezier(0.2, 0, 0, 1);
+	--gap: 0.75rem;
+	/* The page is drawn for a window of 1440 by 900. A bigger window makes everything bigger, in the same proportions. */
+	font-size: clamp(16px, min(1.111vw, 1.777vh), 22px);
+	background: var(--background);
+	color: var(--foreground);
+}
+body {
+	margin: 0; display: grid; gap: var(--gap); padding: 0.75rem clamp(1rem, 2vw, 1.75rem) 0.875rem;
+	font: 400 var(--fs-body) / var(--lh) var(--sans);
+	font-feature-settings: "cv11", "ss01";
+	font-variant-numeric: tabular-nums;
+	-webkit-font-smoothing: antialiased;
+	text-wrap: pretty;
+	overflow-wrap: break-word;
+}
+h1, h2, h3, p, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+h1 { font-size: var(--fs-title); font-weight: 600; line-height: var(--lh-tight); letter-spacing: -0.015em; }
+h2 { font-size: var(--fs-lead); font-weight: 600; line-height: var(--lh-tight); letter-spacing: -0.005em; }
+h3 { font-size: var(--fs-body); font-weight: 600; }
+b { font-weight: 600; }
+b[class*="tone-"] { color: var(--c); }
+.muted { color: var(--muted-foreground); }
+code, .mono { font-family: var(--mono); font-size: var(--fs-meta); }
+svg.icon { inline-size: 1em; block-size: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.tone-good { --c: var(--good); }
+.tone-bad { --c: var(--bad); }
+.tone-now { --c: var(--accent); }
+
+/* Top: title, depth, and the two run controls */
+.top { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.5rem 1.5rem; }
+.top .lead { color: var(--muted-foreground); }
+.controls { display: flex; flex-wrap: wrap; justify-content: end; gap: 0.5rem; align-items: center; }
+.depth { display: flex; align-items: center; gap: 0.375rem; margin-inline-end: 0.75rem; }
+
+/* Button: one style, three variants */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; block-size: 2.25rem; padding-inline: 0.875rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--card); color: var(--foreground); font: inherit; font-weight: 500; line-height: 1; cursor: pointer; box-shadow: var(--shadow); user-select: none; touch-action: manipulation; white-space: nowrap; }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+.btn.square { inline-size: 2.25rem; padding: 0; }
+.btn.sm { block-size: 1.875rem; padding-inline: 0.625rem; gap: 0.375rem; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn:focus-visible, .seg button:focus-visible, .tl button:focus-visible, .ent:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+	.btn:not(:disabled):hover { background: var(--muted); }
+	.btn.primary:not(:disabled):hover { background: color-mix(in srgb, var(--primary) 86%, white); }
+}
+.btn:not(:disabled):active { scale: 0.97; }
+
+/* Badge: the one style for a state word. Color only through --c. */
+.badge { display: inline-flex; align-items: center; gap: 0.3125rem; block-size: 1.375rem; padding-inline: 0.5rem; border-radius: 999px; font-size: var(--fs-meta); font-weight: 600; line-height: 1; white-space: nowrap; color: var(--c, var(--foreground)); background: color-mix(in srgb, var(--c, var(--muted-foreground)) 10%, var(--card)); border: 1px solid color-mix(in srgb, var(--c, var(--muted-foreground)) 28%, var(--card)); }
+.badge.good { --c: var(--good); }
+.badge.bad { --c: var(--bad); }
+.badge.warn { --c: var(--warn); }
+.badge.now { --c: var(--accent); }
+.badge.use { --c: var(--primary); }
+.badge.plain { --c: var(--muted-foreground); }
+.badge.solid { background: var(--c); border-color: var(--c); color: white; }
+.dot { inline-size: 0.4375rem; block-size: 0.4375rem; border-radius: 50%; background: currentColor; flex: none; }
+.chips { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; align-items: center; }
+
+/* Depth: a segmented control. The chosen level is the dark segment. */
+.seg { display: inline-flex; margin: 0; padding: 0.1875rem; gap: 0.125rem; border-radius: calc(var(--radius-sm) + 0.1875rem); background: var(--muted); border: 1px solid var(--border); }
+.seg button { display: inline-flex; align-items: center; gap: 0.375rem; block-size: 1.75rem; padding-inline: 0.625rem; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--muted-foreground); font: inherit; font-weight: 500; line-height: 1; cursor: pointer; white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--primary); color: var(--primary-foreground); box-shadow: var(--shadow); }
+@media (hover: hover) and (pointer: fine) { .seg button:not([aria-pressed="true"]):hover { color: var(--foreground); background: color-mix(in srgb, var(--card) 70%, transparent); } }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+
+/* View: the picture, and beside it the panel of a deeper level */
+.view { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--gap); }
+html:not([data-level="1"]) .view { grid-template-columns: minmax(0, 1fr) minmax(0, clamp(22rem, 30vw, 27rem)); }
+.panel { display: none; }
+html:not([data-level="1"]) .panel { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+
+/* The picture: inbox → agent → queues, and under them the log on disk */
+.stage { container: stage / inline-size; display: grid; grid-template-rows: minmax(min-content, 1fr) auto; gap: 0.625rem; padding: 0.75rem; }
+.flow { display: grid; grid-template-columns: minmax(0, 1fr) 1.5rem minmax(0, 1.9fr) 1.5rem minmax(0, 1fr); }
+.zone { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 0.5rem; padding: 0.625rem; border-radius: var(--radius); background: var(--muted); }
+.zone-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0 0.5rem; padding-inline: 0.125rem; }
+.zone-head span { color: var(--muted-foreground); }
+.stack { display: grid; gap: 0.375rem; align-content: start; }
+.queues { display: grid; grid-template-rows: 1.25fr 1fr; gap: 0.625rem; }
+.gut { --at: 9.5rem; display: grid; align-items: start; color: var(--ring); }
+.gut.two { --at: 3.25rem; grid-template-rows: 1.25fr 1fr; gap: 0.625rem; }
+.wire { display: block; inline-size: 100%; block-size: 1rem; margin-block-start: var(--at); overflow: visible; }
+.wire.on { color: var(--c, var(--accent)); }
+.wire path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+
+/* Ticket: one card style in the inbox and in the queues */
+.tk { display: grid; grid-template-columns: 1.375rem minmax(0, 1fr); gap: 0.125rem 0.5rem; align-items: start; padding: 0.4375rem 0.5625rem; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--border); box-shadow: var(--shadow); line-height: 1.4; }
+.tk .num { display: grid; place-items: center; inline-size: 1.375rem; block-size: 1.375rem; border-radius: 50%; background: var(--muted); font-size: var(--fs-meta); font-weight: 600; line-height: 1; color: var(--muted-foreground); }
+.tk .text { padding-block-start: 0.0625rem; }
+.tk .tags { grid-column: 2; display: flex; flex-wrap: wrap; gap: 0.25rem; align-items: center; font-size: var(--fs-meta); color: var(--muted-foreground); }
+.tk.lit { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent); }
+.tk.lit .num { background: var(--c); color: white; }
+.tk.changed { border-color: color-mix(in srgb, var(--good) 55%, var(--border)); background: color-mix(in srgb, var(--good) 5%, var(--card)); }
+.tk.done { background: transparent; border-color: transparent; box-shadow: none; color: var(--muted-foreground); }
+.tk.done .num { background: color-mix(in srgb, var(--muted-foreground) 14%, var(--muted)); color: var(--foreground); }
+.tk.done.lit { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); border-style: dashed; box-shadow: none; }
+.tk.done.lit .num { background: var(--accent); color: white; }
+.tk.owner { background: color-mix(in srgb, var(--primary) 5%, var(--card)); }
+.tk.owner .num { background: var(--primary); color: var(--primary-foreground); }
+.tk.owner.done { background: transparent; }
+.tk.owner.done .num { background: color-mix(in srgb, var(--muted-foreground) 14%, var(--muted)); color: var(--foreground); }
+.tk.ghost { background: transparent; border-style: dashed; border-color: var(--ring); box-shadow: none; color: var(--muted-foreground); }
+.tk.ghost .num { background: transparent; border: 1px dashed var(--ring); }
+.tk.ghost .text { text-decoration: line-through; }
+.none { color: var(--muted-foreground); padding: 0.25rem 0.125rem; }
+
+/* Agent: every process of the run in its head, and under it every rule of the run with the tickets that the rule decided.
+   Nothing leaves this box: what is over stays, dimmed, in one line. */
+.agent { container: agent / inline-size; display: grid; align-content: start; gap: 0.625rem; padding: 0.75rem; border-color: var(--ring); }
+.agent.stopped { border-style: dashed; background: var(--muted); }
+.agent.up { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+.agent-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.375rem 0.75rem; }
+/* The processes: a plate each, in the order they ran. The ones that ended stay, dashed. */
+.life { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.375rem; }
+.life .then { display: grid; color: var(--muted-foreground); }
+.plate { display: inline-flex; align-items: baseline; gap: 0.3125rem; padding: 0.1875rem 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--primary); background: var(--primary); color: var(--primary-foreground); font-weight: 500; line-height: var(--lh-tight); white-space: nowrap; }
+.plate b { font-size: var(--fs-lead); font-weight: 600; }
+.plate .state { opacity: 0.8; }
+.plate .dot { align-self: center; }
+.plate.lit { background: var(--accent); border-color: var(--accent); }
+.plate.off, .plate.wait { background: transparent; border: 1px dashed var(--ring); color: var(--muted-foreground); }
+.plate.off .state, .plate.wait { opacity: 1; }
+.plate.bad .state { color: var(--bad); }
+.plate.wait { padding-block: 0.3125rem; }
+/* After more than three processes, one that ended keeps only its number and its word. */
+.life.many .plate.off .word { display: none; }
+
+/* The rules, oldest first. The rule in use is a white card. A rule that is over is one dimmed line with its story. */
+.rules { display: grid; gap: 0.25rem; align-content: start; }
+.agent.stopped .rules { opacity: 0.55; }
+.rule { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.125rem 0.5rem; align-items: baseline; padding: 0.375rem 0.5625rem; border-radius: var(--radius-sm); border: 1px solid transparent; }
+.rule > :is(.story, .detail, .trail) { grid-column: 2 / -1; }
+.ver { display: inline-grid; place-items: center; min-inline-size: 1.75rem; block-size: 1.375rem; padding-inline: 0.375rem; border-radius: 0.375rem; background: var(--muted-foreground); color: white; font-size: var(--fs-meta); font-weight: 600; line-height: 1; }
+.rule.rejected .says { color: var(--muted-foreground); }
+.rule .story { color: var(--muted-foreground); }
+.rule.active, .rule.candidate, .rule.lit { background: var(--card); border-color: var(--border); box-shadow: var(--shadow); padding-block: 0.5rem; }
+.rule.active { border-color: var(--ring); }
+.rule.active .ver { background: var(--primary); }
+.rule.active .says, .rule.candidate .says { font-size: var(--fs-lead); font-weight: 500; line-height: 1.4; letter-spacing: -0.005em; color: var(--foreground); }
+.rule.candidate { border-style: dashed; border-color: var(--ring); }
+.rule.candidate .ver { background: var(--accent); }
+.rule.rejected .ver { background: var(--bad); }
+.rule.rejected .says { text-decoration: line-through; }
+.rule.lit { border-style: solid; border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent); }
+.rule.lit .ver { background: var(--c); }
+.rule.rejected.lit { background: color-mix(in srgb, var(--bad) 4%, var(--card)); }
+/* The changed words of a rule: added words have a tint in the color of the step, dropped words are struck out in red. */
+.says ins, .says del { padding: 0.0625rem 0.1875rem; border-radius: 0.25rem; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.says ins { text-decoration: none; background: linear-gradient(var(--tint), var(--tint)) no-repeat 0 0 / 100% 100%; --tint: color-mix(in srgb, var(--c, var(--accent)) 17%, transparent); }
+.says del { text-decoration: line-through; color: color-mix(in srgb, var(--bad) 72%, var(--foreground)); background: color-mix(in srgb, var(--bad) 8%, transparent); }
+
+/* The trail under a rule: one line per ticket that the rule decided, in the order of the run. The ticket of this step is open. */
+.trail { display: grid; gap: 0.0625rem; margin-block-start: 0.1875rem; }
+.trail li { display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.5rem; min-block-size: 1.5rem; color: var(--muted-foreground); }
+.trail .tn { min-inline-size: 4.125rem; font-weight: 500; }
+.trail .to { font-weight: 500; }
+.rule.active .trail .tn, .rule.active .trail .to { color: var(--foreground); }
+/* The tickets of a rule that is over stand in one line. */
+.rule:not(.active) .trail { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+.rule:not(.active) .trail .tn { min-inline-size: 0; }
+.trail li.open { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.125rem 0.5rem; align-items: baseline; margin: 0.125rem -0.375rem 0; padding: 0.3125rem 0.375rem; border-radius: 0.375rem; border: 1px solid var(--c); background: color-mix(in srgb, var(--c) 6%, var(--card)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); color: var(--foreground); }
+.trail .reply { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 0.125rem 0.5rem; }
+.trail .note { color: var(--muted-foreground); }
+.report { padding-inline: 0.5625rem; }
+
+/* The check of a rule, open at its own step: the sample tickets, and the verdict */
+.detail { display: grid; gap: 0.3125rem; margin-block: 0.25rem 0.125rem; }
+.checks { display: grid; gap: 0.125rem; }
+.checks li { display: flex; flex-wrap: wrap; gap: 0 0.5rem; align-items: center; min-block-size: 1.5rem; }
+.checks .to { font-weight: 500; }
+.mark { display: grid; place-items: center; inline-size: 1.25rem; block-size: 1.25rem; border-radius: 50%; background: var(--c, var(--muted-foreground)); color: white; font-size: var(--fs-meta); flex: none; }
+.verdict { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.5rem; align-items: center; padding: 0.4375rem 0.625rem; border-radius: var(--radius-sm); background: var(--c); color: white; line-height: 1.35; }
+.verdict .mark { background: white; color: var(--c); }
+.verdict .btn { border-color: transparent; box-shadow: none; }
+
+/* A restart step: the old process, the new process, and what the log told it */
+.procs { display: grid; grid-template-columns: minmax(0, 1fr) 1.25rem minmax(0, 1fr); gap: 0.375rem; align-items: stretch; }
+.procs .between { display: grid; place-items: center; color: var(--muted-foreground); font-size: var(--fs-lead); }
+.proc { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.625rem; align-items: center; padding: 0.4375rem 0.5625rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--card); line-height: 1.35; }
+.proc > div { display: grid; gap: 0.125rem; }
+.proc b { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.5rem; }
+.pnum { display: grid; place-items: center; inline-size: 2.5rem; block-size: 2.5rem; border-radius: var(--radius-sm); background: var(--primary); color: var(--primary-foreground); font-size: var(--fs-say); font-weight: 600; line-height: 1; }
+.proc.off, .proc.wait { border-style: dashed; border-color: var(--ring); background: var(--muted); color: var(--muted-foreground); }
+.proc.off .pnum, .proc.wait .pnum { background: color-mix(in srgb, var(--muted-foreground) 16%, var(--muted)); color: var(--muted-foreground); }
+.proc.on { border-color: var(--accent); }
+.proc.on .pnum { background: var(--accent); }
+
+/* The log on disk: one row per process, with what it wrote and how it ended. An entry has the dot of its step, and it opens that step. */
+.tape { display: grid; gap: 0.375rem; padding: 0.5625rem 0.75rem 0.625rem; border-radius: var(--radius); background: var(--muted); border: 1.5px solid transparent; }
+.tape.lit { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 5%, var(--card)); }
+.tape-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.75rem; }
+.tape-head p { color: var(--muted-foreground); }
+.tape-rows { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.25rem 0.75rem; align-items: baseline; align-content: start; min-block-size: calc(var(--rows, 1) * 1.875rem - 0.25rem); }
+.prow { display: contents; }
+.pname { white-space: nowrap; }
+.pline { display: flex; flex-wrap: wrap; gap: 0.25rem 0.375rem; align-items: center; }
+.pline .lead { color: var(--muted-foreground); margin-inline-end: 0.125rem; }
+.prow.lit .pname, .prow.lit .lead { color: var(--accent); }
+.ent { display: inline-flex; align-items: center; gap: 0.375rem; block-size: 1.625rem; padding-inline: 0.5rem; border-radius: 0.375rem; background: var(--card); border: 1px solid var(--border); font: inherit; line-height: 1; color: var(--foreground); white-space: nowrap; cursor: pointer; }
+.ent .pip { inline-size: 0.5rem; block-size: 0.5rem; border-radius: 50%; background: var(--c, var(--primary)); flex: none; }
+.ent[class*="tone-"] { color: var(--c); border-color: color-mix(in srgb, var(--c) 35%, var(--card)); }
+.ent.end { background: transparent; border-style: dashed; border-color: var(--ring); color: var(--muted-foreground); }
+.ent.end.tone-bad { color: var(--bad); }
+.ent.end .pip { border-radius: 0.125rem; background: currentColor; }
+.ent.lit { border-style: solid; border-color: var(--c, var(--accent)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c, var(--accent)) 22%, transparent); }
+@media (hover: hover) and (pointer: fine) { .ent:hover { border-color: var(--ring); border-style: solid; } }
+
+/* The caption: one sentence for this step, and one line on why it matters */
+.foot { display: grid; gap: 0.625rem; padding: 0.75rem 1rem 0.625rem; }
+.caption { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.25rem 0.875rem; align-items: start; }
+.caption > .mark { inline-size: 1.875rem; block-size: 1.875rem; font-size: var(--fs-lead); margin-block-start: 0.0625rem; }
+.caption .say { font-size: var(--fs-say); font-weight: 600; line-height: var(--lh-tight); letter-spacing: -0.02em; }
+.caption .why { margin-block-start: 0.125rem; color: var(--muted-foreground); font-size: var(--fs-lead); }
+.caption .more { display: flex; gap: 0.5rem; align-self: center; }
+
+/* The steps: Previous, the timeline, Next, Play */
+.walk { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 0.5rem 0.75rem; align-items: center; }
+.tl { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+.tl li { position: relative; display: grid; }
+.tl li + li::before { content: ""; position: absolute; inset-block-start: calc(0.25rem + 0.4375rem); inset-inline: -50% 50%; block-size: 1px; background: var(--border); }
+.tl button { position: relative; display: grid; justify-items: center; gap: 0.1875rem; padding: 0.25rem 0.125rem; border: 0; border-radius: var(--radius-sm); background: none; font: inherit; font-size: var(--fs-meta); font-weight: 500; line-height: 1.2; color: var(--muted-foreground); cursor: pointer; white-space: nowrap; }
+.tl .pip { inline-size: 0.875rem; block-size: 0.875rem; border-radius: 50%; border: 2px solid var(--card); background: var(--ring); box-shadow: 0 0 0 1px var(--border); }
+.tl button.past .pip { background: var(--primary); }
+.tl button.tone-good .pip, .tl button.tone-bad .pip { background: var(--c); }
+.tl button.tone-good, .tl button.tone-bad { color: var(--c); }
+.tl button[aria-current="step"] { color: var(--foreground); font-weight: 600; }
+.tl button[aria-current="step"].tone-good, .tl button[aria-current="step"].tone-bad { color: var(--c); }
+.tl button[aria-current="step"] .pip { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c, var(--primary)) 30%, transparent), 0 0 0 1px var(--c, var(--primary)); background: var(--c, var(--primary)); }
+.tl.dense button span:not(.pip) { display: none; }
+.tl.dense button[aria-current="step"] span:not(.pip) { display: block; }
+@media (hover: hover) and (pointer: fine) { .tl button:hover { color: var(--foreground); } }
+.walk .count { min-inline-size: 6.5rem; color: var(--muted-foreground); white-space: nowrap; }
+.walk-end { display: flex; align-items: center; gap: 0.5rem; }
+
+/* The panel of a deeper level: about the step that is on the picture */
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.75rem 1rem 0.5rem; }
+.panel-body { display: grid; gap: 1rem; align-content: start; padding: 0.25rem 1rem 1rem; overflow: auto; overscroll-behavior: contain; }
+.qa { display: grid; gap: 0.25rem; }
+.qa ol { display: grid; gap: 0.25rem; padding-inline-start: 1.25rem; list-style: decimal; }
+.qa .quote { padding: 0.375rem 0.625rem; border-radius: var(--radius-sm); background: var(--muted); font-family: var(--mono); font-size: var(--fs-meta); }
+table { inline-size: 100%; border-collapse: collapse; }
+th { text-align: start; font-weight: 500; color: var(--muted-foreground); font-size: var(--fs-meta); padding: 0.375rem 0.5rem; border-block-end: 1px solid var(--border); white-space: nowrap; }
+td { padding: 0.375rem 0.5rem; border-block-end: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-block-end: 0; }
+td.n { inline-size: 1.75rem; color: var(--muted-foreground); font-weight: 600; }
+tr.changed td { background: color-mix(in srgb, var(--good) 7%, var(--card)); }
+.tablebox { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-block-start: 0.25rem; }
+.code { margin-block-start: 0.25rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: oklch(0.99 0 0); font: var(--fs-meta) / 1.6 var(--mono); tab-size: 2; overflow: hidden; }
+.code .row { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); }
+.code .sign { text-align: center; color: var(--muted-foreground); user-select: none; }
+.code .txt { white-space: pre-wrap; overflow-wrap: anywhere; padding-inline-end: 0.5rem; }
+.code .add { background: color-mix(in srgb, var(--good) 13%, var(--card)); color: oklch(0.38 0.12 150); }
+.code .del { background: color-mix(in srgb, var(--bad) 10%, var(--card)); color: oklch(0.45 0.17 27); }
+.code .head { padding: 0.3125rem 0.625rem; border-block-end: 1px solid var(--border); background: var(--muted); color: var(--muted-foreground); }
+.code .body { padding-block: 0.375rem; }
+.code .note { grid-column: 1 / -1; padding: 0.25rem 0.625rem 0.375rem 1.25rem; font: 500 var(--fs-meta) / 1.4 var(--sans); color: var(--c, var(--bad)); background: color-mix(in srgb, var(--c, var(--bad)) 6%, var(--card)); }
+/* Lines of the agent's own code: the line number, and in blue the lines that this step ran. */
+.code.lines .row { grid-template-columns: 2.125rem minmax(0, 1fr); }
+.code.lines .sign { text-align: end; padding-inline-end: 0.5rem; }
+.code.lines .note { padding-inline-start: 2.125rem; }
+.code .hot { background: color-mix(in srgb, var(--accent) 12%, var(--card)); }
+.code .hot .sign { color: var(--accent); font-weight: 600; }
+pre.json { margin: 0.25rem 0 0; padding: 0.5rem 0.625rem; border-radius: var(--radius-sm); background: var(--muted); font: var(--fs-meta) / 1.55 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.plog { display: grid; gap: 0.125rem; margin-block-start: 0.25rem; }
+.plog li { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: 0.375rem; }
+.plog li.sep { grid-template-columns: minmax(0, 1fr); font-weight: 600; padding-block-start: 0.375rem; }
+.plog .mono { color: var(--muted-foreground); }
+
+/* A small picture: the agent gets more of the width, the arrows get shorter, and a ticket in a queue keeps to one line
+   (the inbox has its full text). The text keeps its size. */
+@container stage (width < 80rem) {
+	.flow { grid-template-columns: minmax(0, 1fr) 1.25rem minmax(0, 2.2fr) 1.25rem minmax(0, 1fr); }
+	.zone { padding: 0.5rem; }
+	.queues .tk .text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+/* A picture beside the panel of a deeper level: the agent gets still more of the width, and every ticket keeps to one line. */
+@container stage (width < 62rem) {
+	.flow { grid-template-columns: minmax(0, 1fr) 1rem minmax(0, 2.4fr) 1rem minmax(0, 1fr); }
+	.tk .text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.tape-head p { display: none; }
+}
+/* A narrow agent: a process that ended keeps its number and its word. */
+@container agent (width < 34rem) { .plate.off .word { display: none; } }
+@container agent (width < 30rem) {
+	.verdict { grid-template-columns: auto minmax(0, 1fr); }
+	.verdict .btn { grid-column: 2; justify-self: start; }
+}
+
+/* A fixed screen when the window is big enough: the page never scrolls, only the panel of a deeper level scrolls inside. */
+@media (width >= 60rem) and (height >= 40rem) {
+	body { block-size: 100dvh; grid-template-rows: auto minmax(0, 1fr) auto; overflow: hidden; }
+	.view, .stage, .panel { min-block-size: 0; }
+	/* The last resort in a small window: the picture scrolls inside its card as one piece, so no part of it is cut. The page never scrolls. */
+	.stage { overflow: auto; overscroll-behavior: contain; }
+}
+/* A short window: the sentence under the title goes, and the parts and the tickets stand closer. */
+@media (height < 52rem) {
+	body { --gap: 0.5rem; padding-block: 0.5rem 0.625rem; }
+	.stage { padding: 0.5rem; gap: 0.5rem; }
+	.foot { padding-block: 0.625rem 0.5rem; gap: 0.5rem; }
+	.top .lead { display: none; }
+	.stack { gap: 0.25rem; }
+	.tk { padding-block: 0.3125rem; }
+	.tk.done { padding-block: 0.1875rem; }
+}
+/* A very short window: everything a little smaller, so the picture still fits. */
+@media (height < 48rem) { :root { font-size: 14px; } }
+@media (width < 60rem) {
+	html:not([data-level="1"]) .view { grid-template-columns: minmax(0, 1fr); }
+	.top { grid-template-columns: minmax(0, 1fr); }
+	.controls { justify-content: start; }
+	.flow { grid-template-columns: minmax(0, 1fr); gap: 0.625rem; }
+	.gut { display: none; }
+	.tl button:not([aria-current="step"]) span:not(.pip) { display: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.btn, .seg button { transition: scale 120ms var(--ease), background-color 150ms ease-out, color 150ms ease-out; }
+	.pulse { animation: pulse 1.6s ease-in-out infinite; }
+	/* A step change is a view transition: a ticket, a rule or a process that has a name moves to its new place. */
+	::view-transition-group(*) { animation-duration: 520ms; animation-timing-function: var(--ease); }
+	::view-transition-old(root), ::view-transition-new(root) { animation-duration: 240ms; }
+	/* A part that changes its size keeps its text at the real size while it moves. */
+	::view-transition-old(.part), ::view-transition-new(.part) { inline-size: 100%; block-size: 100%; object-fit: none; object-position: left top; }
+	/* A rule that changes its state moves slower than a ticket: it is the change of the lesson. */
+	::view-transition-group(.rule) { animation-duration: 800ms; }
+
+	/* The two moments of the lesson play once, when their step comes on the picture (.play). Each animation
+	   only leads to the still picture, so with reduced motion the still picture says the same thing. */
+	/* The restart: the agent is down, then it comes back, then it has what the log says. */
+	.play .agent.up { animation: power 1900ms var(--ease) backwards; }
+	.play .agent.up .rules { animation: wake 500ms 1050ms ease-out backwards; }
+	.play .agent.up .proc.off { animation: halt 800ms ease-out backwards; }
+	.play .agent.up .proc.off .pnum { animation: halt-number 800ms ease-out backwards; }
+	.play .agent.up :is(.proc.on, .procs .between, .plate.lit, .life .then:last-of-type) { animation: arrive 420ms 850ms var(--ease) backwards; }
+	.play .tape.lit { animation: read 900ms 1000ms ease-out backwards; }
+	.play .prow.lit > * { animation: arrive 380ms 1400ms var(--ease) backwards; }
+	.play .tk.done.lit, .play .tk.lit .tags { animation: arrive 380ms 1500ms var(--ease) backwards; }
+	/* The change: the agent's new rule appears under the rule in use, and later it becomes the rule in use. */
+	.play .rule.written { animation: ring 800ms 450ms ease-out 2 backwards; --ring-color: var(--accent); }
+	.play .rule.landed { animation: ring 800ms 650ms ease-out 2 backwards; --ring-color: var(--good); }
+	.play :is(.rule.written, .rule.landed) ins { animation: sweep 700ms 700ms var(--ease) backwards; }
+	.play .trail li.open { animation: arrive 380ms 300ms var(--ease) backwards; }
+}
+::view-transition { pointer-events: none; }
+@keyframes pulse { 50% { opacity: 0.35; } }
+@keyframes power {
+	0%, 42% { border-style: dashed; border-color: var(--ring); background: var(--muted); box-shadow: 0 0 0 0 transparent; }
+	58% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--accent) 24%, transparent); }
+}
+@keyframes wake { from { opacity: 0.15; } }
+@keyframes halt { 0%, 35% { border-style: solid; border-color: var(--ring); background: var(--card); color: var(--foreground); } }
+@keyframes halt-number { 0%, 35% { background: var(--primary); color: var(--primary-foreground); } }
+@keyframes arrive { from { opacity: 0; scale: 0.94; } }
+@keyframes read { from { border-color: transparent; background: var(--muted); } 45% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent); } }
+@keyframes ring { from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ring-color) 55%, transparent); } to { box-shadow: 0 0 0 12px transparent; } }
+@keyframes sweep { from { background-size: 0% 100%; } }
+</style>
+</head>
+<body>
+<header class="top">
+	<div>
+		<h1>An agent that changes its own logic</h1>
+		<p class="lead">It sorts tickets with a rule. Asked for a new rule, it writes one, checks it, restarts, and finishes the job.</p>
+	</div>
+	<div class="controls">
+		<nav class="depth" aria-label="Depth">
+			<button id="zoom-out" type="button" class="btn square" title="Zoom out (−)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg><span class="sr">Zoom out</span></button>
+			<fieldset id="levels" class="seg"><legend class="sr">Depth</legend></fieldset>
+			<button id="zoom-in" type="button" class="btn square" title="Zoom in (+)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg><span class="sr">Zoom in</span></button>
+		</nav>
+		<span id="status" class="badge plain"><span class="dot"></span>Connecting…</span>
+		<button id="kill" type="button" class="btn" disabled title="End the agent process at once (SIGKILL). The supervisor starts a new one.">
+			<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+			Kill the agent
+		</button>
+		<button id="reset" type="button" class="btn" title="Delete the log and start a fresh run.">
+			<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+			Run again
+		</button>
+	</div>
+</header>
+
+<main class="view">
+	<section id="stage" class="card stage" aria-label="The picture of this step"></section>
+	<aside id="panel" class="card panel" aria-label="More about this step"></aside>
+</main>
+
+<footer class="card foot">
+	<div id="caption" class="caption" aria-live="polite"></div>
+	<div class="walk">
+		<button id="prev" type="button" class="btn" title="Previous step (←)">
+			<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+			Previous
+		</button>
+		<ol id="timeline" class="tl" aria-label="Steps of the run"></ol>
+		<button id="next" type="button" class="btn primary" title="Next step (→)">
+			Next
+			<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+		</button>
+		<div class="walk-end">
+			<button id="play" type="button" class="btn" title="Play or pause (space)"></button>
+			<span id="count" class="count"></span>
+		</div>
+	</div>
+</footer>
+
+<script type="module" src="/page.js"></script>
+</body>
+</html>
